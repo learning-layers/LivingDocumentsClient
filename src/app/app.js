@@ -51,8 +51,10 @@ angular.module( 'LivingDocuments', [
         defaultPath: '/login',
         restServerAddress: "http://localhost/restNew",
         firstRequestURL: window.location.href.toString().split(window.location.host)[1].split('#')[1],
-        is401response: false
+        is401response: false,
+        currentClientVersion: '0.0.1-alpha'
     };
+    SecurityServiceProvider.setInitialConfiguration(initialConfiguration);
 
     /* Logging decorator */
     $provide.decorator( '$log', [ "$delegate", function( $delegate ) {
@@ -166,8 +168,6 @@ angular.module( 'LivingDocuments', [
         return $delegate;
     }]);
     
-    SecurityServiceProvider.setInitialConfiguration(initialConfiguration);
-    
     var unauthorizedResponseInterceptor = {
         listeners : [],
         notify : function(isLoggedIn) {
@@ -269,6 +269,20 @@ angular.module( 'LivingDocuments', [
 })
 
 .run( function run ($rootScope, $location, $http, $log, localStorageService, SecurityService, ApplicationState) {
+    // check if client version is up to date
+    var basePath = SecurityService.getInitialConfiguration().restServerAddress;
+    var currentClientVersion = SecurityService.getInitialConfiguration().currentClientVersion;
+    $http({
+        method: 'GET',
+        url: basePath + '/clientversioncheck?version=' + currentClientVersion
+    })
+    .success(function(success) {
+        $log.debug("Successfully checked the client version. Current client version is compatible=" + success.compatible);
+        if (!success.compatible) {
+            window.location.reload(true);
+        }
+    });
+
     $rootScope.$on('$locationChangeStart', function (event) {
         $log.debug("Location url()=");
         $log.debug($location.url());
