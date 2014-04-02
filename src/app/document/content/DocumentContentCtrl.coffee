@@ -77,3 +77,33 @@ documentContentController.controller(
   'DocumentContentCtrl',
   DocumentContentCtrl
 )
+
+class DocumentContentContextMenuCtrl
+  constructor: (@$scope, $log, @rootScope) ->
+    @$log = $log.getInstance "DocumentContentContextMenuCtrl"
+    @defineListeners()
+    return
+  defineScope: ->
+    @$scope.visible = true
+    return
+  defineListeners: ->
+    @$rootScope.$on(
+      'ContextMenu:open:DocumentContent',
+      (ev) ->
+        @$scope.visible = true
+        return
+    )
+    @$rootScope.$on(
+      'ContextMenu:close:DocumentContent',
+      (ev) ->
+        @$scope.visible = false
+        return
+    )
+    return
+DocumentContentContextMenuCtrl.$inject =
+  ['$scope', '$log', '$rootScope']
+
+documentContentController.controller(
+  'DocumentContentContextMenuCtrl',
+  DocumentContentContextMenuCtrl
+)

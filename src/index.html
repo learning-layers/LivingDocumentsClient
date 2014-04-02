@@ -2,6 +2,10 @@
 <html ng-app="LivingDocuments" ng-controller="MainCtrl">
   <head>
     <title ng-bind="pageTitle"></title>
+
+    <!-- Mobile viewport optimized -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5"> <!-- , user-scalable=no -->
+
     <style media="screen" type="text/css">
     [ng\:cloak], [ng-cloak], .ng-cloak {
         display: none !important;
@@ -94,5 +98,6 @@
     <div class="container ui-container">
         <div id="content" class="animate-ui-view" ui-view="main"></div>
     </div>
+    <document-content-context-menu></document-content-context-menu>
   </body>
 </html>

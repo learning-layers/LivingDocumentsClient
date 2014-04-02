@@ -15,13 +15,13 @@
   limitations under the License.
 
 ###
-angular.module( "LivingDocuments.document.content", [
+documentContentModule = angular.module( "LivingDocuments.document.content", [
   "LivingDocuments.document.content.model"
   "LivingDocuments.document.content.controller"
 ])
 
-.directive "documentContent", ->
-  linker = (scope, element, attrs)->
+documentContentModule.directive "documentContent", ->
+  linker = (scope, element, attrs) ->
   controller = ($scope, $log, DocumentContentModel, $rootScope) ->
     new DocumentContentCtrl($scope, $log, DocumentContentModel, $rootScope)
   scope = {
@@ -34,6 +34,24 @@ angular.module( "LivingDocuments.document.content", [
     controller: [
       '$scope', '$log', 'DocumentContentModel',
       '$rootScope', controller
+    ]
+    link: linker
+    scope: scope
+  }
+
+documentContentModule.directive "documentContentContextMenu", ->
+  linker = (scope, element, attrs) ->
+  controller = ($scope, $log) ->
+    new DocumentContentContextMenuCtrl($scope, $log)
+  scope = {
+  }
+  return {
+    restrict: 'E'
+    templateUrl: "document/content/" +
+      "documentContentContextMenuDirective.tpl.html"
+    controller: [
+      '$scope', '$log',
+      controller
     ]
     link: linker
     scope: scope
