@@ -21,18 +21,24 @@ documentContentModel =
   ])
 
 class DocumentContentModel extends BaseEventDispatcher
-  constructor: ($log, @DocumentContentService, @$rootScope) ->
+  constructor: ($log, @DocumentContentService,
+                @$rootScope, @SecurityService) ->
     @$log = $log.getInstance("DocumentContentModel")
     @activeDocumentContent = @initActiveDocumentContent()
+    @activeDocumentId = -1
     @defineListeners()
     return
   defineListeners: ->
     that = @
+    @$rootScope.$on 'ReceivedData:document', (ev, id, document) ->
+      that.activeDocumentId = id
+      return
     @$rootScope.$on 'ReceivedData:document.content', (ev, id, content) ->
       that.activeDocumentId = id
       that.$log.debug("Received new document content " +
         "for document with id=" + id)
       that.$log.debug(content)
+      that.$log.error(id)
       return
     return
   getActiveDocumentContent: ->
@@ -46,12 +52,25 @@ class DocumentContentModel extends BaseEventDispatcher
       }
     }
   saveEditorContent: (editorContent) ->
-    return @DocumentContentService.saveEditorContent(
-      @activeDocumentId, editorContent
+    that = @
+    saveEditorContentTask = @DocumentContentService.saveEditorContent(
+      that.activeDocumentId, editorContent
     )
+    saveEditorContentTask.success (success) ->
+      that.activeDocumentContent.content.content =
+        editorContent
+      that.activeDocumentContent.content.authors.push(
+        {
+          id: that.SecurityService.currentUser.id,
+          displayname: that.SecurityService.currentUser.displayname
+        }
+      )
+      return
+    return saveEditorContentTask
 
 documentContentModel.factory "DocumentContentModel",
-  ['$log', 'DocumentContentService', '$rootScope'
-    ($log, DocumentContentService, $rootScope) ->
-      return new DocumentContentModel($log, DocumentContentService, $rootScope)
+  ['$log', 'DocumentContentService', '$rootScope', 'SecurityService'
+    ($log, DocumentContentService, $rootScope, SecurityService) ->
+      return new DocumentContentModel($log, DocumentContentService,
+        $rootScope, SecurityService)
   ]

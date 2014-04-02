@@ -64,13 +64,14 @@ class DocumentContentCtrl
     @$rootScope.$emit('openUserList', 'Viewers', ids)
     return
   saveEditorContent: ->
+    that = @
     editorElement = angular.element( document.querySelector( '#editor' ) )
     editorContent = editorElement.cleanHtml()
     saveEditorContentTask =
       @DocumentContentModel.saveEditorContent(editorContent)
     saveEditorContentTask.success(
       (success) ->
-        @$scope.editorActive = false
+        that.$scope.editorActive = false
         return
     )
     return

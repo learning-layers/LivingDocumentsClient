@@ -24,7 +24,6 @@ class DocumentContentService extends BaseService
     @$log = $log.getInstance("DocumentContentService")
     return
   saveEditorContent: (documentId, editorContent) ->
-    console.error("Saving editor content")
     return @$http({
       method: 'PUT',
       url: @basePath + '/document/' + documentId +

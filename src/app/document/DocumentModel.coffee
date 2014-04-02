@@ -77,6 +77,8 @@ class DocumentModel extends BaseEventDispatcher
     return
   refreshDocumentModel: (id, document) ->
     @$log.debug ">> Updating document model"
+    @$rootScope.$emit('ReceivedData:document',
+      document.id, document)
     @activeDocument.id = document.id
     @activeDocument.title = document.title
     @activeDocument.owner = document.owner
