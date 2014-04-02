@@ -1,0 +1,15 @@
+*.sw*
+*~
+build/
+bin/
+node_modules/
+.idea/*
+.c9revisions/*
+vendor/*
+!vendor/angular-treeview-custom/*
+!vendor/animate.css-custom/*
+!vendor/bootstrap-wysiwyg-custom/*
+!vendor/es-lab/*
+!vendor/jqueryuicustom/*
+!vendor/layers-bootstrap-components/*
+!vendor/toggle-switch-custom/*

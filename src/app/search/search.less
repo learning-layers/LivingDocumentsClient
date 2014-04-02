@@ -1,0 +1,35 @@
+#search-overlay {
+    position: absolute;
+    top: 51px;
+    z-index: 1010;
+    right: 50%;
+    padding-left: 585px;
+    overflow: visible;
+    height: 80%;
+    .search-panel {
+        height: 100%;
+        .search-panel-content {
+            max-height: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            /* Fallback for web browsers that don't support RGBa */
+            background-color: rgb(255, 255, 255);
+            /* RGBa opacity */
+            background-color: rgba(255, 255, 255, 0.85);
+            overflow: auto;
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+        }
+    }
+    .panel-group {
+        .panel {
+            margin-top: 0;
+            .panel-heading {
+                a.accordion-toggle {
+                    cursor: pointer;
+                    cursor: hand;
+                }
+            }
+        }
+        margin-bottom: 0;
+    }
+}

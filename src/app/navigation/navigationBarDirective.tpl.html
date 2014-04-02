@@ -1,0 +1,149 @@
+<div id="navigation" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a class="navbar-brand dropdown-toggle" href="index.html" data-toggle="dropdown"><img src="assets/img/layers-large-transparent-500.png" width="24" height="16" alt="Learning Layers" ng-class="{'busy': busyTasks.length > 0}"> Living Documents</a>
+    
+                    <ul class="dropdown-menu navbar-brand-dropdown">
+                        <li ng-if="ApplicationState.application.normalMode">
+                            <a href="#/home"><span class="glyphicon glyphicon-home"></span>Home</a>
+                        </li>
+                        <li ng-if="ApplicationState.application.loginMode">
+                            <a href="#/login"><span class="glyphicon glyphicon-home"></span>Home</a>
+                        </li>
+                        <li ng-if="busyTasks.length > 0" class="divider"></li>
+                        <li ng-repeat="busyTask in busyTasks">
+                            {{ busyTask.getDescription() }}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse in" style="height: auto;">
+            <div ng-show="!ApplicationState.application.normalMode">
+                <form class="nav navbar-nav navbar-right login-form" name="loginForm" novalidate>
+                    <!-- <div class="alert alert-danger" ng-show="loginForm.$dirty && loginForm.$invalid">
+                        Wrong username
+                    </div> -->
+                    <div class="form-group">
+                        <label for="username" class="hide">Username:</label>
+                        <input id="username" class="form-control" type="text" placeholder="Username" ng-model="username" ng-pattern="/^[A-z0-9]+$/" ng-disabled="loginInProgress"></input>
+                        <label for="password" class="hide">Password:</label>
+                        <input id="password" class="form-control" type="password" placeholder="Password" ng-model="password" ng-disabled="loginInProgress"></input>
+                        <button class="btn btn-default" ng-click="login()" ng-disabled="loginInProgress || !loginForm.$valid">Login</button>
+                    </div>
+                </form>
+            </div>
+            <ul class="nav navbar-nav" ng-class="{'search-mode-invisible':searchMode}">
+                <li ng-if="ApplicationState.application.normalMode" ui-route="/home" ng-class="{active:$uiRoute}"><a href="#/home">Home</a></li>
+                <li ng-if="ApplicationState.application.loginMode" ui-route="/login" ng-class="{active:$uiRoute}"><a href="#/login">Home</a></li>
+                <li ng-if="ApplicationState.application.loginMode" ui-route="/register" ng-class="{active:$uiRoute}"><a href="#/register">Register</a></li>
+                <li ng-if="!ApplicationState.application.loginMode" class="dropdown">
+                    <a href="#/document" class="dropdown-toggle"  ui-route="/document/[0-9]*" ng-class="{active:$uiRoute}" data-toggle="dropdown">Document<strong class="caret"/></strong></a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="" ng-click="openCreateNewDocumentModal()"><span class="glyphicon glyphicon-file"></span>New Document</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href=""><span class="glyphicon glyphicon-list"></span>Document Explorer</a>
+                        </li>
+                        <li>
+                            <a href="#/share"><span class="glyphicon glyphicon-folder-open"></span>Manage Documents</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul ng-if="!ApplicationState.application.loginMode" class="nav navbar-nav navbar-right" ng-class="{'search-mode-invisible':searchMode}">
+                <li class="dropdown user-option-dropdown">
+                    <a href="" class="dropdown-toggle user-option-toggle" data-toggle="dropdown">
+                        <span class="img-thumbnail">
+                            <span ng-show="profileImgSrc === ''" class="glyphicon glyphicon-user"></span>
+                            <img ng-show="profileImgSrc !== ''" ng-src="{{ profileImgSrc }}" style="width: 30px; height: 30px; margin-top: -5px;">
+                             /
+                            <span class="glyphicon glyphicon-wrench"></span>
+                        </span>
+                        <strong class="caret"/></strong>
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#/share"><span class="glyphicon glyphicon-folder-open"></span>Manage Documents</a>
+                        </li>
+                        <li>
+                            <a href="#/explorer"><span class="glyphicon glyphicon glyphicon-user"></span>Manage Contacts</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#/userprofile/{{currentUser.id}}"><span class="glyphicon glyphicon-refresh"></span>Update Profile</a>
+                        </li>
+                        <li>
+                            <a href=""><span class="glyphicon glyphicon-wrench"></span>Settings</a>
+                        </li>
+                        <li ng-show="checkRoles()" class="divider"></li>
+                        <li ng-show="checkRoles()">
+                            <a href="#/admin"><span class="glyphicon glyphicon-star-empty"></span>Admin</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="" ng-click="logout()"><span class="glyphicon glyphicon-off"></span>Sign out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div ng-if="!ApplicationState.application.loginMode" class="navbar-form navbar-right" role="search">
+                <div id="searchbar" class="form-group">
+                    <button class="btn btn-danger close-search-btn" ng-show="$parent.searchMode" ng-click="$parent.searchMode = false">&times;</button>
+                    <input  class="form-control search-bar" 
+                            type="text" ng-class="{'search-mode':$parent.searchMode}" 
+                            placeholder="Search" ng-focus="$parent.searchMode = true" 
+                            ng-model="$parent.searchValue" 
+                            ui-keypress="{13:'$parent.issueSearch($parent.searchValue)'}">
+                    <div class="btn-group">
+                        <button id="subscribe-dropdown" ng-show="$parent.searchMode" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-filter"></span>
+                            All
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="subscribe-dropdown">
+                            <li><span class="dropdown-label">Search:</span></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> All
+                                    </label>
+                                </div>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Documents
+                                    </label>
+                                </div>
+                            </li>
+                            <li role="presentation">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Persons
+                                    </label>
+                                </div>    
+                            </li>
+                        </ul>
+                        <button class="btn btn-default search-submit"><span class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                </div>
+                <!-- <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-search"></span></button> -->
+            </div>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>

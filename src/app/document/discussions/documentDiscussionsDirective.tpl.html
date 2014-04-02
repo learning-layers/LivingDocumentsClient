@@ -1,0 +1,59 @@
+<div id="document-discussions" class="panel panel-default doc-discussion-panel">
+    <div class="panel-heading panel-heading-sm discussion-panel-heading">
+        <img class="discussion-icon" src="assets/img/iconmonstr-speech-bubble-15-icon.svg">
+        <h4>Discussions</h4>
+        <div class="btn-group pull-right">
+            <button class="btn btn-default" ng-click="openCreateDiscussionModal()"><span class="glyphicon glyphicon-plus-sign"></span> Create Discussion</button>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="panel-body">
+        <accordion close-others="'true'">
+            <accordion-group is-open="'true'">
+                <accordion-heading>
+                    Aims
+                    <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> 3</span>
+                    <img src="http://placehold.it/80x22" class="pull-right">
+                </accordion-heading>
+                <div class="col-lg-6">
+                    Aims
+
+a) identify patients at clinical risk of dementia ;
+
+b) offer an assessment to detect for possible signs of dementia in those at risk ;
+
+c) offer a referral for diagnosis where
+                </div>
+                <div class="col-lg-6">
+                    <button class="btn btn-info"><img class="discussion-icon" src="assets/img/iconmonstr-speech-bubble-15-icon.svg">Open Discussion</button>
+                    <a href="" class="thumbnail" ng-click="openUserInfoModal(10)">
+                      <img src="assets/img/demo/persona1.jpg" class="thumbnail-picture">
+                    </a>
+                    <a href="" class="thumbnail">
+                      <img src="assets/img/demo/persona2.png" class="thumbnail-picture">
+                    </a>
+                    <a href="" class="thumbnail">
+                      <img src="assets/img/demo/persona2.png" class="thumbnail-picture">
+                    </a>
+                    <a href="" class="thumbnail">
+                      <img src="assets/img/demo/persona3.jpg" class="thumbnail-picture">
+                    </a>
+                    <a href="" class="thumbnail">
+                      <img src="assets/img/demo/persona4.png" class="thumbnail-picture">
+                    </a>
+                    <a href="" class="thumbnail">
+                      <img src="assets/img/demo/persona1.jpg" class="thumbnail-picture">
+                    </a>
+                </div>
+            </accordion-group>
+            <accordion-group is-open="'true'">
+                <accordion-heading>
+                    At-risk patients
+                    <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> 5</span>
+                    <img src="http://placehold.it/80x22" class="pull-right">
+                </accordion-heading>
+            </accordion-group>
+        </accordion>
+    </div>
+</div>

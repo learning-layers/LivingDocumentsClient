@@ -1,0 +1,75 @@
+#document-discussions {
+    border-radius: 0;
+    .thumbnail-picture {
+        width: 40px;
+        height: 40px;
+    }
+    .discussion-panel-heading {
+        padding-bottom: 5px;
+        h4 {
+            display: inline-block;
+        }
+        img.discussion-icon {
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+        }
+    }
+    .panel-body {
+        padding: 0;
+    }
+    accordion {
+        .panel-group {
+            margin-bottom: 0;
+        }
+        .panel {
+            border-color: #bce8f1;
+            margin-top: 0;
+            border-radius: 0;
+        }
+        .panel-heading {
+            background-image: -webkit-linear-gradient(top,#d9edf7 0,#c4e3f3 100%);
+            background-image: linear-gradient(to bottom,#d9edf7 0,#c4e3f3 100%);
+            background-repeat: repeat-x;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd9edf7', endColorstr='#ffc4e3f3', GradientType=0);
+            
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+            border-radius: 0;
+            
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+        .accordion-toggle {
+            cursor: pointer;
+            cursor: hand;
+            img {
+                border-radius: 10px;
+            }
+        }
+        .col-lg-6 {
+            padding: 2px;
+            .btn-info {
+                display: block;
+                width: 100%;
+                margin-bottom: 2px;
+                img.discussion-icon {
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 5px;
+                    -webkit-filter: invert(100%);
+                }
+            }
+            a.thumbnail {
+                display: inline-block;
+                margin-right: -2px;
+                margin-bottom: -4px;
+                img {
+                    height: 48px;
+                    width: 48px;
+                }
+            }
+        }
+    }
+}

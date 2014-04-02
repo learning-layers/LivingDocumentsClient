@@ -1,0 +1,81 @@
+###
+
+  Copyright 2014 Karlsruhe University of Applied Sciences
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+###
+documentService = angular.module( "LivingDocuments.document.service", [] )
+
+class DocumentService extends BaseService
+  constructor: (SecurityService, $http, $log) ->
+    super(SecurityService, $http)
+    @$log = $log.getInstance("DocumentService")
+  get: (id, embed) ->
+    that = @
+    embedString = null
+    if embed == null
+      embedString = ""
+    else
+      embedString = embed
+    return @$http.get(@basePath + '/document/' + id + embedString,
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString})
+      .success (status) ->
+        that.$log.debug "Fetching document with id=" + id +
+          " and embeddingString=" + embed
+        return
+  addTag: (id, tagname) ->
+    that = @
+    return @$http.put(@basePath + '/document/' + id + '/tag',
+    {tagname: tagname},
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString}
+    )
+    .success (status) ->
+      that.$log.debug "Adding tag with name=" + tagname +
+      "to document with id=" + id
+      return
+  removeTag: (id, tagname) ->
+    that = @
+    return @$http.delete(
+      @basePath + '/document/' + id + '/tag',
+      {
+        data: {tagname: tagname},
+        headers: {'Authorization':
+          that.SecurityService.currentUser.authorizationString}
+      }
+    )
+    .success (status) ->
+      that.$log.debug "Adding tag with name=" + tagname +
+      "to document with id=" + id
+      return
+  updateSubscriptions: (documentId, subscriptionChangeObj) ->
+    that = @
+    that.$log.debug "Updating subscriptions of  document with id=" +
+      documentId + " to="
+    that.$log.debug subscriptionChangeObj
+    return @$http({
+      method: 'PUT',
+      url: @basePath + '/document/' + documentId +
+        '?method=updateSubscriptions',
+      data: subscriptionChangeObj,
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString}
+    })
+    .success (status) ->
+      that.$log.debug "Subscriptions of document with id=" + documentId +
+        " updated successfully."
+
+DocumentService.$inject = ['SecurityService','$http', '$log']
+documentService.service "DocumentService", DocumentService

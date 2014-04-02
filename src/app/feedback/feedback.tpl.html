@@ -1,0 +1,24 @@
+<div id="feedback" ng-init="showFeedback = false" ng-click="showFeedback = true">
+    <span class="glyphicon glyphicon-volume-down"></span>
+    <br>
+    <span class="feedback-font">F</span>
+    <br>
+    <span class="feedback-font">e</span>
+    <br>
+    <span class="feedback-font">e</span>
+    <br>
+    <span class="feedback-font">d</span>
+    <br>
+    <span class="feedback-font">b</span>
+    <br>
+    <span class="feedback-font">a</span>
+    <br>
+    <span class="feedback-font">c</span>
+    <br>
+    <span class="feedback-font">k</span>
+</div>
+<div id="feedback-modal" draggable="" ng-show="showFeedback == true">
+    <div class="ui-widget-content ui-resizable" resize="">
+        <div class="feedback-modal-header">Feeback<span class="close" ng-click="showFeedback = false">&times;</span></div>
+    </div>
+</div>

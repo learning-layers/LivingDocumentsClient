@@ -1,0 +1,56 @@
+<div id="search-overlay" class="container" ng-show="searchMode">
+    <div class="search-panel container">
+        <div class="search-panel-content">
+            <accordion close-others="accordionCloseOthers">
+                <accordion-group ng-init="documentsOpen = $parent.accordionTabIsOpen" is-open="documentsOpen">
+                    <accordion-heading>
+                        Documents
+                        <span class="badge"><span class="glyphicon glyphicon-user"></span> {{ $parent.documents.length }}</span>
+                    </accordion-heading>
+                    <table class="table table-striped table-hover table-condensed">
+                        <th>#</th>
+                        <th>Displayname</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Options</th>
+                        <tr ng-repeat="document in documents">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ document.displayname }}</td>
+                            <td>{{ document.firstname }}</td>
+                            <td>{{ document.lastname }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Add to your documents</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </accordion-group>
+                <accordion-group ng-init="usersOpen = $parent.accordionTabIsOpen" is-open="usersOpen">
+                    <accordion-heading>
+                        Users
+                        <span class="badge"><span class="glyphicon glyphicon-user"></span> {{ $parent.users.length }}</span>
+                    </accordion-heading>
+                    <table class="table table-striped table-hover table-condensed">
+                        <th>#</th>
+                        <th>Displayname</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Options</th>
+                        <tr ng-repeat="user in users">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ user.displayname }}</td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Add to contacts</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </accordion-group>
+            </accordion>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div ng-switch on="editMode()">
+    <div ng-switch-when="true">
+        <div ng-switch on="editModeInputText">
+            <div ng-switch-when="true">
+                <label  id="{{ fieldname }}Label" class="control-label" for="{{ fieldname }}">{{ label }}</label>
+                <textarea name="{{ fieldname }}" rows="5" class="form-control" type="text" placeholder="{{ label }}" ng-model="$parent.$parent.editedValue"></textarea>
+                <div class="btn-group">
+                    <button class="btn btn-success" ng-click="saveEditedValue()">Save</button>
+                    <button class="btn btn-danger" ng-click="$parent.$parent.editModeInputText = !$parent.$parent.editModeInputText; reset()">&times;</button>
+                </div>
+            </div>
+            <div ng-switch-when="false">
+                <h4>{{ label }}</h4>
+                <div class="profile-text">{{ value }}</div>
+                <button class="btn btn-primary" ng-click="$parent.$parent.editModeInputText = !$parent.$parent.editModeInputText"><span class="glyphicon glyphicon-pencil"></span></button>
+            </div>
+        </div>
+    </div>
+    <div ng-switch-when="false">
+        <h4>{{ label }}</h4>
+        <div class="profile-text">{{ value }}</div>
+    </div>
+</div>

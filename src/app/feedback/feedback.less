@@ -1,0 +1,38 @@
+#feedback {
+    position: absolute;
+    cursor: pointer;
+    cursor: hand;
+    top: 100px;
+    right: 0px;
+    background-color: @brand-info;
+    padding-left: 5px;
+    .feedback-font {
+        font-weight: bold;
+        font-size: 14pt;
+        text-transform: uppercase;
+    }
+}
+#feedback-modal {
+    z-index: 1020;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    top: 100px;
+    .ui-widget-content {
+        z-index: 1025;
+        border-radius: 4px;
+        width: 200px;
+        height: 400px;
+        background-color: white;
+    }
+    .feedback-modal-header {
+        display:block;
+        text-align:center;
+        background-color: @brand-info;
+        cursor: pointer;
+        cursor: hand;
+        height: 30px;
+        padding-top: 5px;
+        font-weight: bold;
+    }
+}

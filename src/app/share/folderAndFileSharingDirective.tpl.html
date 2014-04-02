@@ -1,0 +1,105 @@
+<div id="sharing-area" class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-4 treeview-area">
+            <h4>Choose the folder or file for which you want to change the access rights.</h4>
+            <div class="well"
+              data-angular-treeview="true"
+              data-tree-id="mytree"
+              data-tree-model="foldersAndFiles"
+              data-node-id="roleId"
+              data-node-label="roleName"
+              data-node-children="children" >
+            </div>
+        </div>
+        <div class="col-lg-4 assign-area">
+            <div style="well">
+                <h4>Currently assigned access rights for:</h4>
+                <div class="selected-file-or-folder well" ng-show="mytree.currentNode.roleName">
+                    <span ng-show="mytree.currentNode.fileicon"><i class="normal"></i></span>
+                    <span ng-show="!mytree.currentNode.fileicon"><i class="collapsed"></i></i></span>
+                    <span>{{mytree.currentNode.roleName}}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="current-access-rights">
+                <div ng-show="groupsThatHaveAccess.length > 0">
+                    <h4>Groups</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-condensed">
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Rights</th>
+                            <th>Delete</th>
+                            <tr ng-repeat="group in groupsThatHaveAccess">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ group.name }}</td>
+                                <td><select class="form-control" ng-model="group.rights" ng-options="ar for ar in accessRightOptions" ng-change="updateRights('Group', group.id, group.rights)"></select></td>
+                                <td><button class="btn btn-danger" ng-click="deleteRights('Group', group.id)"><span class="glyphicon glyphicon-trash"></span></button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div ng-show="personsThatHaveAccess.length > 0">
+                    <h4>Persons</h4>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover table-condensed">
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Rights</th>
+                            <th>Delete</th>
+                            <tr ng-repeat="person in personsThatHaveAccess">
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ person.name }}</td>
+                                <td><select class="form-control" ng-model="person.rights" ng-options="ar for ar in accessRightOptions" ng-change="updateRights('Person', person.id, person.rights)"></select></td>
+                                <td><button class="btn btn-danger" ng-click="deleteRights('Person', person.id)"><span class="glyphicon glyphicon-trash"></span></button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 search-area">
+            <h4>Search person or group that you want to add.</h4>
+            <hr>
+            <label>Choose person or group:</label><select class="form-control" ng-model="searchPersonOrGroupOption" ng-options="pog for pog in searchPersonOrGroupOptions"></select>
+            <h4>Search {{ searchPersonOrGroupOption }}:</h4>
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <input class="form-control" ng-show="searchPersonOrGroupOption == 'Person'" type="text" ng-model="selectedPerson" typeahead-on-select="setIsPersonSelected(true)" typeahead="person as person.name for person in persons | filter:{name:$viewValue} | limitTo:8">
+                <input class="form-control" ng-show="searchPersonOrGroupOption == 'Group'" type="text" ng-model="selectedGroup" typeahead-on-select="setIsGroupSelected(true)" typeahead="group as group.name for group in groups | filter:{name:$viewValue} | limitTo:8">
+            </div>
+            <hr>
+            <div class="sharing-add-panel" ng-show="(searchPersonOrGroupOption == 'Person' && isPersonSelected) || (searchPersonOrGroupOption == 'Group' && isGroupSelected)">
+                <div class="row">
+                    <div class="person-details well" ng-show="searchPersonOrGroupOption == 'Person'">
+                        <img class="avatar img-thumbnail" alt="Avatar">
+                        <div class="person-info">
+                            <div class="row">
+                                <label>Name:</label><span> {{ selectedPerson.name }}</span>
+                            </div>
+                            <div class="row">
+                                <label>Details:</label><span> {{ selectedPerson.details }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-details well" ng-show="searchPersonOrGroupOption == 'Group'">
+                        <img class="avatar img-thumbnail" alt="Avatar">
+                        <div class="group-info">
+                            <div class="row">
+                                <label>Name:</label><span>{{ selectedGroup.name }}</span>
+                            </div>
+                            <div class="row">
+                                <label>Details:</label><span>{{ selectedGroup.details }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row sharing-options">
+                    <label>Choose access rights:</label><select class="form-control" ng-model="accessRightOption" ng-options="ar for ar in accessRightOptions"></select>
+                    <button class="btn btn-default" ng-click="shareFolderOrFile(searchPersonOrGroupOption, accessRightOption)"><span class="glyphicon glyphicon-chevron-left"></span> Share</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

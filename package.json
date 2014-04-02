@@ -1,0 +1,39 @@
+{
+  "author": "Karlsruhe University of Applied Sciences, Martin Bachl<martin.bachl@hs-karlsruhe.de>",
+  "name": "ng-livingdocuments",
+  "version": "0.0.1-alpha",
+  "homepage": "http://learning-layers.eu/",
+  "licenses": {
+    "type": "Apache-2.0",
+    "url": "http://www.apache.org/licenses/LICENSE-2.0"
+  },
+  "bugs": "http://layers.dbis.rwth-aachen.de/jira/secure/Dashboard.jspa",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/learning-layers/LivingDocumentsClient"
+  },
+  "dependencies": {},
+  "devDependencies": {
+      "karma": "0.10.9",
+      "karma-coffee-preprocessor": "0.1.3",
+      "grunt": "~0.4.1",
+      "grunt-recess": "~0.3.0",
+      "grunt-contrib-clean": "~0.4.1",
+      "grunt-contrib-copy": "~0.4.1",
+      "grunt-contrib-jshint": "~0.4.3",
+      "grunt-contrib-concat": "~0.3.0",
+      "grunt-contrib-watch": "~0.4.0",
+      "grunt-contrib-uglify": "~0.2.0",
+      "grunt-karma": "0.6.2",
+      "grunt-ngmin": "0.0.2",
+      "grunt-html2js": "~0.1.3",
+      "grunt-contrib-coffee": "~0.7.0",
+      "grunt-coffeelint": "0.0.6",
+      "grunt-conventional-changelog": "~0.1.1",
+      "grunt-bump": "0.0.6",
+      "grunt-contrib-less": "0.10.0",
+      "grunt-lib-contrib": "v0.7.1",
+      "underscore": "1.6.0",
+      "chalk": "0.4.0"
+  }
+}

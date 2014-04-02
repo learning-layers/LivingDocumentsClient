@@ -1,0 +1,72 @@
+.ui-icon {
+    width: 16px;
+    height: 16px;
+    //background-image: url(img/arrow_resize_135.png);
+}
+
+.ui-resizable-se {
+    cursor: se-resize;
+    width: 16px;
+    height: 16px;
+    right: 1px;
+    bottom: 1px;
+}
+
+.ui-resizable {
+    position: relative;
+}
+
+.ui-widget-content {
+    border: 1px solid #aaaaaa;
+    color: #222222;
+    margin-bottom: 0;
+}
+
+.ui-resizable-s {
+    cursor: s-resize;
+    height: 7px;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+}
+
+.ui-resizable-e {
+    cursor: e-resize;
+    width: 7px;
+    right: -5px;
+    top: 0;
+    height: 100%;
+}
+
+.ui-resizable-handle {
+    position: absolute;
+    font-size: 0.1px;
+    display: block;
+}
+
+.contactlist-window {
+    z-index: 1020;
+    position: relative; 
+    left: 429px; 
+    top: 23px;
+    .ui-widget-content {
+        z-index: 1025;
+        border-radius: 4px;
+        width: 200px;
+        height: 400px;
+    }
+    .contactlist-header {
+        display:block;
+        text-align:center;
+        background-color:grey;
+        cursor: pointer;
+        cursor: hand;
+        height: 30px;
+        padding-top: 5px;
+        font-weight: bold;
+    }
+}
+
+.ui-draggable {
+    display:inline-block;
+}
