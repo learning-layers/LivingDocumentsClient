@@ -4,9 +4,10 @@
     </div>
     <div class="modal-body">
         <label for="discussionTitle">Discussion title: </label>
-        <input id="discussionTitle" class="form-control" type="text" placeholder="Discussion title">
+        <input id="discussionTitle" ng-model="$parent.title" class="form-control" type="text" placeholder="Discussion title">
     </div>
     <div class="modal-footer">
         <button class="btn btn-warning" ng-click="cancel()">Close</button>
+        <button class="btn btn-success" ng-click="createDiscussion()">Close</button>
     </div>
 </div>

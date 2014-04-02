@@ -15,15 +15,17 @@
   limitations under the License.
 
 ###
-documentDiscussions = angular.module(
+documentDiscussionController = angular.module(
   "LivingDocuments.document.discussions.controller",
   [
     "LivingDocuments.core.baseclass"
+    "LivingDocuments.document.discussions.model"
   ]
 )
 
 class DocumentDiscussionsController extends BaseController
-  constructor: (@$scope, @$rootScope, @$log, @$modal) ->
+  constructor: (@$scope, @$rootScope,
+    @$log, @$modal, @DocumentDiscussionModel) ->
     super($scope)
     return
   defineScope: ->
@@ -44,6 +46,8 @@ class DocumentDiscussionsController extends BaseController
         resolve: {
           document: ->
             return that.$scope.document
+          DocumentDiscussionModel: ->
+            return that.DocumentDiscussionModel
         }
       }
     )

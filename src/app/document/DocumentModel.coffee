@@ -91,6 +91,9 @@ class DocumentModel extends BaseEventDispatcher
       document.content.authors.push({id: 10, name:'test'})
       @$rootScope.$emit('ReceivedData:document.content',
         document.id, document.content)
+    if angular.isDefined document.discussions
+      @$rootScope.$emit('ReceivedData:document.discussions',
+        document.id, document.discussions)
     return
   initActiveDocument: ->
     return {

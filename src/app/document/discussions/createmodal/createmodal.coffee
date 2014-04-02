@@ -26,31 +26,33 @@ createDiscussionModal = angular.module(
 >> CreateDiscussionModal Controller
 ###
 class CreateDiscussionModalCtrl extends BaseController
-  constructor: ($scope, @$modalInstance, document) ->
+  constructor: ($scope, @$modalInstance,
+                @document, @DocumentDiscussionModel, @$location) ->
     super($scope)
-    @$scope.document = document
     return
   defineScope: ->
     that = @
+    @$scope.document = @document
+    @$scope.createDiscussion = @createDiscussion.bind(@)
     @$scope.cancel = ->
       that.$modalInstance.dismiss('cancel')
     return
-
-CreateDiscussionModalCtrl.$inject =
-  ['$scope', '$modalInstance', 'document']
-createDiscussionModal.controller( 'CreateDiscussionModalCtrl',
-  CreateDiscussionModalCtrl)
-
-###
->> CreateDiscussionModal Model
-###
-class CreateDiscussionModel extends BaseEventDispatcher
-  constructor: ($log) ->
-    @$log = $log.getInstance("UserInfoModel")
+  createDiscussion: ->
+    that = @
+    console.error(@$scope.document.id)
+    createDiscussionTask =
+      @DocumentDiscussionModel.createDiscussion(
+        @$scope.document.id,
+        @$scope.title
+      )
+    createDiscussionTask.success( (success) ->
+      that.$location.path('/document/' + success.discussion.id)
+      that.$modalInstance.dismiss('close')
+    )
     return
 
-createDiscussionModal.factory "CreateDiscussionModel",
-  ['$log',
-    ($log) ->
-      return new CreateDiscussionModel($log)
-  ]
+CreateDiscussionModalCtrl.$inject =
+  ['$scope', '$modalInstance', 'document',
+   'DocumentDiscussionModel', '$location']
+createDiscussionModal.controller( 'CreateDiscussionModalCtrl',
+  CreateDiscussionModalCtrl)

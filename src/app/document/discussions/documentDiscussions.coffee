@@ -18,12 +18,16 @@
 documentDiscussions = angular.module( "LivingDocuments.document.discussions", [
   "LivingDocuments.document.discussion.createmodal"
   "LivingDocuments.document.discussions.controller"
+  "LivingDocuments.document.discussions.model"
 ] )
 
 documentDiscussions.directive "documentDiscussions", ->
   linker = (scope, element, attrs) ->
-  controller = ($scope, $rootScope, $log, $modal) ->
-    new DocumentDiscussionsController($scope, $rootScope, $log, $modal)
+  controller = ($scope, $rootScope, $log,
+    $modal, DocumentDiscussionModel) ->
+    return new DocumentDiscussionsController(
+      $scope, $rootScope, $log, $modal, DocumentDiscussionModel
+    )
   scope = {
     document: '='
   }
@@ -31,7 +35,8 @@ documentDiscussions.directive "documentDiscussions", ->
     restrict: 'E',
     templateUrl: "document/discussions/" +
       "documentDiscussionsDirective.tpl.html",
-    controller: ['$scope', '$rootScope', '$log', '$modal', controller],
+    controller: ['$scope', '$rootScope', '$log', '$modal',
+      'DocumentDiscussionModel', controller],
     link: linker,
     scope: scope
   }

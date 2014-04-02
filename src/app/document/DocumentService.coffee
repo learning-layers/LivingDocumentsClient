@@ -21,6 +21,7 @@ class DocumentService extends BaseService
   constructor: (SecurityService, $http, $log) ->
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentService")
+    return
   get: (id, embed) ->
     that = @
     embedString = null
