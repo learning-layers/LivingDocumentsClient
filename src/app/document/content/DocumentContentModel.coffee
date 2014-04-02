@@ -29,6 +29,7 @@ class DocumentContentModel extends BaseEventDispatcher
   defineListeners: ->
     that = @
     @$rootScope.$on 'ReceivedData:document.content', (ev, id, content) ->
+      that.activeDocumentId = id
       that.$log.debug("Received new document content " +
         "for document with id=" + id)
       that.$log.debug(content)
@@ -44,6 +45,10 @@ class DocumentContentModel extends BaseEventDispatcher
         viewers: []
       }
     }
+  saveEditorContent: (editorContent) ->
+    return @DocumentContentService.saveEditorContent(
+      @activeDocumentId, editorContent
+    )
 
 documentContentModel.factory "DocumentContentModel",
   ['$log', 'DocumentContentService', '$rootScope'

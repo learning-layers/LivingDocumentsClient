@@ -66,7 +66,7 @@ module.exports = {
       'vendor/ng-file-upload/angular-file-upload-shim.min.js',
       'vendor/jquery/jquery.min.js',
       'vendor/jqueryuicustom/jquery-ui-1.10.4.custom.js',
-      'vendor/bootstrap-wysiwyg/bootstrap-wysiwyg.js',
+      'vendor/bootstrap-wysiwyg-custom/bootstrap-wysiwyg.js',
       'vendor/sugar/release/sugar.min.js',
       'vendor/prototype-class-jquery/class.js',
       'vendor/es-lab/es-lab-stringmap.js',

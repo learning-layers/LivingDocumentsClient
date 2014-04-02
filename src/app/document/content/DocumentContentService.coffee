@@ -23,6 +23,18 @@ class DocumentContentService extends BaseService
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentContentService")
     return
+  saveEditorContent: (documentId, editorContent) ->
+    console.error("Saving editor content")
+    return @$http({
+      method: 'PUT',
+      url: @basePath + '/document/' + documentId +
+      '/content',
+      data: {editorContent: editorContent},
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString}
+    })
+    .success (status) ->
+      that.$log.debug "Successfully updated document content!"
 
 DocumentContentService.$inject = ['SecurityService','$http', '$log']
 documentContentService.service "DocumentContentService", DocumentContentService

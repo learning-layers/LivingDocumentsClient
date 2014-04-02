@@ -41,8 +41,8 @@ documentContentModule.directive "documentContent", ->
 
 documentContentModule.directive "documentContentContextMenu", ->
   linker = (scope, element, attrs) ->
-  controller = ($scope, $log) ->
-    new DocumentContentContextMenuCtrl($scope, $log)
+  controller = ($scope, $log, $rootScope) ->
+    new DocumentContentContextMenuCtrl($scope, $log, $rootScope)
   scope = {
   }
   return {
@@ -50,7 +50,7 @@ documentContentModule.directive "documentContentContextMenu", ->
     templateUrl: "document/content/" +
       "documentContentContextMenuDirective.tpl.html"
     controller: [
-      '$scope', '$log',
+      '$scope', '$log', '$rootScope',
       controller
     ]
     link: linker

@@ -27,7 +27,7 @@
                     <button ng-show="!editorActive" class="btn btn-default" ng-click="editorActive = !editorActive">
                         <span class="glyphicon glyphicon-pencil"></span> Edit content
                     </button>
-                    <button ng-show="editorActive" class="btn btn-success" ng-click="saveContent()">
+                    <button ng-show="editorActive" class="btn btn-success" ng-click="saveEditorContent()">
                         <span class="glyphicon glyphicon-hdd"></span> Save
                     </button>
                     <button ng-show="editorActive" class="btn btn-danger" ng-click="editorActive = !editorActive">
@@ -83,7 +83,8 @@
                         <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
 
                     </div>
-                    <div id="editor" class="form-control editor" ng-init="setEditorContent()" contenteditable="true" bootstrap-wysiwyg="">
+                    <!-- ng-init="setEditorContent()" -->
+                    <div id="editor" class="form-control editor"  contenteditable="true" bootstrap-wysiwyg="">
                     </div>
                 </div>
             </div>

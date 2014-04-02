@@ -36,7 +36,7 @@ class DocumentContentCtrl
   initScopeMethods: ->
     that = @
     @$scope.openUserInfoModal = @openUserInfoModal.bind(@)
-    @$scope.saveContent = @saveContent.bind(@)
+    @$scope.saveEditorContent = @saveEditorContent.bind(@)
     @$scope.openAuthorList = @openAuthorList.bind(@)
     @$scope.openViewerList = @openViewerList.bind(@)
     @$scope.switchToAttachments = ->
@@ -45,12 +45,6 @@ class DocumentContentCtrl
     @$scope.switchToDocumentContent = ->
       that.$log.debug "Document content active"
       that.$scope.attachmentsActive = false
-    return
-  saveContent: ->
-    editorElement = angular.element( document.querySelector( '#editor' ) )
-    editorContent = editorElement.cleanHtml()
-    #TODO save content
-    @$scope.editorActive = !@$scope.editorActive
     return
   openUserInfoModal: (userId) ->
     @$rootScope.$emit('openUserProfile', userId)
@@ -69,6 +63,17 @@ class DocumentContentCtrl
       return
     @$rootScope.$emit('openUserList', 'Viewers', ids)
     return
+  saveEditorContent: ->
+    editorElement = angular.element( document.querySelector( '#editor' ) )
+    editorContent = editorElement.cleanHtml()
+    saveEditorContentTask =
+      @DocumentContentModel.saveEditorContent(editorContent)
+    saveEditorContentTask.success(
+      (success) ->
+        @$scope.editorActive = false
+        return
+    )
+    return
 
 DocumentContentCtrl.$inject =
   ['$scope', '$log', 'DocumentContentModel', '$rootScope']
@@ -79,7 +84,7 @@ documentContentController.controller(
 )
 
 class DocumentContentContextMenuCtrl
-  constructor: (@$scope, $log, @rootScope) ->
+  constructor: (@$scope, $log, @$rootScope) ->
     @$log = $log.getInstance "DocumentContentContextMenuCtrl"
     @defineListeners()
     return
@@ -100,6 +105,7 @@ class DocumentContentContextMenuCtrl
         return
     )
     return
+
 DocumentContentContextMenuCtrl.$inject =
   ['$scope', '$log', '$rootScope']
 
