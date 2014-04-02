@@ -85,12 +85,6 @@ class DocumentModel extends BaseEventDispatcher
     if angular.isDefined document.tags
       @activeDocument.tags = document.tags
     if angular.isDefined document.content
-      #TODO remove next 2 lines for dev purposes only
-      document.content = {
-        content: "",
-        authors: []
-      }
-      document.content.authors.push({id: 10, name:'test'})
       @$rootScope.$emit('ReceivedData:document.content',
         document.id, document.content)
     if angular.isDefined document.discussions

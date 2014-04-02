@@ -37,8 +37,8 @@ class DocumentContentModel extends BaseEventDispatcher
       that.activeDocumentId = id
       that.$log.debug("Received new document content " +
         "for document with id=" + id)
-      that.$log.debug(content)
-      that.$log.error(id)
+      that.$log.debug(content.content)
+      that.refreshDocumentContent(id, content)
       return
     return
   getActiveDocumentContent: ->
@@ -51,6 +51,10 @@ class DocumentContentModel extends BaseEventDispatcher
         viewers: []
       }
     }
+  refreshDocumentContent: (id, content) ->
+    @activeDocumentContent.content.content = content.content
+    @activeDocumentContent.content.authors = content.authors
+    return
   saveEditorContent: (editorContent) ->
     that = @
     saveEditorContentTask = @DocumentContentService.saveEditorContent(
