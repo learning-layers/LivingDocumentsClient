@@ -33,10 +33,17 @@ class DocumentDiscussionsController extends BaseController
     @$scope.openUserInfoModal = @openUserInfoModal.bind(@)
     @$scope.openCreateDiscussionModal = @openCreateDiscussionModal.bind(@)
     return
+  defineListeners: ->
+    that = @
+    @$rootScope.$on 'discussSelection', (ev, selection) ->
+      console.error(selection)
+      that.openCreateDiscussionModal(selection)
+      return
+    return
   openUserInfoModal: (userId) ->
     @$rootScope.$emit('openUserProfile', userId)
     return
-  openCreateDiscussionModal: ->
+  openCreateDiscussionModal: (selection) ->
     that = @
     @$modal.open(
       {
@@ -48,6 +55,8 @@ class DocumentDiscussionsController extends BaseController
             return that.$scope.document
           DocumentDiscussionModel: ->
             return that.DocumentDiscussionModel
+          selection: ->
+            return selection
         }
       }
     )

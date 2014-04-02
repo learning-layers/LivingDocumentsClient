@@ -39,3 +39,25 @@ coreUtil.directive 'bootstrapWysiwyg', ->
       angular.element(element).wysiwyg(scope.$eval(attrs.directiveName))
       return
   }
+
+coreUtil.directive 'ngRightClick', ($parse) ->
+  return (scope, element, attrs) ->
+    fn = $parse(attrs.ngRightClick)
+    element.bind('contextmenu', (event) ->
+      event.preventDefault()
+      fn(scope, {$event:event})
+    )
+    return
+###
+  .directive('ngRightClick', ['$parse', function($parse) {
+  return function(scope, element, attrs) {
+  var fn = $parse(attrs.ngRightClick);
+  element.bind('contextmenu', function(event) {
+  scope.$apply(function() {
+  event.preventDefault();
+    fn(scope, {$event:event});
+  });
+  });
+  };
+}])
+###

@@ -27,8 +27,10 @@ createDiscussionModal = angular.module(
 ###
 class CreateDiscussionModalCtrl extends BaseController
   constructor: ($scope, @$modalInstance,
-                @document, @DocumentDiscussionModel, @$location) ->
+                @document, @DocumentDiscussionModel,
+                @selection, @$location) ->
     super($scope)
+    console.error selection
     return
   defineScope: ->
     that = @
@@ -36,6 +38,8 @@ class CreateDiscussionModalCtrl extends BaseController
     @$scope.createDiscussion = @createDiscussion.bind(@)
     @$scope.cancel = ->
       that.$modalInstance.dismiss('cancel')
+      return
+    @$scope.selection = @selection
     return
   createDiscussion: ->
     that = @
@@ -53,6 +57,6 @@ class CreateDiscussionModalCtrl extends BaseController
 
 CreateDiscussionModalCtrl.$inject =
   ['$scope', '$modalInstance', 'document',
-   'DocumentDiscussionModel', '$location']
+   'DocumentDiscussionModel', 'selection', '$location']
 createDiscussionModal.controller( 'CreateDiscussionModalCtrl',
   CreateDiscussionModalCtrl)

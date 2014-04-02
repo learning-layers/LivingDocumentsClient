@@ -34,7 +34,9 @@
                         <span class="glyphicon glyphicon-remove"></span><span ng-show="editorActive"> Cancel</span>
                     </button>
                 </div>
-                <div ng-if="!editorActive" class="form-control editor" ng-bind-html="documentContent.content.content">
+                <div style="position: static" ng-right-click="showContextMenu($event)">
+                    <div ng-if="!editorActive" class="form-control editor" ng-bind-html="documentContent.content.content">
+                    </div>
                 </div>
                 <div ng-if="editorActive" class="editor-wrapper">
                     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">

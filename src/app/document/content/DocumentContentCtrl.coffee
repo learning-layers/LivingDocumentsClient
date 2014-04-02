@@ -20,7 +20,7 @@ documentContentController =
     "LivingDocuments.document.content.model"
   ])
 
-class DocumentContentCtrl
+class DocumentContentCtrl extends BaseController
   constructor: (@$scope, $log, @DocumentContentModel, @$rootScope) ->
     @$log = $log.getInstance "DocumentContentController"
     @documentContent = @DocumentContentModel.getActiveDocumentContent()
@@ -40,6 +40,7 @@ class DocumentContentCtrl
     @$scope.openAuthorList = @openAuthorList.bind(@)
     @$scope.openViewerList = @openViewerList.bind(@)
     @$scope.setEditorContent = @setEditorContent.bind(@)
+    @$scope.showContextMenu = @showContextMenu.bind(@)
     @$scope.switchToAttachments = ->
       that.$log.debug "Attachments active"
       that.$scope.attachmentsActive = true
@@ -79,6 +80,36 @@ class DocumentContentCtrl
     editorElement = angular.element( document.querySelector( '#editor' ) )
     editorElement.html( @documentContent.content.content )
     return
+  showContextMenu: (ev) ->
+    that = @
+    @getCurrentSelection (currentSelection) ->
+      if currentSelection.startOffset < currentSelection.endOffset
+        console.log(currentSelection)
+        that.$rootScope.$emit(
+          "ContextMenu:open:DocumentContent",
+          {
+            clientX: ev.clientX,
+            clientY: ev.clientY,
+            currentSelection: currentSelection
+          }
+        )
+    return
+  getCurrentSelection: (callback)->
+    selectionObj = window.getSelection().getRangeAt(0)
+    content = selectionObj.cloneContents()
+    span = window.document.createElement('SPAN')
+
+    span.appendChild(content)
+    htmlContent = span.innerHTML
+    currentSelection = {
+      startOffset: selectionObj.startOffset
+      endOffset: selectionObj.endOffset
+      htmlContent: htmlContent
+    }
+    #alert("startOffset=" + selectionObj.startOffset + ", endOffset="
+    # + selectionObj.endOffset + ", htmlContent=" + htmlContent)
+    callback(currentSelection)
+    return
 
 DocumentContentCtrl.$inject =
   ['$scope', '$log', 'DocumentContentModel', '$rootScope']
@@ -88,26 +119,49 @@ documentContentController.controller(
   DocumentContentCtrl
 )
 
-class DocumentContentContextMenuCtrl
-  constructor: (@$scope, $log, @$rootScope) ->
+class DocumentContentContextMenuCtrl  extends BaseController
+  constructor: ($scope, $log, @$rootScope) ->
+    super($scope)
     @$log = $log.getInstance "DocumentContentContextMenuCtrl"
-    @defineListeners()
     return
   defineScope: ->
-    @$scope.visible = true
+    @$scope.visible = false
+    @$scope.top = "10px"
+    @$scope.left = "10px"
+    @$scope.hide = @hide.bind(@)
+    @$scope.discussSelection = @discussSelection.bind(@)
+    @selection = null
     return
   defineListeners: ->
+    super()
+    that = @
     @$rootScope.$on(
       'ContextMenu:open:DocumentContent',
-      (ev) ->
-        @$scope.visible = true
+      (ev, selection) ->
+        that.selection = selection
+        that.$scope.$apply( ->
+          that.$scope.visible = true
+          that.$scope.top = selection.clientY + "px"
+          that.$scope.left = selection.clientX + "px"
+        )
         return
     )
     @$rootScope.$on(
       'ContextMenu:close:DocumentContent',
       (ev) ->
-        @$scope.visible = false
+        that.$scope.visible = false
         return
+    )
+    return
+  hide: ->
+    @$scope.visible = false
+    return
+  discussSelection: ->
+    that = @
+    @$scope.visible = false
+    @$rootScope.$emit(
+      'discussSelection',
+      that.selection
     )
     return
 
