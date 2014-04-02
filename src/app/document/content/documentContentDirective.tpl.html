@@ -34,8 +34,7 @@
                         <span class="glyphicon glyphicon-remove"></span><span ng-show="editorActive"> Cancel</span>
                     </button>
                 </div>
-                <div ng-if="!editorActive" class="form-control editor">
-                    {{ documentContent.content.content }}
+                <div ng-if="!editorActive" class="form-control editor" ng-bind-html="documentContent.content.content">
                 </div>
                 <div ng-if="editorActive" class="editor-wrapper">
                     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
@@ -83,8 +82,7 @@
                         <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
 
                     </div>
-                    <!-- ng-init="setEditorContent()" -->
-                    <div id="editor" class="form-control editor"  contenteditable="true" bootstrap-wysiwyg="">
+                    <div id="editor" class="form-control editor" ng-init="setEditorContent()" contenteditable="true" bootstrap-wysiwyg="">
                     </div>
                 </div>
             </div>

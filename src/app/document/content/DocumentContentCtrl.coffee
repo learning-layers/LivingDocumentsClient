@@ -39,6 +39,7 @@ class DocumentContentCtrl
     @$scope.saveEditorContent = @saveEditorContent.bind(@)
     @$scope.openAuthorList = @openAuthorList.bind(@)
     @$scope.openViewerList = @openViewerList.bind(@)
+    @$scope.setEditorContent = @setEditorContent.bind(@)
     @$scope.switchToAttachments = ->
       that.$log.debug "Attachments active"
       that.$scope.attachmentsActive = true
@@ -74,6 +75,9 @@ class DocumentContentCtrl
         that.$scope.editorActive = false
         return
     )
+  setEditorContent: ->
+    editorElement = angular.element( document.querySelector( '#editor' ) )
+    editorElement.html( @documentContent.content.content )
     return
 
 DocumentContentCtrl.$inject =

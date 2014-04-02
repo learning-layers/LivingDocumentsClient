@@ -25,6 +25,7 @@ angular.module( 'LivingDocuments', [
     'angularTreeview',
     'angularFileUpload',
     'ui.keypress',
+    'ngSanitize',
 
     /* application module dependencies */
     'LivingDocuments.core',
