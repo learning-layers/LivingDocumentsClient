@@ -13,7 +13,7 @@
             <accordion-group is-open="discussion.isOpen" ng-repeat="discussion in discussions.discussions">
                 <accordion-heading>
                     {{ discussion.title }}
-                    <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> 3</span>
+                    <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> {{ discussion.content.authors.length }}</span>
                     <img src="http://placehold.it/80x22" class="pull-right">
                 </accordion-heading>
                 <div class="col-lg-6" ng-bind-html="discussion.content.content">

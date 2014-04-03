@@ -5,12 +5,12 @@
     <div class="modal-body">
         <label for="commentTitle">Comment title: </label>
         <input id="commentTitle" ng-model="$parent.title" class="form-control" type="text" placeholder="Comment title">
-        <label for="commentText">Comment title: </label>
+        <label for="commentText">Comment text: </label>
         <textarea id="commentText" ng-model="$parent.text" class="form-control" type="text" placeholder="Comment text">
         </textarea>
     </div>
     <div class="modal-footer">
         <button class="btn btn-danger pull-left" ng-click="cancel()">Close</button>
-        <button class="btn btn-success pull-right" ng-click="createDiscussion()"><span class="glyphicon glyphicon-plus-sign"></span> Create</button>
+        <button class="btn btn-success pull-right" ng-click="createComment()"><span class="glyphicon glyphicon-plus-sign"></span> Create</button>
     </div>
 </div>

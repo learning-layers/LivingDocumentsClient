@@ -17,18 +17,18 @@
 ###
 documentCommentsModule = angular.module( "LivingDocuments.document.comments", [
   "LivingDocuments.document.comments.createmodal"
+  "LivingDocuments.document.comments.model"
 ] )
 
 documentCommentsModule.factory "DocumentCommentsController", ->
   class DocumentCommentsController
-    constructor: (@$scope, @$modal) ->
+    constructor: (@$scope, @$modal, @DocumentCommentModel) ->
       @initScopeMethods()
       return
     initScopeMethods: ->
       @$scope.openCreateCommentModal = @openCreateCommentModal.bind(@)
       return
     openCreateCommentModal: ->
-      console.error("Create comment modal triggerd")
       that = @
       @$modal.open(
         {
@@ -38,6 +38,8 @@ documentCommentsModule.factory "DocumentCommentsController", ->
           resolve: {
             document: ->
               return that.$scope.document
+            DocumentCommentModel: ->
+              return that.DocumentCommentModel
           }
         }
       )
@@ -47,8 +49,8 @@ documentCommentsModule.factory "DocumentCommentsController", ->
 documentCommentsModule.directive "documentComments",
   (DocumentCommentsController) ->
     linker = (scope, element, attrs) ->
-    controller = ($scope, $modal) ->
-      new DocumentCommentsController($scope, $modal)
+    controller = ($scope, $modal, DocumentCommentModel) ->
+      new DocumentCommentsController($scope, $modal, DocumentCommentModel)
     scope = {
       document: '='
     }
@@ -56,7 +58,7 @@ documentCommentsModule.directive "documentComments",
       restrict: 'E',
       templateUrl: "document/comments/" +
         "documentCommentsDirective.tpl.html",
-      controller: ['$scope', '$modal', controller],
+      controller: ['$scope', '$modal', 'DocumentCommentModel', controller],
       link: linker,
       scope: scope
     }

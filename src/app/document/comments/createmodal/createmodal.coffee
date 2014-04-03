@@ -19,6 +19,7 @@ createCommentsCreateModal = angular.module(
   "LivingDocuments.document.comments.createmodal",
   [
     "LivingDocuments.core.baseclass"
+    "LivingDocuments.document.comments.model"
   ]
 )
 
@@ -26,7 +27,7 @@ createCommentsCreateModal = angular.module(
 >> CreateCommentModal Controller
 ###
 class CreateCommentModalCtrl extends BaseController
-  constructor: ($scope, @$modalInstance, @document) ->
+  constructor: ($scope, @$modalInstance, @document, @DocumentCommentModel) ->
     super($scope)
     return
   defineScope: ->
@@ -35,12 +36,22 @@ class CreateCommentModalCtrl extends BaseController
     @$scope.cancel = ->
       that.$modalInstance.dismiss('cancel')
       return
+    @$scope.createComment = @createComment.bind(@)
     return
   createComment: ->
     that = @
+    createDiscussionTask =
+      @DocumentCommentModel.createComment(
+        @$scope.document.id,
+        @$scope.title,
+        @$scope.text
+      )
+    createDiscussionTask.success( (success) ->
+      that.$modalInstance.dismiss('close')
+    )
     return
 
 CreateCommentModalCtrl.$inject =
-  ['$scope', '$modalInstance', 'document']
+  ['$scope', '$modalInstance', 'document', 'DocumentCommentModel']
 createCommentsCreateModal.controller( 'CreateCommentModalCtrl',
   CreateCommentModalCtrl)
