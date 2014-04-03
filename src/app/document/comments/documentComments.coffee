@@ -15,26 +15,48 @@
   limitations under the License.
 
 ###
-angular.module( "LivingDocuments.document.comments", [] )
+documentCommentsModule = angular.module( "LivingDocuments.document.comments", [
+  "LivingDocuments.document.comments.createmodal"
+] )
 
-.factory "DocumentCommentsController", ->
+documentCommentsModule.factory "DocumentCommentsController", ->
   class DocumentCommentsController
-    constructor: (@$scope) ->
+    constructor: (@$scope, @$modal) ->
+      @initScopeMethods()
+      return
     initScopeMethods: ->
-      @$scope.test ="Hello World"
+      @$scope.openCreateCommentModal = @openCreateCommentModal.bind(@)
+      return
+    openCreateCommentModal: ->
+      console.error("Create comment modal triggerd")
+      that = @
+      @$modal.open(
+        {
+          templateUrl: 'document/comments/createmodal' +
+            '/createmodal.tpl.html'
+          controller: CreateCommentModalCtrl
+          resolve: {
+            document: ->
+              return that.$scope.document
+          }
+        }
+      )
+      return
   DocumentCommentsController
 
-.directive "documentComments",
+documentCommentsModule.directive "documentComments",
   (DocumentCommentsController) ->
     linker = (scope, element, attrs) ->
-    controller = ($scope) ->
-      new DocumentCommentsController($scope)
-    scope = {}
+    controller = ($scope, $modal) ->
+      new DocumentCommentsController($scope, $modal)
+    scope = {
+      document: '='
+    }
     return {
       restrict: 'E',
       templateUrl: "document/comments/" +
         "documentCommentsDirective.tpl.html",
-      controller: ['$scope', controller],
+      controller: ['$scope', '$modal', controller],
       link: linker,
       scope: scope
     }

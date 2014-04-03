@@ -1,8 +1,9 @@
 <div id="document-comments" class="panel panel-default">
+    {{ title }}
     <div class="panel-heading panel-heading-sm document-comments-panel-heading">
         <span class="glyphicon glyphicon-comment"></span> <h4>Comments</h4> <span class="badge">3</span>
         <div class="btn-group pull-right">
-            <button class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span> Create Comment</button>
+            <button class="btn btn-default" ng-click="openCreateCommentModal()"><span class="glyphicon glyphicon-plus-sign"></span> Create Comment</button>
             <button class="btn btn-default"><span class="glyphicon glyphicon-filter"></span> Filter</button>
         </div>
         <div style="clear: both"></div>
