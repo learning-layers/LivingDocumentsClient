@@ -30,7 +30,6 @@ class CreateDiscussionModalCtrl extends BaseController
                 @document, @DocumentDiscussionModel,
                 @selection, @$location) ->
     super($scope)
-    console.error selection
     return
   defineScope: ->
     that = @
@@ -43,11 +42,11 @@ class CreateDiscussionModalCtrl extends BaseController
     return
   createDiscussion: ->
     that = @
-    console.error(@$scope.document.id)
     createDiscussionTask =
       @DocumentDiscussionModel.createDiscussion(
         @$scope.document.id,
-        @$scope.title
+        @$scope.title,
+        @$scope.selection
       )
     createDiscussionTask.success( (success) ->
       that.$location.path('/document/' + success.discussion.id)

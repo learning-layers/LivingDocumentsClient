@@ -36,7 +36,6 @@ class DocumentDiscussionsController extends BaseController
   defineListeners: ->
     that = @
     @$rootScope.$on 'discussSelection', (ev, selection) ->
-      console.error(selection)
       that.openCreateDiscussionModal(selection)
       return
     return

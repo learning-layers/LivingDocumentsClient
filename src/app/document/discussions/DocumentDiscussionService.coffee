@@ -24,16 +24,16 @@ class DocumentDiscussionService extends BaseService
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentDiscussionService")
     return
-  createDiscussion: (parentId, title) ->
+  createDiscussion: (parentId, title, selection) ->
     that = @
     return @$http.post(
       @basePath + '/document/' + parentId + '/discussion',
-      {title: title},
+      {title: title, selection: selection},
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}
     )
-    .success (status) ->
-      that.$log.debug "Created disussion with id=" + discussion.id
+    .success (success) ->
+      that.$log.debug "Created disussion with id=" + success.discussion.id
       return
 
 DocumentDiscussionService.$inject = ['SecurityService','$http', '$log']

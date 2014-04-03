@@ -36,8 +36,10 @@ class DocumentDiscussionModel extends BaseEventDispatcher
     return
   refreshDocumentDiscussions: (id, discussions) ->
     return
-  createDiscussion: (parentId, title) ->
-    return @DocumentDiscussionService.createDiscussion(parentId, title)
+  createDiscussion: (parentId, title, selection) ->
+    return @DocumentDiscussionService.createDiscussion(
+      parentId, title, selection
+    )
 
 documentDiscussionModel.factory "DocumentDiscussionModel",
   ['$log', 'DocumentDiscussionService', '$rootScope',
