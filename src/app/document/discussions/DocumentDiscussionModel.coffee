@@ -26,20 +26,52 @@ documentDiscussionModel = angular.module(
 class DocumentDiscussionModel extends BaseEventDispatcher
   constructor: ($log, @DocumentDiscussionService, @$rootScope) ->
     @$log = $log.getInstance("DocumentDiscussionModel")
+    @activeDocumentId = -1
+    @activeDiscussions = {
+      discussions: []
+    }
+    @defineListeners()
     return
   defineListeners: ->
+    that = @
+    @$rootScope.$on('ReceivedData:document',
+      (ev, id, document) ->
+        that.activeDocumentId = id
+        return
+    )
     @$rootScope.$on('ReceivedData:document.discussions',
       (ev, id, discussions) ->
-        @refreshDocumentDiscussions(id, discussions)
+        that.refreshDocumentDiscussions(id, discussions)
         return
     )
     return
+  getActiveDiscussions: ->
+    return @activeDiscussions
   refreshDocumentDiscussions: (id, discussions) ->
+    @activeDiscussions.discussions = discussions
     return
   createDiscussion: (parentId, title, selection) ->
     return @DocumentDiscussionService.createDiscussion(
       parentId, title, selection
     )
+  getUserAvatar: (userId, srcToUpdate) ->
+    basePath =
+      that.SecurityService.getInitialConfiguration().restServerAddress
+    userPath = '/user/' + userId + '/profile/image'
+    that.$http(
+      {
+        method: 'GET',
+        url: basePath + userPath,
+        headers: {
+          'Authorization':
+            that.SecurityService.currentUser.authorizationString
+        }
+      }
+    )
+    .success (success, status) ->
+      srcToUpdate.img = 'data:' + success.type + ';base64,' + success.content
+      return
+    return
 
 documentDiscussionModel.factory "DocumentDiscussionModel",
   ['$log', 'DocumentDiscussionService', '$rootScope',

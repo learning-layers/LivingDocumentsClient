@@ -10,49 +10,25 @@
     </div>
     <div class="panel-body">
         <accordion close-others="'true'">
-            <accordion-group is-open="'true'">
+            <accordion-group is-open="discussion.isOpen" ng-repeat="discussion in discussions.discussions">
                 <accordion-heading>
-                    Aims
+                    {{ discussion.title }}
                     <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> 3</span>
                     <img src="http://placehold.it/80x22" class="pull-right">
                 </accordion-heading>
-                <div class="col-lg-6">
-                    Aims
-
-a) identify patients at clinical risk of dementia ;
-
-b) offer an assessment to detect for possible signs of dementia in those at risk ;
-
-c) offer a referral for diagnosis where
+                <div class="col-lg-6" ng-bind-html="discussion.content.content">
                 </div>
                 <div class="col-lg-6">
-                    <button class="btn btn-info"><img class="discussion-icon" src="assets/img/iconmonstr-speech-bubble-15-icon.svg">Open Discussion</button>
-                    <a href="" class="thumbnail" ng-click="openUserInfoModal(10)">
-                      <img src="assets/img/demo/persona1.jpg" class="thumbnail-picture">
+                    <a href="#/document/{{discussion.id}}" class="btn btn-info">
+                        <img class="discussion-icon" src="assets/img/iconmonstr-speech-bubble-15-icon.svg">
+                        Open Discussion
                     </a>
-                    <a href="" class="thumbnail">
-                      <img src="assets/img/demo/persona2.png" class="thumbnail-picture">
-                    </a>
-                    <a href="" class="thumbnail">
-                      <img src="assets/img/demo/persona2.png" class="thumbnail-picture">
-                    </a>
-                    <a href="" class="thumbnail">
-                      <img src="assets/img/demo/persona3.jpg" class="thumbnail-picture">
-                    </a>
-                    <a href="" class="thumbnail">
-                      <img src="assets/img/demo/persona4.png" class="thumbnail-picture">
-                    </a>
-                    <a href="" class="thumbnail">
-                      <img src="assets/img/demo/persona1.jpg" class="thumbnail-picture">
-                    </a>
+                    <div ng-if="discussion.isOpen">
+                        <a href="" class="thumbnail" ng-click="openUserInfoModal(author.id)" ng-repeat="author in discussion.content.authors">
+                            <img ng-init="loadUserImgSrc(author.id, author)" ng-src="{{ author.img }}" class="thumbnail-picture">
+                        </a>
+                    </div>
                 </div>
-            </accordion-group>
-            <accordion-group is-open="'true'">
-                <accordion-heading>
-                    At-risk patients
-                    <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> 5</span>
-                    <img src="http://placehold.it/80x22" class="pull-right">
-                </accordion-heading>
             </accordion-group>
         </accordion>
     </div>

@@ -32,9 +32,12 @@ class DocumentDiscussionsController extends BaseController
     @$scope.$rootScope = @$rootScope
     @$scope.openUserInfoModal = @openUserInfoModal.bind(@)
     @$scope.openCreateDiscussionModal = @openCreateDiscussionModal.bind(@)
+    @$scope.discussions = @DocumentDiscussionModel.getActiveDiscussions()
+    @$scope.loadUserImgSrc = @loadUserImgSrc.bind(@)
     return
   defineListeners: ->
     that = @
+    discussionWatches = []
     @$rootScope.$on 'discussSelection', (ev, selection) ->
       that.openCreateDiscussionModal(selection)
       return
@@ -59,4 +62,7 @@ class DocumentDiscussionsController extends BaseController
         }
       }
     )
+    return
+  loadUserImgSrc: (userId, srcToUpdate) ->
+    @DocumentDiscussionModel.getUserAvatar(userId, srcToUpdate)
     return
