@@ -4,7 +4,7 @@
         <div class="accordion-toggle-wrap" ng-click="isCollapsed = !isCollapsed">
             <a class="accordion-toggle">
                 <span class="panel-title">
-                   Are there any particular...
+                   {{ comment.title }}
                 </span>
                 <br>
                 <span class="author">from: Author</span>
@@ -14,14 +14,14 @@
             <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span><span class="badge">3</span></button>
             <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span><span class="badge">3</span></button>
             <button class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-            <button class="btn btn-info"><span class="glyphicon glyphicon-plus-sign"></span> Reply</button>
+            <button class="btn btn-info" ng-click="openCreateCommentModal(comment)"><span class="glyphicon glyphicon-plus-sign"></span> Reply</button>
         </div>
     </div>
     <div class="panel-body panel-body-sm" collapse="isCollapsed">
-        Would it be worth asking our patient and carer involvement group to review this proposed service and let us know if they can see any issues or any ways it could be used to help provide them with better care?
+        {{ comment.text }}
         <button ng-show="comment.commentList.length > 0" class="btn btn-default btn-comments-expand" ng-init="isCommentsCollapsed = true" ng-click="isCommentsCollapsed = !isCommentsCollapsed">
             <span ng-show="isCommentsCollapsed">Show</span><span ng-hide="isCommentsCollapsed">Hide</span> 
-             Replies <span class="badge">4</span>
+             Replies <span class="badge">{{ comment.commentList.length }}</span>
         </button>
         <div ng-if="comment.commentList.length > 0" collapse="isCommentsCollapsed">
             <div ng-init="isCollapsed = true"  class="comment-margin">

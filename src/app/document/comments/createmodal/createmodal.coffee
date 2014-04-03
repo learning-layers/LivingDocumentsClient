@@ -27,12 +27,19 @@ createCommentsCreateModal = angular.module(
 >> CreateCommentModal Controller
 ###
 class CreateCommentModalCtrl extends BaseController
-  constructor: ($scope, @$modalInstance, @document, @DocumentCommentModel) ->
+  constructor: ($scope, @$modalInstance, $log, @document,
+                @DocumentCommentModel, @comment) ->
     super($scope)
+    console.log($log)
+    @$log = $log.getInstance("CreateCommentModalCtrl")
+    if angular.isDefined @comment
+      @$log.debug(@comment)
     return
   defineScope: ->
     that = @
     @$scope.document = @document
+    if angular.isDefined @comment
+      @$scope.comment = @comment
     @$scope.cancel = ->
       that.$modalInstance.dismiss('cancel')
       return
@@ -44,7 +51,8 @@ class CreateCommentModalCtrl extends BaseController
       @DocumentCommentModel.createComment(
         @$scope.document.id,
         @$scope.title,
-        @$scope.text
+        @$scope.text,
+        @comment
       )
     createDiscussionTask.success( (success) ->
       that.$modalInstance.dismiss('close')
@@ -52,6 +60,7 @@ class CreateCommentModalCtrl extends BaseController
     return
 
 CreateCommentModalCtrl.$inject =
-  ['$scope', '$modalInstance', 'document', 'DocumentCommentModel']
+  ['$scope', '$modalInstance', '$log',
+   'document', 'DocumentCommentModel', 'comment']
 createCommentsCreateModal.controller( 'CreateCommentModalCtrl',
   CreateCommentModalCtrl)

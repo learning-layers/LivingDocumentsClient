@@ -24,8 +24,8 @@
                         Open Discussion
                     </a>
                     <div ng-if="discussion.isOpen">
-                        <a href="" class="thumbnail" ng-click="openUserInfoModal(author.id)" ng-repeat="author in discussion.content.authors">
-                            <img ng-init="loadUserImgSrc(author.id, author)" ng-src="{{ author.img }}" class="thumbnail-picture">
+                        <a href="" class="thumbnail thumbnail-picture" ng-click="openUserInfoModal(author.id)" ng-repeat="author in discussion.content.authors">
+                            <img ng-init="loadUserImgSrc(author.id, author)" ng-src="{{ author.img }}" class="img-responsive">
                         </a>
                     </div>
                 </div>

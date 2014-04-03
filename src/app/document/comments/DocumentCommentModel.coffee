@@ -26,9 +26,9 @@ documentCommentModel = angular.module(
 class DocumentCommentModel extends BaseEventDispatcher
   constructor: ($log, @DocumentCommentService, @$rootScope) ->
     return
-  createComment: (documentId, commentTitle, commentText) ->
+  createComment: (documentId, commentTitle, commentText, parentComment) ->
     return @DocumentCommentService.createComment(
-      documentId, commentTitle, commentText
+      documentId, commentTitle, commentText, parentComment
     )
 
 

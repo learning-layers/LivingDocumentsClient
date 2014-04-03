@@ -4,7 +4,7 @@
     </div>
     <div class="modal-body">
         <div class="thumbnail pull-left">
-            <img ng-src="{{ profile.imgSrc }}">
+            <img class="img-responsive" ng-src="{{ profile.imgSrc }}">
         </div>
         <a ng-disabled="!userInfo.id" href="#/userprofile/{{ userInfo.id }}" class="btn btn-info pull-left" ng-click="close()">Open user profile</a>
         <br/>

@@ -30,7 +30,7 @@ class DocumentCtrl extends BaseController
         $stateParams.item,
         "?filter=id,title,viewCount,authorCount,commentCount," +
         "lastUpdateAt,createdAt,content,is_discussion" +
-        "&embed=tags:id,name;content:all;discussions:all"
+        "&embed=tags:id,name;content:all;discussions:all;comments:all"
       )
       @defineWatches()
       return

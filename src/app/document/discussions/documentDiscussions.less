@@ -1,8 +1,14 @@
 #document-discussions {
     border-radius: 0;
     .thumbnail-picture {
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
+        img.img-responsive {
+          max-height: 100%!important;
+          display: block!important;
+          max-width: 100%!important;
+          height: auto!important;
+        }
     }
     .discussion-panel-heading {
         padding-bottom: 5px;
@@ -65,10 +71,6 @@
                 display: inline-block;
                 margin-right: -2px;
                 margin-bottom: -4px;
-                img {
-                    height: 48px;
-                    width: 48px;
-                }
             }
         }
     }

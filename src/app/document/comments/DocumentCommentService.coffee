@@ -27,14 +27,15 @@ class DocumentCommentService extends BaseService
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentCommentService")
     return
-  createComment: (documentId, commentTitle, commentText) ->
+  createComment: (documentId, commentTitle, commentText, parentComment) ->
     that = @
     return @$http.post(
       @basePath + '/document/' + documentId + '/comment',
       {
         documentId: documentId,
         commentTitle: commentTitle,
-        commentText: commentText
+        commentText: commentText,
+        parentComment: parentComment
       },
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}

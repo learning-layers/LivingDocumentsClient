@@ -22,24 +22,30 @@ documentCommentsModule = angular.module( "LivingDocuments.document.comments", [
 
 documentCommentsModule.factory "DocumentCommentsController", ->
   class DocumentCommentsController
-    constructor: (@$scope, @$modal, @DocumentCommentModel) ->
+    constructor: (@$scope, @$modal, @$log, @DocumentCommentModel) ->
+      @log = $log.getInstance("DocumentCommentsController")
       @initScopeMethods()
       return
     initScopeMethods: ->
       @$scope.openCreateCommentModal = @openCreateCommentModal.bind(@)
       return
-    openCreateCommentModal: ->
+    openCreateCommentModal: (comment) ->
       that = @
+      @log.debug("Opening create comment modal")
       @$modal.open(
         {
           templateUrl: 'document/comments/createmodal' +
             '/createmodal.tpl.html'
           controller: CreateCommentModalCtrl
           resolve: {
+            $log: ->
+              return that.$log
             document: ->
               return that.$scope.document
             DocumentCommentModel: ->
               return that.DocumentCommentModel
+            comment: ->
+              return comment
           }
         }
       )
@@ -49,8 +55,9 @@ documentCommentsModule.factory "DocumentCommentsController", ->
 documentCommentsModule.directive "documentComments",
   (DocumentCommentsController) ->
     linker = (scope, element, attrs) ->
-    controller = ($scope, $modal, DocumentCommentModel) ->
-      new DocumentCommentsController($scope, $modal, DocumentCommentModel)
+    controller = ($scope, $modal, $log, DocumentCommentModel) ->
+      new DocumentCommentsController($scope, $modal,
+        $log, DocumentCommentModel)
     scope = {
       document: '='
     }
@@ -58,7 +65,8 @@ documentCommentsModule.directive "documentComments",
       restrict: 'E',
       templateUrl: "document/comments/" +
         "documentCommentsDirective.tpl.html",
-      controller: ['$scope', '$modal', 'DocumentCommentModel', controller],
+      controller: ['$scope', '$modal', '$log',
+                   'DocumentCommentModel', controller],
       link: linker,
       scope: scope
     }

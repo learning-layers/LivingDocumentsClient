@@ -1,6 +1,9 @@
 <div id="commentCreateModal">
     <div class="modal-header">
-        <h3>Create a comment for document '{{ document.title }}'</h3>
+        <h3>
+            <span ng-if="!comment">Create a comment for document '{{ document.title }}'</span>
+            <span ng-if="!!comment">Create a reply for comment '{{ comment.title }}'</span>
+        </h3>
     </div>
     <div class="modal-body">
         <label for="commentTitle">Comment title: </label>
