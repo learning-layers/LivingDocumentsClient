@@ -42,3 +42,61 @@ AttachmentUploadModalCtrl.$inject =
   ['$scope', '$modalInstance', 'attachmentsActiveScope']
 contentAttachmentUploadModal.controller( 'AttachmentUploadModalCtrl',
   AttachmentUploadModalCtrl)
+
+###
+>> FileAndMediaUpload Controller
+###
+class FileAndMediaUploadCtrl extends BaseController
+  constructor: ($scope, @$rootScope, @$upload,
+                @SecurityService, @ClassManager, @$log) ->
+    super($scope)
+    @log = $log.getInstance("FileAndMediaUploadCtrl")
+    @basePath = SecurityService.getInitialConfiguration().restServerAddress
+    return
+  defineScope: ->
+    that = @
+    @$scope.onFileSelect = @onFileSelect.bind(@)
+    return
+  onFileSelect: ($files) ->
+    that = @
+    ProgressImageMessage =
+      @ClassManager.getRegisteredClass('ProgressImageMessage')
+    progressImageMessageInstance =
+      new ProgressImageMessage("Profile image upload")
+    @$rootScope.$broadcast('info', progressImageMessageInstance)
+    #$files: an array of files selected, each file has name, size, and type.
+    successFunction = (data, status, headers, config) ->
+      #file is uploaded successfully
+      that.log.debug(data)
+      progressImageMessageInstance.fireIsFinished()
+      return
+    progressFunction = (evt) ->
+      that.log.debug('percent: ' +
+        parseInt(100.0 * evt.loaded / evt.total, 10))
+      progressImageMessageInstance.setProgressPercentage(
+        parseInt(100.0 * evt.loaded / evt.total, 10)
+      )
+      return
+    for file, i in $files
+      that.$scope.upload = that.$upload.upload(
+        {
+          url: that.basePath + '/user/' + that.SecurityService.currentUser.id +
+            '/profile?method=uploadimage',
+          #method: 'PUT',
+          data: {myObj: that.$scope.myModelObj},
+          headers: {
+            'Authorization':
+              that.SecurityService.currentUser.authorizationString
+          },
+          file: file
+        }
+      ).progress(progressFunction).success(successFunction)
+      #.error(...)
+      #.then(success, error, progress);
+    return
+
+FileAndMediaUploadCtrl.$inject =
+  ['$scope', '$rootScope', '$upload',
+   'SecurityService', 'ClassManager', '$log']
+contentAttachmentUploadModal.controller( 'FileAndMediaUploadCtrl',
+  FileAndMediaUploadCtrl)
