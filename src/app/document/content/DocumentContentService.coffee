@@ -32,8 +32,22 @@ class DocumentContentService extends BaseService
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}
     })
-    .success (status) ->
+    .success (success) ->
       that.$log.debug "Successfully updated document content!"
+      return
+  loadFileAttachments: (documentId) ->
+    @$log.debug("Loading file attachments")
+    return @$http({
+      method: 'GET',
+      url: @basePath + '/document/' + documentId +
+        '/fileattachment',
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString}
+    })
+    .success (success) ->
+      that.$log.debug success
+      return
+    return
 
 DocumentContentService.$inject = ['SecurityService','$http', '$log']
 documentContentService.service "DocumentContentService", DocumentContentService

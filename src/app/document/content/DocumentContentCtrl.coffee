@@ -26,12 +26,20 @@ class DocumentContentCtrl extends BaseController
     @documentContent = @DocumentContentModel.getActiveDocumentContent()
     @initScopeVars()
     @initScopeMethods()
+    @initScopeWatches()
     return
   initScopeVars: ->
     @$scope.editorActive = false
     @$scope.documentContent = @documentContent
     @$scope.attachmentsActive = false
     @$scope.editorActive = false
+    @$scope.tabs = {
+      historyActive: true,
+      filesActive: false,
+      imgAVidsActive: false,
+      linksActive: false,
+      relDocsActive: false
+    }
     return
   initScopeMethods: ->
     that = @
@@ -44,6 +52,15 @@ class DocumentContentCtrl extends BaseController
     @$scope.switchToAttachments = @switchToAttachments.bind(@)
     @$scope.switchToDocumentContent = @switchToDocumentContent.bind(@)
     @$scope.openAttachmentUploadModal = @openAttachmentUploadModal.bind(@)
+    return
+  initScopeWatches: ->
+    that = @
+    @$log.debug("Initializing scope watches")
+    @$scope.$watch 'tabs.filesActive', (newVal) ->
+      if newVal == true
+        that.$log.debug("File tab opened")
+        that.DocumentContentModel.loadFileAttachments()
+      return
     return
   switchToAttachments: ->
     @$log.debug "Attachments active"

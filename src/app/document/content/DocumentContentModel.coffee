@@ -92,6 +92,15 @@ class DocumentContentModel extends BaseEventDispatcher
     #.error(...)
     #.then(success, error, progress)
     return
+  loadFileAttachments: ->
+    that = @
+    loadFileAttachmentsTask = @DocumentContentService.loadFileAttachments(
+      that.activeDocumentId
+    )
+    ###loadFileAttachmentsTask.success (success) ->
+      that.$log.debug(success)
+      return###
+    return loadFileAttachmentsTask
 
 documentContentModel.factory "DocumentContentModel",
   ['$log', 'DocumentContentService', '$rootScope', 'SecurityService'
