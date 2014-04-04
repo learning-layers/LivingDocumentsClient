@@ -10,7 +10,7 @@
     </div>
     <div class="panel-body panel-body-no-padding">
         <div ng-init="commentList = [{title:'title', text:'text', commentList: [{title:'title2', text:'text2', commentList: []}]}]; isCollapsed = false">
-            <div ng-repeat="comment in commentList" ng-include="" src="'document/comments/documentCommentsCommentsInclude.tpl.html'"></div>
+            <div ng-repeat="comment in comments.comments" ng-include="" src="'document/comments/documentCommentsCommentsInclude.tpl.html'"></div>
         </div>
     </div>
 </div>

@@ -90,6 +90,9 @@ class DocumentModel extends BaseEventDispatcher
     if angular.isDefined document.discussions
       @$rootScope.$emit('ReceivedData:document.discussions',
         document.id, document.discussions)
+    if angular.isDefined document.comments
+      @$rootScope.$emit('ReceivedData:document.comments',
+        document.id, document.comments)
     return
   initActiveDocument: ->
     return {

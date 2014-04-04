@@ -28,6 +28,7 @@ documentCommentsModule.factory "DocumentCommentsController", ->
       return
     initScopeMethods: ->
       @$scope.openCreateCommentModal = @openCreateCommentModal.bind(@)
+      @$scope.comments = @DocumentCommentModel.getActiveDocumentComments()
       return
     openCreateCommentModal: (comment) ->
       that = @

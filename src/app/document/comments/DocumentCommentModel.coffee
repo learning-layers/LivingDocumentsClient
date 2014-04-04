@@ -25,11 +25,28 @@ documentCommentModel = angular.module(
 
 class DocumentCommentModel extends BaseEventDispatcher
   constructor: ($log, @DocumentCommentService, @$rootScope) ->
+    @activeDocumentComments = @initActiveDocumentComments()
+    @defineListeners()
+    return
+  defineListeners: ->
+    that = @
+    @$rootScope.$on(
+      'ReceivedData:document.comments',
+      (ev, documentId, comments) ->
+        that.activeDocumentComments.comments = comments
+        return
+    )
     return
   createComment: (documentId, commentTitle, commentText, parentComment) ->
     return @DocumentCommentService.createComment(
       documentId, commentTitle, commentText, parentComment
     )
+  getActiveDocumentComments: ->
+    return @activeDocumentComments
+  initActiveDocumentComments: ->
+    return {
+      comments: []
+    }
 
 
 documentCommentModel.factory "DocumentCommentModel",
