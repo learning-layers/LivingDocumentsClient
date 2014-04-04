@@ -18,12 +18,14 @@
 documentContentModule = angular.module( "LivingDocuments.document.content", [
   "LivingDocuments.document.content.model"
   "LivingDocuments.document.content.controller"
+  "LivingDocuments.document.content.attachment.uploadmodal"
 ])
 
 documentContentModule.directive "documentContent", ->
   linker = (scope, element, attrs) ->
-  controller = ($scope, $log, DocumentContentModel, $rootScope) ->
-    new DocumentContentCtrl($scope, $log, DocumentContentModel, $rootScope)
+  controller = ($scope, $log, DocumentContentModel, $rootScope, $modal) ->
+    new DocumentContentCtrl($scope, $log,
+      DocumentContentModel, $rootScope, $modal)
   scope = {
     document: '='
   }
@@ -33,7 +35,7 @@ documentContentModule.directive "documentContent", ->
       "documentContentDirective.tpl.html"
     controller: [
       '$scope', '$log', 'DocumentContentModel',
-      '$rootScope', controller
+      '$rootScope', '$modal', controller
     ]
     link: linker
     scope: scope

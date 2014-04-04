@@ -21,7 +21,7 @@ documentContentController =
   ])
 
 class DocumentContentCtrl extends BaseController
-  constructor: (@$scope, $log, @DocumentContentModel, @$rootScope) ->
+  constructor: (@$scope, $log, @DocumentContentModel, @$rootScope, @$modal) ->
     @$log = $log.getInstance "DocumentContentController"
     @documentContent = @DocumentContentModel.getActiveDocumentContent()
     @initScopeVars()
@@ -41,12 +41,32 @@ class DocumentContentCtrl extends BaseController
     @$scope.openViewerList = @openViewerList.bind(@)
     @$scope.setEditorContent = @setEditorContent.bind(@)
     @$scope.showContextMenu = @showContextMenu.bind(@)
-    @$scope.switchToAttachments = ->
-      that.$log.debug "Attachments active"
-      that.$scope.attachmentsActive = true
-    @$scope.switchToDocumentContent = ->
-      that.$log.debug "Document content active"
-      that.$scope.attachmentsActive = false
+    @$scope.switchToAttachments = @switchToAttachments.bind(@)
+    @$scope.switchToDocumentContent = @switchToDocumentContent.bind(@)
+    @$scope.openAttachmentUploadModal = @openAttachmentUploadModal.bind(@)
+    return
+  switchToAttachments: ->
+    @$log.debug "Attachments active"
+    @$scope.attachmentsActive = true
+    return
+  switchToDocumentContent: ->
+    @$log.debug "Document content active"
+    @$scope.attachmentsActive = false
+    return
+  openAttachmentUploadModal: ->
+    that = @
+    @switchToDocumentContent()
+    @$modal.open(
+      {
+        templateUrl: 'document/content/attachment' +
+          '/uploadmodal.tpl.html'
+        controller: AttachmentUploadModalCtrl
+        resolve: {
+          attachmentsActiveScope: ->
+            return that.$scope
+        }
+      }
+    )
     return
   openUserInfoModal: (userId) ->
     @$rootScope.$emit('openUserProfile', userId)
