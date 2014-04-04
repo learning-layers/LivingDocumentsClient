@@ -27,7 +27,8 @@ contentAttachmentUploadModal = angular.module(
 >> AttachmentUploadModal Controller
 ###
 class AttachmentUploadModalCtrl extends BaseController
-  constructor: ($scope, @$modalInstance, @attachmentsActiveScope) ->
+  constructor: ($scope, @$modalInstance,
+                @attachmentsActiveScope, @documentId) ->
     super($scope)
     return
   defineScope: ->
@@ -48,10 +49,10 @@ contentAttachmentUploadModal.controller( 'AttachmentUploadModalCtrl',
 ###
 class FileAndMediaUploadCtrl extends BaseController
   constructor: ($scope, @$rootScope, @$upload,
-                @SecurityService, @ClassManager, @$log) ->
+                @SecurityService, @ClassManager,
+                @$log, @DocumentContentModel) ->
     super($scope)
     @log = $log.getInstance("FileAndMediaUploadCtrl")
-    @basePath = SecurityService.getInitialConfiguration().restServerAddress
     return
   defineScope: ->
     that = @
@@ -78,25 +79,15 @@ class FileAndMediaUploadCtrl extends BaseController
       )
       return
     for file, i in $files
-      that.$scope.upload = that.$upload.upload(
-        {
-          url: that.basePath + '/user/' + that.SecurityService.currentUser.id +
-            '/profile?method=uploadimage',
-          #method: 'PUT',
-          data: {myObj: that.$scope.myModelObj},
-          headers: {
-            'Authorization':
-              that.SecurityService.currentUser.authorizationString
-          },
-          file: file
-        }
-      ).progress(progressFunction).success(successFunction)
-      #.error(...)
-      #.then(success, error, progress);
+      @DocumentContentModel.addAttachment(
+        file, @$upload, that.$scope.myModelObj,
+        progressFunction, successFunction
+      )
     return
 
 FileAndMediaUploadCtrl.$inject =
   ['$scope', '$rootScope', '$upload',
-   'SecurityService', 'ClassManager', '$log']
+   'SecurityService', 'ClassManager',
+   '$log', 'DocumentContentModel']
 contentAttachmentUploadModal.controller( 'FileAndMediaUploadCtrl',
   FileAndMediaUploadCtrl)

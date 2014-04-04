@@ -71,6 +71,27 @@ class DocumentContentModel extends BaseEventDispatcher
       )
       return
     return saveEditorContentTask
+  addAttachment: (file, $upload, modelObj,
+                  progressFunction, successFunction) ->
+    that = @
+    basePath = @SecurityService.getInitialConfiguration().restServerAddress
+    $upload.upload(
+      {
+        url: basePath + '/document/' +
+          that.activeDocumentId +
+          '/attachment',
+        #method: 'PUT',
+        data: {myObj: modelObj},
+        headers: {
+          'Authorization':
+            that.SecurityService.currentUser.authorizationString
+        },
+        file: file
+      }
+    ).progress(progressFunction).success(successFunction)
+    #.error(...)
+    #.then(success, error, progress)
+    return
 
 documentContentModel.factory "DocumentContentModel",
   ['$log', 'DocumentContentService', '$rootScope', 'SecurityService'
