@@ -34,6 +34,7 @@
       "grunt-contrib-less": "0.10.0",
       "grunt-lib-contrib": "v0.7.1",
       "underscore": "1.6.0",
-      "chalk": "0.4.0"
+      "chalk": "0.4.0",
+      "grunt-typescript": "0.3.0"
   }
 }

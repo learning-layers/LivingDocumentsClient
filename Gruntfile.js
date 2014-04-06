@@ -18,6 +18,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-typescript');
 
   /**
    * Load in our build configuration file.
@@ -214,6 +215,13 @@ module.exports = function ( grunt ) {
         dest: '<%= build_dir %>',
         ext: '.js'
       }
+    },
+
+    typescript: {
+        base: {
+            src: ['<%= app_files.ts %>'],
+            dest: '<%= build_dir %>'
+        }
     },
 
     /**
@@ -563,7 +571,7 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [
-    'clean', 'html2js', 'jshint', 'coffeelint', 'coffee', 'less:build',
+    'clean', 'html2js', 'jshint', 'typescript:base', 'coffeelint', 'coffee', 'less:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_app_fonts', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous' 
