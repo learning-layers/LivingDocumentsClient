@@ -40,6 +40,9 @@ class DocumentContentCtrl extends BaseController
       linksActive: false,
       relDocsActive: false
     }
+    @$scope.attachments = {
+      files: []
+    }
     return
   initScopeMethods: ->
     that = @
@@ -52,6 +55,7 @@ class DocumentContentCtrl extends BaseController
     @$scope.switchToAttachments = @switchToAttachments.bind(@)
     @$scope.switchToDocumentContent = @switchToDocumentContent.bind(@)
     @$scope.openAttachmentUploadModal = @openAttachmentUploadModal.bind(@)
+    @$scope.downloadFileAttachment = @downloadFileAttachment.bind(@)
     return
   initScopeWatches: ->
     that = @
@@ -59,7 +63,12 @@ class DocumentContentCtrl extends BaseController
     @$scope.$watch 'tabs.filesActive', (newVal) ->
       if newVal == true
         that.$log.debug("File tab opened")
-        that.DocumentContentModel.loadFileAttachments()
+        loadFileAttachmentsTask =
+          that.DocumentContentModel.loadFileAttachments()
+        loadFileAttachmentsTask.success (fileAttachments) ->
+          for fileAttachment in fileAttachments
+            that.$scope.attachments.files.add fileAttachment
+          return
       return
     return
   switchToAttachments: ->
@@ -146,6 +155,9 @@ class DocumentContentCtrl extends BaseController
     #alert("startOffset=" + selectionObj.startOffset + ", endOffset="
     # + selectionObj.endOffset + ", htmlContent=" + htmlContent)
     callback(currentSelection)
+    return
+  downloadFileAttachment: (fileattachmentId) ->
+    @DocumentContentModel.downloadFileAttachment(fileattachmentId)
     return
 
 DocumentContentCtrl.$inject =

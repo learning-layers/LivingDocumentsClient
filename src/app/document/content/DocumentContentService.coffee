@@ -27,7 +27,7 @@ class DocumentContentService extends BaseService
     return @$http({
       method: 'PUT',
       url: @basePath + '/document/' + documentId +
-      '/content',
+        '/content',
       data: {editorContent: editorContent},
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}
@@ -46,6 +46,24 @@ class DocumentContentService extends BaseService
     })
     .success (success) ->
       that.$log.debug success
+      return
+    return
+  downloadFileAttachment: (fileattachmentId)->
+    that = @
+    @$http({
+      method: 'GET',
+      url: @basePath + '/prepdownload/attachment/' +
+        fileattachmentId,
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString}
+    })
+    .success (success) ->
+      that.$log.debug "Successfully downloaded " +
+        "document file attachment!"
+
+      document.location = that.basePath + '/dodownload/attachment/' +
+        that.SecurityService.currentUser.id + '/' +
+        success.uuid + '/' + success.attachmentname
       return
     return
 

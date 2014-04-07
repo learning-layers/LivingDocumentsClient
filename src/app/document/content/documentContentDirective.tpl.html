@@ -117,11 +117,11 @@
                                 <th>Filename</th>
                                 <th>Size</th>
                                 <th>Options</th>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <tr ng-repeat="file in attachments.files">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ file.name }}</td>
+                                    <td>{{ file.size }}</td>
+                                    <td><button class="btn btn-default" ng-click="downloadFileAttachment(file.id)">Download</button></td>
                                 </tr>
                             </table>
                         </tab>
