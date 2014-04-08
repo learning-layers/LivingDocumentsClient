@@ -3,8 +3,13 @@
         <div class="front panel panel-default doc-content-panel">
             <div class="panel-heading panel-heading-sm">
                 <div class="row first-row">
-                    <button class="btn btn-info" ng-click="switchToAttachments()"><span class="glyphicon glyphicon-paperclip"></span>Attachments<span class="badge">3</span></button>
-                    <img src="http://placehold.it/180x34">
+                    <button class="btn btn-info pull-left" ng-click="switchToAttachments()"><span class="glyphicon glyphicon-paperclip"></span>Attachments<span class="badge">3</span></button>
+                    <div id="documentContentMaturityIndicator" class="pull-left">
+                        <div class="maturity-low"></div>
+                        <div class="maturity-mid"></div>
+                        <div class="maturity-high"></div>
+                        <div class="maturity-norm"></div>
+                    </div>
                 </div>
                 <div class="row second-row">
                     <div class="btn-group">
