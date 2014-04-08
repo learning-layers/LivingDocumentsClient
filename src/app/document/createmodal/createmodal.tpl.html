@@ -3,17 +3,21 @@
 </div>
 <div class="modal-body">
     <input type="text" class="form-control" ng-model="title" placeholder="Document title">
-    Optional: <button class="btn btn-default">Choose a folder</button> Current selection: "Unassigned Documents Folder"
+    <!-- Optional: <button class="btn btn-default">Choose a folder</button> Current selection: "Unassigned Documents Folder" -->
     <label class="rememberme-switch switch-light well" onclick="" data-ng-click="togglePublic()">
-        <input type="checkbox">
+        <input type="checkbox" checked disabled>
         <span>
             <span>Private</span>
             <span>Public</span>
         </span>
         <a class="btn btn-primary"></a>
     </label>
+    <h4><i>Note: Currently the only option is public till sharing options are available.</i></h4>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok(title)">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-danger pull-left" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-success pull-right" ng-click="ok(title)">
+        <span class="glyphicon glyphicon-plus-sign"></span> Create
+    </button>
+    <div style="clear: both"></div>
 </div>

@@ -111,7 +111,7 @@ angular.module( 'LivingDocuments.navigation', [
             
             var CreateNewDocumentModalInstanceCtrl = ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                 $scope.title = '';
-                $scope.togglePublicOn = false;
+                $scope.togglePublicOn = true;
                 $scope.togglePublicCount = 0;
                 $scope.togglePublic = function() {
                     // This function contains a workaround because it is triggered twice
