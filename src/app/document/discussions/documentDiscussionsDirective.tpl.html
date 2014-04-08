@@ -14,7 +14,12 @@
                 <accordion-heading>
                     {{ discussion.title }}
                     <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> {{ discussion.content.authors.length }}</span>
-                    <img src="http://placehold.it/80x22" class="pull-right">
+                    <div id="documentDiscussionMaturityIndicator" class="pull-right">
+                        <div class="maturity-low"></div>
+                        <div class="maturity-mid"></div>
+                        <div class="maturity-high"></div>
+                        <div class="maturity-norm"></div>
+                    </div>
                 </accordion-heading>
                 <div class="col-lg-6" ng-bind-html="discussion.content.content">
                 </div>
