@@ -81,17 +81,28 @@ class DocumentCtrl extends BaseController
     EditDocTagsModalInstanceCtrl =
       ['$scope', '$modalInstance', 'document', 'DocumentModel',
       ($scope, $modalInstance, document, DocumentModel) ->
+        that = @
+        @$scope = $scope
         $scope.tagObj = {}
+        $scope.tagSelected = false
         $scope.selectedTag = null
         $scope.document = document
         $scope.ok = (tagObj)->
           $modalInstance.close(tagObj)
+          return
         $scope.cancel = ->
           $modalInstance.dismiss('cancel')
+          that.$scope.tagSelected = false
+          that.$scope.selectedTag = null
+          return
         $scope.removeTag = (tag) ->
           DocumentModel.removeTag(tag)
+          that.$scope.selectedTag = null
+          that.$scope.tagSelected = false
+          return
         $scope.createNewTag = (newTagName)->
           DocumentModel.addTag(newTagName)
+          return
       ]
     @$modal.open(
       {

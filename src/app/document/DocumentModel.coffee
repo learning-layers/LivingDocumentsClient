@@ -55,7 +55,7 @@ class DocumentModel extends BaseEventDispatcher
     id = @activeDocument.id
     addTagTask = @DocumentService.removeTag(id, tag.name)
     addTagTask.success (data) ->
-      that.$log.debug("Successfully added tag! id=" + data.id)
+      that.$log.debug("Successfully removed tag!")
       that.activeDocument.tags.remove tag
       return
     return

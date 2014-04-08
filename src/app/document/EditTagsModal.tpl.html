@@ -2,19 +2,23 @@
     <h3>Edit tags of document '{{ document.title }}'</h3>
 </div>
 <div class="modal-body">
-    Select a tag to remove it from this document:
-    <a href="" class="tag btn btn-warning" ng-repeat="tag in document.tags" ng-click="$parent.selectedTag = tag"><span class="glyphicon glyphicon-tag"></span>{{ tag.name }}</a>
-    <hr>
-    <a href="" class="tag btn btn-warning" ng-show="!!selectedTag"><span class="glyphicon glyphicon-tag"></span>{{ selectedTag.name }}</a>
-    <div class="btn-group">
-        <button class="btn btn-default" ng-show="!!selectedTag" ng-click="selectedTag = null">Cancel</button>
-        <button class="btn btn-danger" ng-show="!!selectedTag" ng-click="removeTag(selectedTag)">
-            <span class="glyphicon glyphicon-trash"></span> Remove
-        </button>
+    <div id="edit-tags-area">
+        <p>Select a tag to remove it from this document:</p>
+        <a href="" class="tag btn btn-warning" ng-repeat="tag in document.tags" ng-click="$parent.selectedTag = tag; $parent.tagSelected = 'true'">
+            <span class="glyphicon glyphicon-tag"></span>{{ tag.name }}
+        </a>
+        <hr>
+        <a href="" class="tag btn btn-warning" ng-show="tagSelected"><span class="glyphicon glyphicon-tag"></span>{{ selectedTag.name }}</a>
+        <div class="btn-group">
+            <button class="btn btn-default" ng-show="tagSelected" ng-click="tagSelected = 'false'">Cancel</button>
+            <button class="btn btn-danger" ng-show="tagSelected" ng-click="tagSelected = 'false'; removeTag(selectedTag)">
+                <span class="glyphicon glyphicon-trash"></span> Remove
+            </button>
+        </div>
+        <hr>
+        <input class="form-control" type="text" ng-model="newTagName">
+        <button class="btn btn-default" ng-click="createNewTag(newTagName)">Create</button>
     </div>
-    <hr>
-    <input class="form-control" type="text" ng-model="newTagName">
-    <button class="btn btn-default" ng-click="createNewTag(newTagName)">Create</button>
 </div>
 <div class="modal-footer">
     <button class="btn btn-warning" ng-click="cancel()">Close</button>
