@@ -37,14 +37,19 @@ class DocumentDiscussionModel extends BaseEventDispatcher
     @$rootScope.$on('ReceivedData:document',
       (ev, id, document) ->
         that.activeDocumentId = id
-        that.activeDiscussions.discussion = []
+        that.activeDiscussions.discussions = []
+        @that.$log.debug("Resetted discussions")
         return
     )
     @$rootScope.$on('ReceivedData:document.discussions',
       (ev, id, discussions) ->
-        if angular.isDefined(discussions[0])
+        if(
+          angular.isDefined(discussions) &&
+          discussions != null &&
+          discussions.length > 0
+        )
           discussions[0].isOpen = true
-        that.refreshDocumentDiscussions(id, discussions)
+          that.refreshDocumentDiscussions(id, discussions)
         return
     )
     return
