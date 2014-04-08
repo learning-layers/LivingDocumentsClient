@@ -3,7 +3,7 @@
     <form name="registrationForm" novalidate>
         <div class="form-group">
             <label for="domain">Registration for domain or organisation:</label>
-            <select name="domain" ng-init="domain = 'None'" class="form-control" ng-model="domain">
+            <select id="domain" name="domain" ng-init="domain = 'None'" class="form-control" ng-model="domain">
                 <option>None</option>
             </select>
             <div ng-show="domain == 'None'" class="alert alert-warning">

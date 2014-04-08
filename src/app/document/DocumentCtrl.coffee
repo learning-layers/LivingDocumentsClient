@@ -29,7 +29,7 @@ class DocumentCtrl extends BaseController
       DocumentModel.get(
         $stateParams.item,
         "?filter=id,title,viewCount,authorCount,commentCount," +
-        "lastUpdateAt,createdAt,content,is_discussion" +
+        "lastUpdateAt,createdAt,content,is_discussion,parent_document_id" +
         "&embed=tags:id,name;content:all;discussions:all;comments:all"
       )
       @defineWatches()

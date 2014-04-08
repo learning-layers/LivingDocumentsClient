@@ -5,8 +5,8 @@
                 <h1 class="panel-title">{{ document.title }}</h1>
             </div>
             <div class="btn-group pull-right">
-                <button class="btn btn-info" ng-show="document.hasParent"><span class="glyphicon glyphicon-arrow-up"></span>Parent document</button>
-                <button class="btn btn-default" ng-show="!document.isAlreadyAddedToUserFolders"><span class="glyphicon glyphicon-folder-close"></span>Add to your folders</button>
+                <a class="btn btn-info" href="#/document/{{ document.parent_document_id }}" ng-show="document.parent_document_id != null && document.parent_document_id != ''"><span class="glyphicon glyphicon-arrow-up"></span>Parent document</a>
+                <button class="btn btn-default" ng-show="!document.isAlreadyAddedToUserFolders" disabled><span class="glyphicon glyphicon-folder-close"></span>Add to your folders</button>
                 <button class="btn btn-default" ng-show="document.isAlreadyAddedToUserFolders"><span class="glyphicon glyphicon-folder-close"></span>Move</button>
                 <button class="btn btn-default" ng-show="document.userHasSharingRights"><span class="glyphicon glyphicon-share-alt"></span>Share</button>
                 <div class="btn-group">

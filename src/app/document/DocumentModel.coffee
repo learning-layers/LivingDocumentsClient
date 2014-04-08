@@ -82,6 +82,7 @@ class DocumentModel extends BaseEventDispatcher
     @activeDocument.id = document.id
     @activeDocument.title = document.title
     @activeDocument.owner = document.owner
+    @activeDocument.parent_document_id = document.parent_document_id
     if angular.isDefined document.tags
       @activeDocument.tags = document.tags
     if angular.isDefined document.content

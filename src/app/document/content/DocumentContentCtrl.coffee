@@ -85,7 +85,6 @@ class DocumentContentCtrl extends BaseController
     @$scope.$watch 'tabs.imgAVidsActive', (newVal) ->
       if newVal == true
         that.$log.debug("ImgAVids tab opened")
-        that.$scope.attachments.images.add {id:-1, title:'imgTitle1'}
       return
     return
   switchToAttachments: ->
