@@ -1,7 +1,7 @@
 <div id="document-comments" class="panel panel-default">
     {{ title }}
     <div class="panel-heading panel-heading-sm document-comments-panel-heading">
-        <span class="glyphicon glyphicon-comment"></span> <h4>Comments</h4> <span class="badge">{{ commentList.length }}</span>
+        <span class="glyphicon glyphicon-comment"></span> <h4>Comments</h4> <span class="badge">{{ comments.comments.length }}</span>
         <div class="btn-group pull-right">
             <button class="btn btn-default" ng-click="openCreateCommentModal()"><span class="glyphicon glyphicon-plus-sign"></span> Create Comment</button>
             <button class="btn btn-default" disabled><span class="glyphicon glyphicon-filter"></span> Filter</button>
@@ -9,7 +9,8 @@
         <div style="clear: both"></div>
     </div>
     <div class="panel-body panel-body-no-padding">
-        <div ng-init="commentList = [{title:'title', text:'text', commentList: [{title:'title2', text:'text2', commentList: []}]}]; isCollapsed = false">
+        <!--commentList = [{title:'title', text:'text', commentList: [{title:'title2', text:'text2', commentList: []}]}]; -->
+        <div ng-init="isCollapsed = false">
             <div ng-repeat="comment in comments.comments" ng-include="" src="'document/comments/documentCommentsCommentsInclude.tpl.html'"></div>
         </div>
     </div>

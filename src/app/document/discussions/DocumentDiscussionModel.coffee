@@ -37,6 +37,7 @@ class DocumentDiscussionModel extends BaseEventDispatcher
     @$rootScope.$on('ReceivedData:document',
       (ev, id, document) ->
         that.activeDocumentId = id
+        that.activeDiscussions.discussion = []
         return
     )
     @$rootScope.$on('ReceivedData:document.discussions',
