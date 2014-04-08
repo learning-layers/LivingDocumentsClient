@@ -38,7 +38,7 @@ angular.module( 'LivingDocuments.home', [
 /**
  * And of course we define a controller for our route.
  */
-.controller( 'HomeCtrl', function ( $scope ) {
+.controller( 'HomeCtrl', function ( $scope, $http, $log, SecurityService ) {
     $scope.subscriptionChanges = [
         {changes:[{type:"comments", changedByUsers:[{name:"David"}, {name:"Martin"}]}, {type:"content", changedByUsers:[{name:"Christine"}]}], document:{name:'Dementias DES Summary', lastUpdateAt:'01/10/2013 13:25'}},
         {changes:[{type:"content", changedByUsers:[{name:"Andreas"}]}], document:{name:'Registration Guidelines', lastUpdateAt:'03/05/2014 15:25'}}
@@ -47,15 +47,44 @@ angular.module( 'LivingDocuments.home', [
         {changes:[{type:"comments", changedByUsers:[{name:"Martin"}]}, {type:"content", changedByUsers:[{name:"Christine"}]}], document:{name:'Dementias DES Summary', lastUpdateAt:'01/10/2013 13:25'}},
         {changes:[{type:"content", changedByUsers:[{name:"Andreas"}]}], document:{name:'Registration Guidelines', lastUpdateAt:'03/05/2014 15:25'}}
         ];
+    $scope.tabs = {
+        subscribedDocsActive: false,
+        overallDocsActive: true,
+        followedUsersActive: false,
+        overallUsersActive: false
+    };
+    $scope.tabs = {
+        subscribedDocsActive: false,
+        overallDocsActive: true,
+        followedUsersActive: false,
+        overallUsersActive: false
+    };
+    $scope.documents = [];
+    $scope.$watch('tabs.overallDocsActive', function(newVal) {
+        $log.debug("Triggered tabs overallDocsActive");
+        if (newVal === true) {
+            $http({
+                method: 'GET',
+                url: SecurityService.getInitialConfiguration().restServerAddress + '/document',
+                headers: {
+                    'Authorization': SecurityService.currentUser.authorizationString
+                }
+            }).success( function(success) {
+                $log.debug("Successfully retrieved document list!");
+                $log.debug(success);
+                $scope.documents = success.documents;
+            });
+        }
+    });
 })
 
 .controller('CarouselDemoCtrl', function ($scope, $animate) {    
     $scope.animate = false;
     $scope.animateGlobal = true;
     $scope.slides = [
-        { image: 'http://lorempixel.com/400/200/', text: 'blah' },    
-        { image: 'http://lorempixel.com/400/200/', text: 'blah' },
-        { image: 'http://lorempixel.com/400/200/', text: 'blah' }
+        { image: '', text: '' },
+        { image: '', text: '' },
+        { image: '', text: '' }
     ];
     $scope.myInterval = 5000;
 })
