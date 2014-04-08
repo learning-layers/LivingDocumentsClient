@@ -41,7 +41,8 @@ class DocumentContentCtrl extends BaseController
       relDocsActive: false
     }
     @$scope.attachments = {
-      files: []
+      files: [],
+      hyperlinks: []
     }
     return
   initScopeMethods: ->
@@ -68,6 +69,16 @@ class DocumentContentCtrl extends BaseController
         loadFileAttachmentsTask.success (fileAttachments) ->
           for fileAttachment in fileAttachments
             that.$scope.attachments.files.add fileAttachment
+          return
+      return
+    @$scope.$watch 'tabs.linksActive', (newVal) ->
+      if newVal == true
+        that.$log.debug("Hyperlink tab opened")
+        loadHyperlinksTask =
+          that.DocumentContentModel.loadHyperlinks()
+        loadHyperlinksTask.success (hyperlinksAttachments) ->
+          for hyperlinksAttachment in hyperlinksAttachments
+            that.$scope.attachments.hyperlinks.add hyperlinksAttachment
           return
       return
     return

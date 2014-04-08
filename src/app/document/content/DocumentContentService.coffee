@@ -83,6 +83,21 @@ class DocumentContentService extends BaseService
         "Successfully added new hyperlink" +
         "to document with id=" + documentId
       )
+  loadHyperlinks: (documentId) ->
+    that = @
+    return @$http({
+      method: 'GET',
+      url: @basePath + '/document/' + documentId + '/attachment/hyperlink',
+      headers: {
+        'Authorization': that.SecurityService.currentUser.authorizationString
+      }
+    })
+    .success (success) ->
+      that.$log.debug(
+        "Successfully retrieved hyperlinks for document with id=" +
+        documentId
+      )
+      return
     return
 
 DocumentContentService.$inject = ['SecurityService','$http', '$log']
