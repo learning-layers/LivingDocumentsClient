@@ -66,6 +66,24 @@ class DocumentContentService extends BaseService
         success.uuid + '/' + success.attachmentname
       return
     return
+  addHyperlink: (documentId, hyperlink, description) ->
+    that = @
+    @$http({
+      method: 'POST',
+      url: @basePath + '/document/' + documentId + '/attachment/hyperlink',
+      data: {
+        hyperlink: hyperlink,
+        description: description
+      },
+      headers: {'Authorization':
+        that.SecurityService.currentUser.authorizationString}
+    })
+    .success (success) ->
+      that.$log.debug(
+        "Successfully added new hyperlink" +
+        "to document with id=" + documentId
+      )
+    return
 
 DocumentContentService.$inject = ['SecurityService','$http', '$log']
 documentContentService.service "DocumentContentService", DocumentContentService

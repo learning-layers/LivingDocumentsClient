@@ -94,6 +94,21 @@ contentAttachmentUploadModal.controller( 'FileAndMediaUploadCtrl',
 
 class AddDocumentContentLinkCtrl extends BaseController
   constructor: ($scope, @$rootScope, @$log, @DocumentContentModel) ->
+    super($scope)
+    @log = $log.getInstance("AddDocumentContentLinkCtrl")
+    return
+  defineScope: ->
+    @$scope.createHyperlink = @createHyperlink.bind(@)
+    return
+  createHyperlink: ->
+    that = @
+    @log.debug(
+      "createHypelink called with hyperlink=" + @$scope.hyperlink +
+      ", and description=" + @$scope.description
+    )
+    @DocumentContentModel.addHyperlink(
+      that.$scope.hyperlink, that.$scope.description
+    )
     return
 
 AddDocumentContentLinkCtrl.$inject =

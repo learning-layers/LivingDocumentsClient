@@ -104,6 +104,12 @@ class DocumentContentModel extends BaseEventDispatcher
   downloadFileAttachment: (fileattachmentId) ->
     @DocumentContentService.downloadFileAttachment(fileattachmentId)
     return
+  addHyperlink: (hyperlink, description) ->
+    that = @
+    @DocumentContentService.addHyperlink(
+      that.activeDocumentId, hyperlink, description
+    )
+    return
 
 documentContentModel.factory "DocumentContentModel",
   ['$log', 'DocumentContentService', '$rootScope', 'SecurityService'
