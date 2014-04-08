@@ -23,6 +23,7 @@ class DocumentModel extends BaseEventDispatcher
   constructor: ($log, @DocumentService, @$rootScope) ->
     @$log = $log.getInstance("DocumentModel")
     @activeDocument = @initActiveDocument()
+    @activeDocumentLoading
     @addTag.bind(@)
     @removeTag.bind(@)
     return
@@ -30,17 +31,16 @@ class DocumentModel extends BaseEventDispatcher
     return @activeDocument
   get: (id, embed) ->
     that = @
-    documentLoadTask = @DocumentService.get id, embed
-    documentLoadTask.success (data) ->
-      that.$log.debug "Received document data="
-      that.$log.debug data
-      that.refreshDocumentModel data.document.id, data.document
-      return
-    documentLoadTask.error (error) ->
-      that.$log.debug "Error receiving document data"
-      return
-    #$stateParams.item, "?embed=test"
-    return
+    return documentLoadTask =
+      @DocumentService.get(id, embed)
+      .success (data) ->
+        that.$log.debug "Received document data="
+        that.$log.debug data
+        that.refreshDocumentModel data.document.id, data.document
+        return
+      .error (error) ->
+        that.$log.debug "Error receiving document data"
+        return
   addTag: (tagname) ->
     that = @
     id = @activeDocument.id

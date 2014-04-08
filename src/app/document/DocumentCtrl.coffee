@@ -24,17 +24,23 @@ class DocumentCtrl extends BaseController
   constructor:
     ($scope, @$stateParams, @$modal, @$log, @$http, @DocumentModel) ->
       super($scope)
-      @$scope.item = $stateParams.item
-      @$log.debug "Opening document with id=" + @$scope.item
-      DocumentModel.get(
+      that = @
+      @$log.debug "Opening document with id=" + $stateParams.item
+      documentLoadTask = DocumentModel.get(
         $stateParams.item,
         "?filter=id,title,viewCount,authorCount,commentCount," +
         "lastUpdateAt,createdAt,content,is_discussion,parent_document_id" +
         "&embed=tags:id,name;content:all;discussions:all;comments:all"
       )
+      documentLoadTask.success((success) ->
+        that.$scope.loadingDocument = false
+        return
+      )
       @defineWatches()
       return
   defineScope: ->
+    @$scope.item = @$stateParams.item
+    @$scope.loadingDocument = true
     @$scope.document = @DocumentModel.getActiveDocument()
     @$scope.openEditTags = @openEditTags.bind(@)
     return

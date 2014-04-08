@@ -1,4 +1,12 @@
-<div id="document">
+<div id="loadingDocument" ng-show="loadingDocument">
+    <div class="well">
+        <h2 class="letterpress-effect">Loading...</h2>
+        <div class="center-logo">
+            <img src="assets/img/layers-large-transparent-500.png"  />
+        </div>
+    </div>
+</div>
+<div id="document" ng-hide="loadingDocument">
     <div class="well well-sm doc-heading">
         <div class="title-section">
             <div class="title-wrapper pull-left">

@@ -31,7 +31,13 @@ class DocumentContentModel extends BaseEventDispatcher
   defineListeners: ->
     that = @
     @$rootScope.$on 'ReceivedData:document', (ev, id, document) ->
+      that.$log.debug("Received new document information.")
       that.activeDocumentId = id
+      that.activeDocumentContent.content = {
+        content: ''
+        authors: []
+        viewers: []
+      }
       return
     @$rootScope.$on 'ReceivedData:document.content', (ev, id, content) ->
       that.activeDocumentId = id
