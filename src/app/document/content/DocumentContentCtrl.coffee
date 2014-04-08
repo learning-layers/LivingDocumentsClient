@@ -42,7 +42,8 @@ class DocumentContentCtrl extends BaseController
     }
     @$scope.attachments = {
       files: [],
-      hyperlinks: []
+      hyperlinks: [],
+      images: []
     }
     return
   initScopeMethods: ->
@@ -80,6 +81,11 @@ class DocumentContentCtrl extends BaseController
           for hyperlinksAttachment in hyperlinksAttachments
             that.$scope.attachments.hyperlinks.add hyperlinksAttachment
           return
+      return
+    @$scope.$watch 'tabs.imgAVidsActive', (newVal) ->
+      if newVal == true
+        that.$log.debug("ImgAVids tab opened")
+        that.$scope.attachments.images.add {id:-1, title:'imgTitle1'}
       return
     return
   switchToAttachments: ->
