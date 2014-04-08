@@ -28,7 +28,6 @@ class UserInfoModalCtrl extends BaseController
     super($scope)
     #Trigger user information retrieval in model
     @UserInfoModel.get @userId, ""
-    @UserInfoModel.getUserAvatar @userId
     return
   defineScope: ->
     that = @
@@ -37,11 +36,18 @@ class UserInfoModalCtrl extends BaseController
     # belongs to the user id we provided earlier
     # (when we triggered the user retrieval).
     @$scope.userInfo = @UserInfoModel.getActiveUserInfo()
-    @$scope.profile = @UserInfoModel.getActiveProfile()
+    @$scope.profileinfo = @UserInfoModel.getActiveProfile()
     @$scope.cancel = ->
       that.$modalInstance.dismiss('cancel')
+      that.UserInfoModel.reset()
+      return
     @$scope.close = ->
       that.$modalInstance.dismiss('close')
+      that.UserInfoModel.reset()
+      return
+    return
+  destroy: ->
+    @UserInfoModel.reset()
     return
 
 UserInfoModalCtrl.$inject =
@@ -57,14 +63,14 @@ class UserInfoModel extends BaseEventDispatcher
     #@resetActiveUserInfo is used to set the activeUserInfo instance to
     # the initial state.
     @activeUserInfo = @resetActiveUserInfo()
-    @profile = {
+    @profileinfo = {
       imgSrc: ''
     }
     return
   getActiveUserInfo: ->
     return @activeUserInfo
   getActiveProfile: ->
-    return @profile
+    return @profileinfo
   get: (id, embed) ->
     that = @
     #Load user from backend -> could be later on also loaded
@@ -78,6 +84,7 @@ class UserInfoModel extends BaseEventDispatcher
     userInfoLoadTask.error (error) ->
       that.$log.error "Error receiving user info data"
       return
+    @getUserAvatar id
     return
   updateUserInfoModel: (id, user) ->
     @$log.debug ">> Updating user info model"
@@ -93,17 +100,25 @@ class UserInfoModel extends BaseEventDispatcher
       id: null
       firstname: null
       lastname: null
+      displayname: 'Loading...'
     }
   getUserAvatar: (userId) ->
     that = @
     loadUserAvatarTask = @UserService.getUserAvatar userId
     loadUserAvatarTask.success (success) ->
-      that.profile.imgSrc = 'data:' + success.type +
+      that.profileinfo.imgSrc = 'data:' + success.type +
         ';base64,' + success.content
       return
     loadUserAvatarTask.error (error) ->
       that.$log.error "Error receiving user avatar data"
       return
+    return
+  reset: ->
+    @profileinfo.imgSrc = ''
+    @activeUserInfo.id = null
+    @activeUserInfo.firstname = null
+    @activeUserInfo.lastname = null
+    @activeUserInfo.displayname = 'Loading...'
     return
 userInfomodal.factory "UserInfoModel",
   ['$log', 'UserService',
