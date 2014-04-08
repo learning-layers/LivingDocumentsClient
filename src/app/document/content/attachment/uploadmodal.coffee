@@ -91,3 +91,12 @@ FileAndMediaUploadCtrl.$inject =
    '$log', 'DocumentContentModel']
 contentAttachmentUploadModal.controller( 'FileAndMediaUploadCtrl',
   FileAndMediaUploadCtrl)
+
+class AddDocumentContentLinkCtrl extends BaseController
+  constructor: ($scope, @$rootScope, @$log, @DocumentContentModel) ->
+    return
+
+AddDocumentContentLinkCtrl.$inject =
+  ['$scope', '$rootScope', '$log', 'DocumentContentModel']
+contentAttachmentUploadModal.controller( 'AddDocumentContentLinkCtrl',
+  AddDocumentContentLinkCtrl)
