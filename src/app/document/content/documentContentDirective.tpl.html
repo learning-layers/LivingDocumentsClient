@@ -169,7 +169,7 @@
                                 <th>Options</th>
                                 <tr ng-repeat="hyperlink in attachments.hyperlinks">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ hyperlink.hyperlink }}</td>
+                                    <td><a href="{{ hyperlink.hyperlink }}">{{ hyperlink.hyperlink }}</a></td>
                                     <td>{{ hyperlink.description }}</td>
                                     <td></td>
                                 </tr>
