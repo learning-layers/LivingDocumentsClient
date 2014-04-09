@@ -52,7 +52,7 @@ angular.module( 'LivingDocuments', [
         restServerAddress: "http://localhost/restNew",
         firstRequestURL: window.location.href.toString().split(window.location.host)[1].split('#')[1],
         is401response: false,
-        currentClientVersion: '0.0.3-alpha'
+        currentClientVersion: '0.0.5-alpha'
     };
     SecurityServiceProvider.setInitialConfiguration(initialConfiguration);
     console.log("Current client version is=" + initialConfiguration.currentClientVersion);
@@ -270,20 +270,6 @@ angular.module( 'LivingDocuments', [
 })
 
 .run( function run ($rootScope, $location, $http, $log, localStorageService, SecurityService, ApplicationState) {
-    // check if client version is up to date
-    var basePath = SecurityService.getInitialConfiguration().restServerAddress;
-    var currentClientVersion = SecurityService.getInitialConfiguration().currentClientVersion;
-    $http({
-        method: 'GET',
-        url: basePath + '/clientversioncheck?version=' + currentClientVersion
-    })
-    .success(function(success) {
-        $log.debug("Successfully checked the client version. Current client version is compatible=" + success.compatible);
-        if (!success.compatible) {
-            window.location.reload(true);
-        }
-    });
-
     $rootScope.$on('$locationChangeStart', function (event) {
         $log.debug("Location url()=");
         $log.debug($location.url());
@@ -357,8 +343,21 @@ angular.module( 'LivingDocuments', [
         
     });
 
-    /*$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-    });*/
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+        // check if client version is up to date
+        var basePath = SecurityService.getInitialConfiguration().restServerAddress;
+        var currentClientVersion = SecurityService.getInitialConfiguration().currentClientVersion;
+        $http({
+            method: 'GET',
+            url: basePath + '/clientversioncheck?version=' + currentClientVersion
+        })
+        .success(function(success) {
+            $log.debug("Successfully checked the client version. Current client version is compatible=" + success.compatible);
+            if (!success.compatible) {
+                window.location.reload(true);
+            }
+        });
+    });
 })
 
 ;

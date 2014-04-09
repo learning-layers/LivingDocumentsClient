@@ -23,7 +23,7 @@
             <span ng-show="isCommentsCollapsed">Show</span><span ng-hide="isCommentsCollapsed">Hide</span> 
              Replies <span class="badge">{{ comment.commentList.length }}</span>
         </button>
-        <div ng-if="comment.commentList.length > 0" collapse="isCommentsCollapsed">
+        <div class="subcomment-area" ng-if="comment.commentList.length > 0" collapse="isCommentsCollapsed">
             <div ng-init="isCollapsed = true"  class="comment-margin">
                 <div ng-repeat="comment in comment.commentList" ng-include="" src="'document/comments/documentCommentsCommentsInclude.tpl.html'"></div>
             </div>
