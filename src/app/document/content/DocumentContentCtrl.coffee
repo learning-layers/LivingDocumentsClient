@@ -68,8 +68,7 @@ class DocumentContentCtrl extends BaseController
         loadFileAttachmentsTask =
           that.DocumentContentModel.loadFileAttachments()
         loadFileAttachmentsTask.success (fileAttachments) ->
-          for fileAttachment in fileAttachments
-            that.$scope.attachments.files.add fileAttachment
+          that.$scope.attachments.files = fileAttachments
           return
       return
     @$scope.$watch 'tabs.linksActive', (newVal) ->
