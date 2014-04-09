@@ -22,13 +22,15 @@ documentCommentsModule = angular.module( "LivingDocuments.document.comments", [
 
 documentCommentsModule.factory "DocumentCommentsController", ->
   class DocumentCommentsController
-    constructor: (@$scope, @$modal, @$log, @DocumentCommentModel) ->
+    constructor: (@$scope, @$modal, @$log,
+                  @DocumentCommentModel, @SecurityService) ->
       @log = $log.getInstance("DocumentCommentsController")
       @initScopeMethods()
       return
     initScopeMethods: ->
       @$scope.openCreateCommentModal = @openCreateCommentModal.bind(@)
       @$scope.comments = @DocumentCommentModel.getActiveDocumentComments()
+      @$scope.security = @SecurityService
       return
     openCreateCommentModal: (comment) ->
       that = @
@@ -56,9 +58,10 @@ documentCommentsModule.factory "DocumentCommentsController", ->
 documentCommentsModule.directive "documentComments",
   (DocumentCommentsController) ->
     linker = (scope, element, attrs) ->
-    controller = ($scope, $modal, $log, DocumentCommentModel) ->
+    controller = ($scope, $modal, $log,
+                  DocumentCommentModel, SecurityService) ->
       new DocumentCommentsController($scope, $modal,
-        $log, DocumentCommentModel)
+        $log, DocumentCommentModel, SecurityService)
     scope = {
       document: '='
     }
@@ -67,7 +70,7 @@ documentCommentsModule.directive "documentComments",
       templateUrl: "document/comments/" +
         "documentCommentsDirective.tpl.html",
       controller: ['$scope', '$modal', '$log',
-                   'DocumentCommentModel', controller],
+                   'DocumentCommentModel', 'SecurityService', controller],
       link: linker,
       scope: scope
     }
