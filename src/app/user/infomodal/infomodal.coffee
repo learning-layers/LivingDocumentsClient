@@ -24,7 +24,8 @@ userInfomodal = angular.module( "LivingDocuments.user.infomodal", [
 >> UserInfoModal Controller
 ###
 class UserInfoModalCtrl extends BaseController
-  constructor: ($scope, @userId, @UserInfoModel, @$modalInstance) ->
+  constructor: ($scope, @userId, @UserInfoModel,
+                @$modalInstance, @$location) ->
     super($scope)
     #Trigger user information retrieval in model
     @UserInfoModel.get @userId, ""
@@ -41,9 +42,10 @@ class UserInfoModalCtrl extends BaseController
       that.$modalInstance.dismiss('cancel')
       that.UserInfoModel.reset()
       return
-    @$scope.close = ->
+    @$scope.close = (userId)->
       that.$modalInstance.dismiss('close')
       that.UserInfoModel.reset()
+      that.$location.path('/userprofile/' + userId)
       return
     return
   destroy: ->
@@ -51,7 +53,7 @@ class UserInfoModalCtrl extends BaseController
     return
 
 UserInfoModalCtrl.$inject =
-  ['$scope', 'userId', 'UserInfoModel', '$modalInstance']
+  ['$scope', 'userId', 'UserInfoModel', '$modalInstance', '$location']
 userInfomodal.controller( 'UserInfoModalCtrl', UserInfoModalCtrl)
 
 ###

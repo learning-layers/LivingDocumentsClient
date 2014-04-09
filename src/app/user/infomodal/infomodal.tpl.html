@@ -6,7 +6,7 @@
         <div class="thumbnail pull-left">
             <img class="img-responsive" ng-src="{{ profileinfo.imgSrc }}">
         </div>
-        <a ng-disabled="!userInfo.id" href="#/userprofile/{{ userInfo.id }}" class="btn btn-info pull-left" ng-click="close()">Open user profile</a>
+        <button ng-disabled="!userInfo.id" class="btn btn-info pull-left" ng-click="close(userInfo.id)">Open user profile</button>
         <br/>
         <br/>
         <h4>Displayname</h4>
@@ -19,6 +19,6 @@
         <p>{{ userInfo.lastname }}</p>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-warning" ng-click="cancel()">Close</button>
+        <button class="btn btn-warning pull-left" ng-click="cancel()">Close</button>
     </div>
 </div>
