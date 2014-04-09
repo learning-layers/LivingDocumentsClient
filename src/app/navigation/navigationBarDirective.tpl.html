@@ -1,7 +1,7 @@
 <div id="navigation" class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <button ng-hide="searchMode" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -12,9 +12,6 @@
                     <a class="navbar-brand dropdown-toggle" href="index.html" data-toggle="dropdown"><img src="assets/img/layers-large-transparent-500.png" width="24" height="16" alt="Learning Layers" ng-class="{'busy': busyTasks.length > 0}"> Living Documents</a>
     
                     <ul class="dropdown-menu navbar-brand-dropdown">
-                        <li ng-if="ApplicationState.application.normalMode">
-                            <a href="#/home"><span class="glyphicon glyphicon-home"></span>Home</a>
-                        </li>
                         <li ng-if="ApplicationState.application.loginMode">
                             <a href="#/login"><span class="glyphicon glyphicon-home"></span>Home</a>
                         </li>
@@ -26,22 +23,22 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-collapse collapse in" style="height: auto;">
+        <div class="navbar-collapse collapse in" style="height: auto;" ng-class="{'login-mode':ApplicationState.application.loginMode}">
             <div ng-show="!ApplicationState.application.normalMode">
                 <form class="nav navbar-nav navbar-right login-form" name="loginForm" novalidate>
                     <!-- <div class="alert alert-danger" ng-show="loginForm.$dirty && loginForm.$invalid">
                         Wrong username
                     </div> -->
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'login-mode':ApplicationState.application.loginMode}">
                         <label for="username" class="hide">Username:</label>
                         <input id="username" class="form-control" type="text" placeholder="Username" ng-model="username" ng-pattern="/^[A-z0-9]+$/" ng-disabled="loginInProgress"></input>
                         <label for="password" class="hide">Password:</label>
                         <input id="password" class="form-control" type="password" placeholder="Password" ng-model="password" ng-disabled="loginInProgress"></input>
-                        <button class="btn btn-default" ng-click="login()" ng-disabled="loginInProgress || !loginForm.$valid">Login</button>
+                        <button class="btn btn-default login-btn" ng-class="{'login-mode':ApplicationState.application.loginMode}" ng-click="login()" ng-disabled="loginInProgress || !loginForm.$valid">Login</button>
                     </div>
                 </form>
             </div>
-            <ul class="nav navbar-nav" ng-class="{'search-mode-invisible':searchMode}">
+            <ul class="nav navbar-nav" ng-class="{'search-mode-invisible':searchMode,'login-mode':ApplicationState.application.loginMode}">
                 <li ng-if="ApplicationState.application.normalMode" ui-route="/home" ng-class="{active:$uiRoute}"><a href="#/home">Home</a></li>
                 <li ng-if="ApplicationState.application.loginMode" ui-route="/login" ng-class="{active:$uiRoute}"><a href="#/login">Home</a></li>
                 <li ng-if="ApplicationState.application.loginMode" ui-route="/register" ng-class="{active:$uiRoute}"><a href="#/register">Register</a></li>
@@ -54,17 +51,17 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href=""><span class="glyphicon glyphicon-list"></span>Document Explorer</a>
+                            <a href=""><span class="glyphicon glyphicon-list"></span><strike><del>Document Explorer</del></strike></a>
                         </li>
                         <li>
-                            <a href="#/share"><span class="glyphicon glyphicon-folder-open"></span>Manage Documents</a>
+                            <a href=""><span class="glyphicon glyphicon-folder-open"></span><strike><del>Manage Documents</del></strike></a>
                         </li>
                     </ul>
                 </li>
             </ul>
             <ul ng-if="!ApplicationState.application.loginMode" class="nav navbar-nav navbar-right" ng-class="{'search-mode-invisible':searchMode}">
                 <li class="dropdown user-option-dropdown">
-                    <a href="" class="dropdown-toggle user-option-toggle" data-toggle="dropdown">
+                    <a href="" class="dropdown-toggle user-option-toggle" data-toggle="dropdown" ng-click="$parent.userDropDownOpen = !$parent.userDropDownOpen">
                         <span class="img-thumbnail">
                             <span ng-show="profileImgSrc === ''" class="glyphicon glyphicon-user"></span>
                             <img ng-show="profileImgSrc !== ''" ng-src="{{ profileImgSrc }}" style="width: 30px; height: 30px; margin-top: -5px;">
@@ -76,17 +73,17 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#/share"><span class="glyphicon glyphicon-folder-open"></span>Manage Documents</a>
+                            <a href=""><span class="glyphicon glyphicon-folder-open"></span><strike><del>Manage Documents</del></strike></a>
                         </li>
                         <li>
-                            <a href="#/explorer"><span class="glyphicon glyphicon glyphicon-user"></span>Manage Contacts</a>
+                            <a href=""><span class="glyphicon glyphicon glyphicon-user"></span><strike><del>Manage Contacts</del></strike></a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="#/userprofile/{{currentUser.id}}"><span class="glyphicon glyphicon-refresh"></span>Update Profile</a>
                         </li>
                         <li>
-                            <a href=""><span class="glyphicon glyphicon-wrench"></span>Settings</a>
+                            <a href=""><span class="glyphicon glyphicon-wrench"></span><strike><del>Settings</del></strike></a>
                         </li>
                         <li ng-show="checkRoles()" class="divider"></li>
                         <li ng-show="checkRoles()">
@@ -100,7 +97,7 @@
                 </li>
             </ul>
             <div ng-if="!ApplicationState.application.loginMode" class="navbar-form navbar-right" role="search">
-                <div id="searchbar" class="form-group">
+                <div id="searchbar" class="form-group" ng-class="{'user-menu-active':$parent.userDropDownOpen}">
                     <button class="btn btn-danger close-search-btn" ng-show="$parent.searchMode" ng-click="$parent.searchMode = false">&times;</button>
                     <input  class="form-control search-bar" 
                             type="text" ng-class="{'search-mode':$parent.searchMode}" 

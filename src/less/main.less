@@ -70,6 +70,10 @@ h1 {
     min-height: 80%;
 }
 
+strike {
+  text-decoration: line-through;
+}
+
 /**
  * Ui view animation
  */
@@ -212,6 +216,7 @@ html {
  * Adjusted according to bootstrap device width categories.
  */
 @media @xs-device {
+  @import "../app/navigation/navigation-xs.less";
 }
 
 @media @sm-device {

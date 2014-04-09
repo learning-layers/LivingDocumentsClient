@@ -1,0 +1,10 @@
+<div ng-init="deleteInput = ''" class="modal-header">
+    <h3>Add User Tag</h3>
+</div>
+<div class="modal-body">
+    <label for="tagname">Tagname:</label><input id="tagname" name="tagname" ng-model="tagname">
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok(tagname)">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+</div>

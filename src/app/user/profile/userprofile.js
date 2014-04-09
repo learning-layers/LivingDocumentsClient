@@ -97,8 +97,8 @@ angular.module( 'LivingDocuments.user.profile', [
     
     $scope.openAddTag = function() {
         var modalInstance = $modal.open({
-            templateUrl: 'AddUserTagModalContent.html',
-            controller: AddUserTagModalInstanceCtrl,
+            templateUrl: 'user/profile/addTagsModal.tpl.html',
+            controller: ['$scope', '$modalInstance', AddUserTagModalInstanceCtrl],
             resolve: {
                 tagname: function () {
                     return $scope.tagname;
