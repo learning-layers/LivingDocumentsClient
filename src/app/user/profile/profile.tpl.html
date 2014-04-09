@@ -1,4 +1,14 @@
-<div id="userprofile">
+<div>
+    <div id="loadingUserprofile" ng-show="loadingProfileinfo">
+        <div class="well">
+            <h2 class="letterpress-effect">Loading...</h2>
+            <div class="center-logo">
+                <img src="assets/img/layers-large-transparent-500.png"  />
+            </div>
+        </div>
+    </div>
+</div>
+<div id="userprofile" ng-hide="loadingProfileinfo">
     <div ng-show="isOwner" class="row">
         <div ng-switch on="editMode">
             <div ng-switch-when="false">

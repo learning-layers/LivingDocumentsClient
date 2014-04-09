@@ -100,8 +100,8 @@ class UserInfoModel extends BaseEventDispatcher
   resetActiveUserInfo: ->
     return { #This is the initial state of the activeUserInfo instance
       id: null
-      firstname: null
-      lastname: null
+      firstname: 'Loading...'
+      lastname: 'Loading...'
       displayname: 'Loading...'
     }
   getUserAvatar: (userId) ->
@@ -118,8 +118,8 @@ class UserInfoModel extends BaseEventDispatcher
   reset: ->
     @profileinfo.imgSrc = ''
     @activeUserInfo.id = null
-    @activeUserInfo.firstname = null
-    @activeUserInfo.lastname = null
+    @activeUserInfo.firstname = 'Loading...'
+    @activeUserInfo.lastname = 'Loading...'
     @activeUserInfo.displayname = 'Loading...'
     return
 userInfomodal.factory "UserInfoModel",

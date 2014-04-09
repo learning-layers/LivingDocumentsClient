@@ -37,13 +37,15 @@ angular.module( 'LivingDocuments.user.profile', [
     $scope.editMode = false;
 
     $scope.profileImgSrc = '';
-    
+
+    $scope.loadingProfileinfo = true;
     User.getUserById($scope.item, 
         function(success) {
             console.log(success);
             $scope.userprofile = success.user;
+            $scope.loadingProfileinfo = false;
         }, function(error) {
-            
+            $scope.loadingProfileinfo = false;
         });
         
     User.getTagsByUserId($scope.item,
