@@ -48,39 +48,36 @@ class UserService extends BaseService
     return getUserTask
   getList: (ids, embed) ->
     that = @
-    embedString = null
-    if embed == null
-      embedString = ""
-    else
-      embedString = embed
     if (angular.isDefined(ids) && ids.length > 0)
-      if (ids.length > 0)
-        listString = "["
-        listString = listString + ids[0]
-        if ids.length > 1
-          angular.forEach(ids, (value, key) ->
-            listString = listString + ', ' + value
-            return
-          )
-        listString = listString + "]"
-        return @$http.get(
-          @basePath + '/user' + '?ids=' + listString,
-          headers: {
-            'Authorization':
-              that.SecurityService.currentUser.authorizationString
-          }
-        ).success (status) ->
-          that.$log.debug("Received user list modal response")
+      listString = "["
+      listString = listString + ids[0]
+      if ids.length > 1
+        angular.forEach(ids, (value, key) ->
+          listString = listString + ', ' + value
           return
+        )
+      listString = listString + "]"
+      return @$http.get(
+        @basePath + '/user' + '?ids=' + listString,
+        headers: {
+          'Authorization':
+            that.SecurityService.currentUser.authorizationString
+        }
+      ).success (status) ->
+        that.$log.debug("Received user list modal response")
+        return
     else
       return{
         success: (callback) ->
           callback({users:[]})
           return
         error: (callback) ->
+          callback()
+          return
+        then: (callback) ->
+          callback()
           return
       }
-    return
   getUserAvatar: (userId) ->
     getUserAvatarTask = @$http.get(
       @basePath + '/user/' + userId + '/profile/image',
