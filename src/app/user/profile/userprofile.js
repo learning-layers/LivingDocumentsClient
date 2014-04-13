@@ -36,6 +36,24 @@ angular.module( 'LivingDocuments.user.profile', [
 
     $scope.editMode = false;
 
+    $scope.newpassword = '';
+    $scope.confirmNewPassword = '';
+    $scope.$watch('editMode', function() {
+        $scope.newpassword = '';
+        $scope.confirmNewPassword = '';
+    });
+    $scope.submitPasswordChange = function() {
+        console.log("Submitted password change");
+        if ($scope.newpassword !== $scope.confirmNewPassword) {
+            $rootScope.$broadcast('error', "New password and the confirmation of the password don't match!");
+        } else {
+            User.changePassword($scope.newpassword).success(function(success) {
+                $rootScope.$broadcast('success', "Password successfully changed!");
+                SecurityService.logout();
+            });
+        }
+    };
+
     $scope.profileImgSrc = '';
 
     $scope.loadingProfileinfo = true;

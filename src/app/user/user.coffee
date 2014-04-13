@@ -36,13 +36,16 @@ class UserService extends BaseService
       embedString = ""
     else
       embedString = embed
-    return @$http.get(@basePath + '/user/' + id + embedString,
-      headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString})
-    .success (status) ->
-      that.$log.debug "Fetching user info from user with id=" + id +
-      " and embeddingString=" + embed
-      return
+      getUserTask = @$http.get(
+        @basePath + '/user/' + id + embedString,
+        headers: {
+          'Authorization': that.SecurityService.currentUser.authorizationString
+        }
+      ).success (status) ->
+        that.$log.debug "Fetching user info from user with id=" + id +
+          " and embeddingString=" + embed
+        return
+    return getUserTask
   getList: (ids, embed) ->
     that = @
     embedString = null
@@ -57,12 +60,14 @@ class UserService extends BaseService
         listString.add(',value')
       )
       listString.add("}")
-      return @$http.get(@basePath + '/user/' + id + embedString,
-        headers: {'Authorization':
-          that.SecurityService.currentUser.authorizationString})
-        .success (status) ->
-          that.$log.debug("Received user list modal response")
-          return
+      return @$http.get(
+        @basePath + '/user/' + id + embedString,
+        headers: {
+          'Authorization': that.SecurityService.currentUser.authorizationString
+        }
+      ).success (status) ->
+        that.$log.debug("Received user list modal response")
+        return
     else
       return{
         success: (callback) ->
@@ -73,12 +78,15 @@ class UserService extends BaseService
       }
     return
   getUserAvatar: (userId) ->
-    return @$http.get(@basePath + '/user/' + userId + '/profile/image',
-      headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString})
-      .success (status) ->
-        that.$log.debug "Fetching user avatar"
-        return
+    getUserAvatarTask = @$http.get(
+      @basePath + '/user/' + userId + '/profile/image',
+      headers: {
+        'Authorization': that.SecurityService.currentUser.authorizationString
+      }
+    ).success (status) ->
+      that.$log.debug "Fetching user avatar"
+      return
+    return getUserAvatarTask
 
 UserService.$inject = ['SecurityService','$http', '$log']
 user.service "UserService", UserService

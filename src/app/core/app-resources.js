@@ -159,12 +159,26 @@ angular.module( 'LivingDocuments.core.resources', [
             errorCallback(error, status);
         });
     };
+
+    var changePassword = function (newpassword) {
+        var basePath = SecurityService.getInitialConfiguration().restServerAddress;
+        var registrationPath = '/user/' + SecurityService.currentUser.id + '?method=changepassword';
+        return $http({
+            method: 'PUT',
+            url: basePath + registrationPath,
+            data: {
+                newpassword: newpassword
+            },
+            headers: {'Authorization': SecurityService.currentUser.authorizationString}
+        });
+    };
     
     return {
         getUsers: getUsers,
         getUserById: getUserById,
         getTagsByUserId: getTagsByUserId,
-        deleteTag: deleteTag
+        deleteTag: deleteTag,
+        changePassword: changePassword
     };
 })
 

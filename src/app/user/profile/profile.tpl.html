@@ -70,6 +70,14 @@
                             <edit-input-text edit-mode="editMode" label="Lastname" fieldname="lastname" value="userprofile.lastname"  save-method="saveEdit"></edit-input-text>
                             <edit-input-text ng-show="editMode" edit-mode="editMode" label="Email" fieldname="email" value="userprofile.email"  save-method="saveEdit"></edit-input-text>
                             <edit-input-textarea edit-mode="editMode" label="Description" fieldname="description" value="userprofile.description"  save-method="saveEdit"></edit-input-textarea>
+                            <br />
+                            <div ng-show="editMode">
+                                <label for="newPassword">Change Password to:</label>
+                                <input id="newPassword" type="password" ng-model="newpassword">
+                                <label for="confirmNewPassword">Confirm new password:</label>
+                                <input id="confirmNewPassword" type="password" ng-model="confirmNewPassword">
+                                <button class="btn btn-success" ng-click="submitPasswordChange()">Change password</button>
+                            </div>
                         </div>
                         <div style="clear: both"></div>
                     </div>
