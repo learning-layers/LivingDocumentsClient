@@ -37,12 +37,28 @@ class DocumentCommentService extends BaseService
         commentText: commentText,
         parentComment: parentComment
       },
-      headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
-    )
-    .success (success) ->
+      headers: {
+        "Authorization": that.SecurityService.currentUser.authorizationString
+      }
+    ).success (success) ->
       that.$log.debug "Created comment with id=" + success.comment.id
       return
+  editComment: (documentId, commentId, commentTitle, commentText) ->
+    that = @
+    return @$http.put(
+      @basePath + '/document/' + documentId + '/comment',
+      {
+        commentId: commentId,
+        commentTitle: commentTitle,
+        commentText: commentText
+      },
+      headers: {
+        "Authorization": that.SecurityService.currentUser.authorizationString
+      }
+    ).success (success) ->
+      that.$log.debug "Edited comment with id=" + commentId
+      return
+    return
 
 DocumentCommentService.$inject = ['SecurityService','$http', '$log']
 documentCommentService.service(

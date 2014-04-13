@@ -13,8 +13,8 @@
         <div class="btn-group pull-right">
             <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span><span class="badge">3</span></button>
             <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span><span class="badge">3</span></button>
-            <button class="btn btn-info" ng-show="security.currentUser.id == comment.creator.id"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
-            <button class="btn btn-info" ng-hide="security.currentUser.id == comment.creator.id" ng-click="openCreateCommentModal(comment)"><span class="glyphicon glyphicon-plus-sign"></span> Reply</button>
+            <button class="btn btn-info" ng-show="security.currentUser.id == comment.creator.id" ng-click="openCreateCommentModal('Edit', comment)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+            <button class="btn btn-info" ng-hide="security.currentUser.id == comment.creator.id" ng-click="openCreateCommentModal('Reply', comment)"><span class="glyphicon glyphicon-plus-sign"></span> Reply</button>
         </div>
     </div>
     <div class="panel-body panel-body-sm" collapse="isCollapsed">

@@ -32,7 +32,7 @@ documentCommentsModule.factory "DocumentCommentsController", ->
       @$scope.comments = @DocumentCommentModel.getActiveDocumentComments()
       @$scope.security = @SecurityService
       return
-    openCreateCommentModal: (comment) ->
+    openCreateCommentModal: (cmd, comment) ->
       that = @
       @log.debug("Opening create comment modal")
       @$modal.open(
@@ -49,6 +49,8 @@ documentCommentsModule.factory "DocumentCommentsController", ->
               return that.DocumentCommentModel
             comment: ->
               return comment
+            cmd: ->
+              return cmd
           }
         }
       )

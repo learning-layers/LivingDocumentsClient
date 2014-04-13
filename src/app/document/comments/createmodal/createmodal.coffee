@@ -28,7 +28,7 @@ createCommentsCreateModal = angular.module(
 ###
 class CreateCommentModalCtrl extends BaseController
   constructor: ($scope, @$modalInstance, $log, @document,
-                @DocumentCommentModel, @comment) ->
+                @DocumentCommentModel, @comment, @cmd) ->
     super($scope)
     console.log($log)
     @$log = $log.getInstance("CreateCommentModalCtrl")
@@ -37,6 +37,10 @@ class CreateCommentModalCtrl extends BaseController
     return
   defineScope: ->
     that = @
+    @$scope.cmd = @cmd
+    if (@cmd == 'Edit')
+      @$scope.title = @comment.title
+      @$scope.text = @comment.text
     @$scope.document = @document
     if angular.isDefined @comment
       @$scope.comment = @comment
@@ -47,20 +51,37 @@ class CreateCommentModalCtrl extends BaseController
     return
   createComment: ->
     that = @
-    createDiscussionTask =
-      @DocumentCommentModel.createComment(
-        @$scope.document.id,
-        @$scope.title,
-        @$scope.text,
-        @comment
+    if (@cmd != 'Edit')
+      createCommentTask =
+        @DocumentCommentModel.createComment(
+          @$scope.document.id,
+          @$scope.title,
+          @$scope.text,
+          @comment
+        )
+      createCommentTask.success((success) ->
+        that.$modalInstance.dismiss('close')
       )
-    createDiscussionTask.success( (success) ->
-      that.$modalInstance.dismiss('close')
-    )
+    else if (@cmd == 'Edit')
+      commentToEdit = @comment
+      newTitle = @$scope.title
+      newText = @$scope.text
+      editCommentTask =
+        @DocumentCommentModel.editComment(
+          @$scope.document.id,
+          @comment.id,
+          newTitle,
+          newText
+        )
+      editCommentTask.success((success) ->
+        commentToEdit.title = newTitle
+        commentToEdit.text = newText
+        that.$modalInstance.dismiss('close')
+      )
     return
 
 CreateCommentModalCtrl.$inject =
   ['$scope', '$modalInstance', '$log',
-   'document', 'DocumentCommentModel', 'comment']
+   'document', 'DocumentCommentModel', 'comment', 'cmd']
 createCommentsCreateModal.controller( 'CreateCommentModalCtrl',
   CreateCommentModalCtrl)

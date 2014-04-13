@@ -47,6 +47,10 @@ class DocumentCommentModel extends BaseEventDispatcher
     return {
       comments: []
     }
+  editComment: (documentId, commentId, commentTitle, commentText) ->
+    return @DocumentCommentService.editComment(
+      documentId, commentId, commentTitle, commentText
+    )
 
 
 documentCommentModel.factory "DocumentCommentModel",
