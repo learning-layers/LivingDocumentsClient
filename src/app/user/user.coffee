@@ -72,7 +72,6 @@ class UserService extends BaseService
           callback({users:[]})
           return
         error: (callback) ->
-          callback()
           return
         then: (callback) ->
           callback()
