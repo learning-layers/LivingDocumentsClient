@@ -28,7 +28,12 @@ class UserInfoListModalCtrl extends BaseController
     @UserInfoListModel, @$modalInstance) ->
     super($scope)
     #Trigger user information retrieval in model
-    @UserInfoListModel.get @userIds, ""
+    $scope.loadingUsers = true
+    userInfoLoadTask = @UserInfoListModel.get(@userIds, "")
+    userInfoLoadTask.then(->
+      $scope.loadingUsers = false
+      return
+    )
     return
   defineScope: ->
     that = @
@@ -38,9 +43,16 @@ class UserInfoListModalCtrl extends BaseController
     # (when we triggered the user retrieval).
     @$scope.userInfoList = @UserInfoListModel.getActiveUserInfoList()
     @$scope.modalTitle = @modalTitle
-    @$scope.cancel = ->
-      that.$modalInstance.dismiss('cancel')
+    @$scope.dismiss = @dismiss.bind(@)
+    @$scope.cancel = @cancel.bind(@)
     return
+  dismiss: ->
+    @UserInfoListModel.resetActiveUserInfo()
+    @$modalInstance.dismiss('openProfile')
+    return
+  cancel: ->
+    @UserInfoListModel.resetActiveUserInfo()
+    @$modalInstance.dismiss('cancel')
 UserInfoListModalCtrl.$inject =
   ['$scope', 'modalTitle', 'userIds', 'UserInfoListModel', '$modalInstance']
 userInfolistmodal.controller( 'UserInfoListModalCtrl', UserInfoListModalCtrl)
@@ -53,7 +65,7 @@ class UserInfoListModel extends BaseEventDispatcher
     @$log = $log.getInstance("UserInfoListModel")
     #@resetActiveUserInfo is used to set the activeUserInfo instance to
     # the initial state.
-    @activeUserInfoList = @resetActiveUserInfo()
+    @activeUserInfoList = []
     return
   getActiveUserInfoList: ->
     return @activeUserInfoList
@@ -68,14 +80,15 @@ class UserInfoListModel extends BaseEventDispatcher
     userInfoLoadTask.error (error) ->
       that.$log.error "Error receiving user info data"
       return
-    return
+    return userInfoLoadTask
   updateUserInfoModel: (users) ->
     @$log.debug ">> Updating user info list model"
     @$log.debug "Retrieved user info list"
-    @activeUserInfoList = users
+    @activeUserInfoList.add users
     return
   resetActiveUserInfo: ->
-    return []
+    @activeUserInfoList.removeAt(0, @activeUserInfoList.length)
+    return
 
 userInfolistmodal.factory "UserInfoListModel",
   ['$log', 'UserService',
