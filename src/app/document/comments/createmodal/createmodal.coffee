@@ -29,9 +29,8 @@ createCommentsCreateModal = angular.module(
 class CreateCommentModalCtrl extends BaseController
   constructor: ($scope, @$modalInstance, $log, @document,
                 @DocumentCommentModel, @comment, @cmd,
-                @commentList) ->
+                @commentList, @rootScope) ->
     super($scope)
-    console.log($log)
     @$log = $log.getInstance("CreateCommentModalCtrl")
     if angular.isDefined @comment
       @$log.debug(@comment)
@@ -55,6 +54,7 @@ class CreateCommentModalCtrl extends BaseController
     newTitle = @$scope.title
     newText = @$scope.text
     if (@cmd != 'Edit')
+      parentComment = @comment
       createCommentTask =
         @DocumentCommentModel.createComment(
           @$scope.document.id,
@@ -63,7 +63,7 @@ class CreateCommentModalCtrl extends BaseController
           @comment
         )
       createCommentTask.success((success) ->
-        if (success.documentId != null)
+        if (angular.isDefined(success.documentId))
           that.commentList.comments.add(
             {
               id: success.commentId
@@ -71,9 +71,16 @@ class CreateCommentModalCtrl extends BaseController
               text: newText
             }
           )
-        else if (success.parentId != null)
-          test = null
+        else if (angular.isDefined(success.parentId))
+          that.comment.commentList.add(
+            {
+              id: success.commentId
+              title: newTitle
+              text: newText
+            }
+          )
         that.$modalInstance.dismiss('close')
+        return
       )
     else if (@cmd == 'Edit')
       commentToEdit = @comment
@@ -93,6 +100,7 @@ class CreateCommentModalCtrl extends BaseController
 
 CreateCommentModalCtrl.$inject =
   ['$scope', '$modalInstance', '$log',
-   'document', 'DocumentCommentModel', 'comment', 'cmd', 'commentList']
+   'document', 'DocumentCommentModel', 'comment',
+   'cmd', 'commentList', 'rootScope']
 createCommentsCreateModal.controller( 'CreateCommentModalCtrl',
   CreateCommentModalCtrl)
