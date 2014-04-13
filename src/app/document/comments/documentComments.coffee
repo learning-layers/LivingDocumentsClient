@@ -51,6 +51,8 @@ documentCommentsModule.factory "DocumentCommentsController", ->
               return comment
             cmd: ->
               return cmd
+            commentList: ->
+              return that.$scope.comments
           }
         }
       )

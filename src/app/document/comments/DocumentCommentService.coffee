@@ -41,7 +41,7 @@ class DocumentCommentService extends BaseService
         "Authorization": that.SecurityService.currentUser.authorizationString
       }
     ).success (success) ->
-      that.$log.debug "Created comment with id=" + success.comment.id
+      that.$log.debug "Created comment with id=" + success.commentId
       return
   editComment: (documentId, commentId, commentTitle, commentText) ->
     that = @
