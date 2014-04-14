@@ -87,6 +87,8 @@ class DocumentModel extends BaseEventDispatcher
       @activeDocument.attachmentCount = 0
     else
       @activeDocument.attachmentCount = document.attachmentCount
+    if angular.isDefined document.viewers
+      @activeDocument.viewers = document.viewers
     @activeDocument.parent_document_id = document.parent_document_id
     if angular.isDefined document.tags
       @activeDocument.tags = document.tags
@@ -117,6 +119,8 @@ class DocumentModel extends BaseEventDispatcher
       }
       owner: {id:-1, displayname:'Loading...'}
       tags: [
+      ]
+      viewers: [
       ]
       checkHasSubscriptions: ->
         hasSubscriptions = false

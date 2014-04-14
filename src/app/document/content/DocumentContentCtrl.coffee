@@ -122,7 +122,7 @@ class DocumentContentCtrl extends BaseController
     return
   openViewerList: ->
     ids = []
-    angular.forEach @documentContent.content.viewers, (value, key) ->
+    angular.forEach @$scope.document.viewers, (value, key) ->
       ids.push value['id']
       return
     @$rootScope.$emit('openUserList', 'Viewers', ids)

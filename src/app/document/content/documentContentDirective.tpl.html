@@ -15,7 +15,7 @@
                     <div class="btn-group">
                         <button class="btn btn-default" ng-click="openUserInfoModal(document.owner.id)"><span class="glyphicon glyphicon-user"></span>Owner: {{ document.owner.displayname }}</button>
                         <button class="btn btn-default" ng-click="openAuthorList()">Authors<span class="badge badge-grey">{{ documentContent.content.authors.length }}</span></button>
-                        <button class="btn btn-default" ng-click="openViewerList()">Viewers<span class="badge badge-grey">{{ documentContent.content.viewers.length }}</span></button>
+                        <button class="btn btn-default" ng-click="openViewerList()">Viewers<span class="badge badge-grey">{{ document.viewers.length }}</span></button>
                         <!--on 2014-01-27 15:59:01 augmented by ; last update at 2014-01-27 15:59:01 -->
                     </div>
                     <button class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>More information</button>
