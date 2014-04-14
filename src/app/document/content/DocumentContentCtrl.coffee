@@ -21,7 +21,8 @@ documentContentController =
   ])
 
 class DocumentContentCtrl extends BaseController
-  constructor: (@$scope, @$log, @DocumentContentModel, @$rootScope, @$modal) ->
+  constructor: (@$scope, @$log, @DocumentContentModel,
+                @$rootScope, @$modal, @SecurityService) ->
     @log = $log.getInstance "DocumentContentController"
     @documentContent = @DocumentContentModel.getActiveDocumentContent()
     @initScopeVars()
@@ -33,6 +34,7 @@ class DocumentContentCtrl extends BaseController
     @$scope.documentContent = @documentContent
     @$scope.attachmentsActive = false
     @$scope.editorActive = false
+    @$scope.SecurityService = @SecurityService
     @$scope.tabs = {
       historyActive: true,
       filesActive: false,
@@ -75,13 +77,13 @@ class DocumentContentCtrl extends BaseController
     @$scope.$watch 'tabs.linksActive', (newVal) ->
       if newVal == true
         that.$log.debug("Hyperlink tab opened")
-        loadHyperlinksTask =
-          that.DocumentContentModel.loadHyperlinks()
-        loadHyperlinksTask.success (hyperlinksAttachments) ->
-          for hyperlinksAttachment in hyperlinksAttachments
-            that.$scope.attachments.hyperlinks.add hyperlinksAttachment
-          return
+        that.refreshHyperLinks()
       return
+    @$rootScope.$on("hyperLinkAdded", ->
+      that.refreshHyperLinks()
+      that.log.debug "Refreshing file list after successful upload"
+      return
+    )
     @$scope.$watch 'tabs.imgAVidsActive', (newVal) ->
       if newVal == true
         that.$log.debug("ImgAVids tab opened")
@@ -183,6 +185,15 @@ class DocumentContentCtrl extends BaseController
       that.$scope.attachments.files = fileAttachments
       return
     return
+  refreshHyperLinks: ->
+    that = @
+    loadHyperlinksTask =
+      that.DocumentContentModel.loadHyperlinks()
+    loadHyperlinksTask.success (hyperlinksAttachments) ->
+      for hyperlinksAttachment in hyperlinksAttachments
+        that.$scope.attachments.hyperlinks.add hyperlinksAttachment
+      return
+    return
 
 DocumentContentCtrl.$inject =
   ['$scope', '$log', 'DocumentContentModel', '$rootScope']
@@ -239,7 +250,7 @@ class DocumentContentContextMenuCtrl  extends BaseController
     return
 
 DocumentContentContextMenuCtrl.$inject =
-  ['$scope', '$log', '$rootScope']
+  ['$scope', '$log', '$rootScope', 'SecurityService']
 
 documentContentController.controller(
   'DocumentContentContextMenuCtrl',

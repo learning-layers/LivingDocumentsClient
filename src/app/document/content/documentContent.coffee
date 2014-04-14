@@ -24,9 +24,12 @@ documentContentModule = angular.module( "LivingDocuments.document.content", [
 documentContentModule.directive "documentContent", ->
   linker = (scope, element, attrs) ->
     return
-  controller = ($scope, $log, DocumentContentModel, $rootScope, $modal) ->
-    new DocumentContentCtrl($scope, $log,
-      DocumentContentModel, $rootScope, $modal)
+  controller = ($scope, $log, DocumentContentModel,
+                $rootScope, $modal, SecurityService) ->
+    new DocumentContentCtrl(
+      $scope, $log, DocumentContentModel,
+      $rootScope, $modal, SecurityService
+    )
   scope = {
     document: '='
   }
@@ -36,7 +39,7 @@ documentContentModule.directive "documentContent", ->
       "documentContentDirective.tpl.html"
     controller: [
       '$scope', '$log', 'DocumentContentModel',
-      '$rootScope', '$modal', controller
+      '$rootScope', '$modal', 'SecurityService', controller
     ]
     link: linker
     scope: scope
@@ -46,7 +49,9 @@ documentContentModule.directive "documentContentContextMenu", ->
   linker = (scope, element, attrs) ->
     return
   controller = ($scope, $log, $rootScope) ->
-    new DocumentContentContextMenuCtrl($scope, $log, $rootScope)
+    new DocumentContentContextMenuCtrl(
+      $scope, $log, $rootScope
+    )
   scope = {
   }
   return {
@@ -54,7 +59,7 @@ documentContentModule.directive "documentContentContextMenu", ->
     templateUrl: "document/content/" +
       "documentContentContextMenuDirective.tpl.html"
     controller: [
-      '$scope', '$log', '$rootScope',
+      '$scope', '$log', '$rootScope'
       controller
     ]
     link: linker

@@ -68,7 +68,7 @@ class DocumentContentService extends BaseService
     return
   addHyperlink: (documentId, hyperlink, description) ->
     that = @
-    @$http({
+    return @$http({
       method: 'POST',
       url: @basePath + '/document/' + documentId + '/attachment/hyperlink',
       data: {
@@ -77,8 +77,7 @@ class DocumentContentService extends BaseService
       },
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}
-    })
-    .success (success) ->
+    }).success (success) ->
       that.$log.debug(
         "Successfully added new hyperlink" +
         "to document with id=" + documentId

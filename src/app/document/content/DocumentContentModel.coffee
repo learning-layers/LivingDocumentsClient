@@ -112,7 +112,7 @@ class DocumentContentModel extends BaseEventDispatcher
     return
   addHyperlink: (hyperlink, description) ->
     that = @
-    @DocumentContentService.addHyperlink(
+    return @DocumentContentService.addHyperlink(
       that.activeDocumentId, hyperlink, description
     )
   loadHyperlinks: ->

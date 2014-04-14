@@ -109,6 +109,8 @@ class AddDocumentContentLinkCtrl extends BaseController
     )
     @DocumentContentModel.addHyperlink(
       that.$scope.hyperlink, that.$scope.description
+    ).success((success) ->
+      that.$rootScope.$broadcast("hyperLinkAdded", "")
     )
     return
 
