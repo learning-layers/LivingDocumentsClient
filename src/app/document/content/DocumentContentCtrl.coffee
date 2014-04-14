@@ -92,6 +92,8 @@ class DocumentContentCtrl extends BaseController
   switchToAttachments: ->
     @$log.debug "Attachments active"
     @$scope.attachmentsActive = true
+    @refreshFileList()
+    @refreshHyperLinks()
     return
   switchToDocumentContent: ->
     @$log.debug "Document content active"
@@ -190,8 +192,7 @@ class DocumentContentCtrl extends BaseController
     loadHyperlinksTask =
       that.DocumentContentModel.loadHyperlinks()
     loadHyperlinksTask.success (hyperlinksAttachments) ->
-      for hyperlinksAttachment in hyperlinksAttachments
-        that.$scope.attachments.hyperlinks.add hyperlinksAttachment
+      that.$scope.attachments.hyperlinks = hyperlinksAttachments
       return
     return
 
