@@ -21,8 +21,8 @@ documentContentController =
   ])
 
 class DocumentContentCtrl extends BaseController
-  constructor: (@$scope, $log, @DocumentContentModel, @$rootScope, @$modal) ->
-    @$log = $log.getInstance "DocumentContentController"
+  constructor: (@$scope, @$log, @DocumentContentModel, @$rootScope, @$modal) ->
+    @log = $log.getInstance "DocumentContentController"
     @documentContent = @DocumentContentModel.getActiveDocumentContent()
     @initScopeVars()
     @initScopeMethods()
@@ -65,12 +65,13 @@ class DocumentContentCtrl extends BaseController
     @$scope.$watch 'tabs.filesActive', (newVal) ->
       if newVal == true
         that.$log.debug("File tab opened")
-        loadFileAttachmentsTask =
-          that.DocumentContentModel.loadFileAttachments()
-        loadFileAttachmentsTask.success (fileAttachments) ->
-          that.$scope.attachments.files = fileAttachments
-          return
+        that.refreshFileList()
       return
+    @$rootScope.$on("finishedFileUpload", ->
+      that.refreshFileList()
+      that.log.debug "Refreshing file list after successful upload"
+      return
+    )
     @$scope.$watch 'tabs.linksActive', (newVal) ->
       if newVal == true
         that.$log.debug("Hyperlink tab opened")
@@ -173,6 +174,14 @@ class DocumentContentCtrl extends BaseController
     return
   downloadFileAttachment: (fileattachmentId) ->
     @DocumentContentModel.downloadFileAttachment(fileattachmentId)
+    return
+  refreshFileList: ->
+    that = @
+    loadFileAttachmentsTask =
+      that.DocumentContentModel.loadFileAttachments()
+    loadFileAttachmentsTask.success (fileAttachments) ->
+      that.$scope.attachments.files = fileAttachments
+      return
     return
 
 DocumentContentCtrl.$inject =

@@ -70,6 +70,7 @@ class FileAndMediaUploadCtrl extends BaseController
       #file is uploaded successfully
       that.log.debug(data)
       progressImageMessageInstance.fireIsFinished()
+      that.$rootScope.$broadcast('finishedFileUpload', "")
       return
     progressFunction = (evt) ->
       that.log.debug('percent: ' +
