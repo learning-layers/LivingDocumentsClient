@@ -52,7 +52,7 @@ angular.module( 'LivingDocuments', [
         restServerAddress: "http://localhost/restNew",
         firstRequestURL: window.location.href.toString().split(window.location.host)[1].split('#')[1],
         is401response: false,
-        currentClientVersion: '0.1.0-alpha'
+        currentClientVersion: '0.1.1-alpha'
     };
     SecurityServiceProvider.setInitialConfiguration(initialConfiguration);
     console.log("Current client version is=" + initialConfiguration.currentClientVersion);

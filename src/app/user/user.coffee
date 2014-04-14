@@ -49,14 +49,13 @@ class UserService extends BaseService
   getList: (ids, embed) ->
     that = @
     if (angular.isDefined(ids) && ids.length > 0)
-      listString = "["
-      listString = listString + ids[0]
+      listString = ids[0]
       if ids.length > 1
         angular.forEach(ids, (value, key) ->
-          listString = listString + ', ' + value
+          if key != 0
+            listString = listString + ',' + value
           return
         )
-      listString = listString + "]"
       return @$http.get(
         @basePath + '/user' + '?ids=' + listString,
         headers: {
