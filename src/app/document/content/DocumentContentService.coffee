@@ -110,6 +110,25 @@ class DocumentContentService extends BaseService
         documentId
       )
     return
+  saveNewFile: (documentId, item, attributeName, value) ->
+    that = @
+    data = {}
+    data[attributeName] = value
+    return @$http({
+      method: 'PUT',
+      url: @basePath + '/document/' + documentId +
+        '/fileattachment/' + item.id,
+      data: data
+      headers: {
+        'Authorization': that.SecurityService.currentUser.authorizationString
+      }
+    }).success (success) ->
+      that.$log.debug(
+        "Successfully changed file attachment name " +
+        "for attachment with id=" +
+        item.id + " to newvalue=" + value
+      )
+    return
 
 DocumentContentService.$inject = ['SecurityService','$http', '$log']
 documentContentService.service "DocumentContentService", DocumentContentService

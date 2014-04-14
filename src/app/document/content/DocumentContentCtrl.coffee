@@ -209,7 +209,7 @@ class DocumentContentCtrl extends BaseController
       that.$scope.attachments.hyperlinks = hyperlinksAttachments
       return
     return
-  triggerEditMode: (cmd, item, attributeName, oldVal) ->
+  triggerEditMode: (cmd, itemType, item, attributeName, oldVal) ->
     that = @
     console.log(item)
     if (
@@ -234,6 +234,16 @@ class DocumentContentCtrl extends BaseController
         item[attributeName] = item.rememberOldVal[attributeName]
       else if cmd == 'save'
         console.log "Save triggered with item value=" + item[attributeName]
+        newValueSaveTask = @DocumentContentModel.saveNewValueFor(
+          itemType, item, attributeName, item[attributeName]
+        )
+        newValueSaveTask.success( ->
+          return
+        )
+        newValueSaveTask.error( ->
+          item[attributeName] = item.rememberOldVal[attributeName]
+          return
+        )
     item.editmode = !item.editmode
     return
 

@@ -134,6 +134,10 @@ class DocumentContentModel extends BaseEventDispatcher
       return
     )
     return
+  saveNewValueFor: (itemType, item, attributeName, value) ->
+    return @DocumentContentService.saveNewFile(
+      @activeDocumentId, item, attributeName, value
+    )
 
 
 documentContentModel.factory "DocumentContentModel",
