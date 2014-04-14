@@ -28,7 +28,8 @@ class DocumentCtrl extends BaseController
       @$log.debug "Opening document with id=" + $stateParams.item
       documentLoadTask = DocumentModel.get(
         $stateParams.item,
-        "?filter=id,title,viewCount,authorCount,commentCount," +
+        "?filter=id,title,attachmentCount,viewCount,authorCount"+
+        ",commentCount," +
         "lastUpdateAt,createdAt,content,is_discussion,parent_document_id" +
         "&embed=tags:id,name;content:all;discussions:all;comments:all"
       )

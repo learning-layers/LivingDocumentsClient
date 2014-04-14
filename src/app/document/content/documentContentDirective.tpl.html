@@ -3,7 +3,7 @@
         <div class="front panel panel-default doc-content-panel">
             <div class="panel-heading panel-heading-sm">
                 <div class="row first-row">
-                    <button class="btn btn-info pull-left" ng-click="switchToAttachments()"><span class="glyphicon glyphicon-paperclip"></span>Attachments<span class="badge">3</span></button>
+                    <button class="btn btn-info pull-left" ng-click="switchToAttachments()"><span class="glyphicon glyphicon-paperclip"></span>Attachments<span class="badge">{{ document.attachmentCount }}</span></button>
                     <div id="documentContentMaturityIndicator" class="pull-left">
                         <div class="maturity-low"></div>
                         <div class="maturity-mid"></div>
@@ -126,7 +126,20 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ file.name }}</td>
                                     <td>{{ file.size }}</td>
-                                    <td><button class="btn btn-default" ng-click="downloadFileAttachment(file.id)">Download</button></td>
+                                    <td>
+                                        <button class="btn btn-default" ng-click="downloadFileAttachment(file.id)">
+                                            <span class="glyphicon glyphicon-download-alt"></span>
+                                             Download
+                                        </button>
+                                        <button class="btn btn-default">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                             Edit
+                                        </button>
+                                        <button ng-show="file.creatorId === SecurityService.currentUser.id" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                             Delete
+                                        </button>
+                                    </td>
                                 </tr>
                             </table>
                         </tab>
@@ -147,9 +160,11 @@
                                         <th>Options</th>
                                         <tr ng-repeat="file in attachments.files">
                                             <td>{{ $index + 1 }}</td>
-                                            <td>{{ file.name }}</td>
+                                            <td>{{ file.name }} sdfsf</td>
                                             <td>{{ file.size }}</td>
-                                            <td><button class="btn btn-default" ng-click="downloadFileAttachment(file.id)">Download</button></td>
+                                            <td>
+                                                <button class="btn btn-default" ng-click="downloadFileAttachment(file.id)">Download</button>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>

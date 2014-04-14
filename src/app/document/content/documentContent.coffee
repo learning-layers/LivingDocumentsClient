@@ -23,6 +23,7 @@ documentContentModule = angular.module( "LivingDocuments.document.content", [
 
 documentContentModule.directive "documentContent", ->
   linker = (scope, element, attrs) ->
+    return
   controller = ($scope, $log, DocumentContentModel, $rootScope, $modal) ->
     new DocumentContentCtrl($scope, $log,
       DocumentContentModel, $rootScope, $modal)
@@ -43,6 +44,7 @@ documentContentModule.directive "documentContent", ->
 
 documentContentModule.directive "documentContentContextMenu", ->
   linker = (scope, element, attrs) ->
+    return
   controller = ($scope, $log, $rootScope) ->
     new DocumentContentContextMenuCtrl($scope, $log, $rootScope)
   scope = {
