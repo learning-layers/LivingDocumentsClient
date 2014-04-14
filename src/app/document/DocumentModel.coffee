@@ -83,9 +83,8 @@ class DocumentModel extends BaseEventDispatcher
     @activeDocument.id = document.id
     @activeDocument.title = document.title
     @activeDocument.owner = document.owner
-    if document.attachmentCount == null
-      @activeDocument.attachmentCount = 0
-    else
+    @activeDocument.attachmentCount = 0
+    if angular.isDefined document.attachmentCount
       @activeDocument.attachmentCount = document.attachmentCount
     if angular.isDefined document.viewers
       @activeDocument.viewers = document.viewers

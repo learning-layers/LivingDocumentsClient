@@ -135,7 +135,9 @@
                                             <span class="glyphicon glyphicon-pencil"></span>
                                              Edit
                                         </button>
-                                        <button ng-show="file.creatorId === SecurityService.currentUser.id" class="btn btn-danger">
+                                        <button ng-show="file.creatorId === SecurityService.currentUser.id"
+                                                class="btn btn-danger"
+                                                ng-click="deleteFileAttachment(file.id, file.name)">
                                             <span class="glyphicon glyphicon-trash"></span>
                                              Delete
                                         </button>

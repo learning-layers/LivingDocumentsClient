@@ -31,8 +31,7 @@ class DocumentContentService extends BaseService
       data: {editorContent: editorContent},
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}
-    })
-    .success (success) ->
+    }).success (success) ->
       that.$log.debug "Successfully updated document content!"
       return
   loadFileAttachments: (documentId) ->
@@ -43,8 +42,7 @@ class DocumentContentService extends BaseService
         '/fileattachment',
       headers: {'Authorization':
         that.SecurityService.currentUser.authorizationString}
-    })
-    .success (success) ->
+    }).success (success) ->
       that.$log.debug success
       return
     return
@@ -90,13 +88,27 @@ class DocumentContentService extends BaseService
       headers: {
         'Authorization': that.SecurityService.currentUser.authorizationString
       }
-    })
-    .success (success) ->
+    }).success (success) ->
       that.$log.debug(
         "Successfully retrieved hyperlinks for document with id=" +
         documentId
       )
       return
+    return
+  deleteFileAttachment: (documentId, fileAttachmentId) ->
+    that = @
+    return @$http({
+      method: 'DELETE',
+      url: @basePath + '/document/' + documentId +
+        '/fileattachment/' + fileAttachmentId,
+      headers: {
+        'Authorization': that.SecurityService.currentUser.authorizationString
+      }
+    }).success (success) ->
+      that.$log.debug(
+        "Successfully deleted file attachment for document with id=" +
+        documentId
+      )
     return
 
 DocumentContentService.$inject = ['SecurityService','$http', '$log']

@@ -60,6 +60,7 @@ class DocumentContentCtrl extends BaseController
     @$scope.switchToDocumentContent = @switchToDocumentContent.bind(@)
     @$scope.openAttachmentUploadModal = @openAttachmentUploadModal.bind(@)
     @$scope.downloadFileAttachment = @downloadFileAttachment.bind(@)
+    @$scope.deleteFileAttachment = @deleteFileAttachment.bind(@)
     return
   initScopeWatches: ->
     that = @
@@ -178,6 +179,17 @@ class DocumentContentCtrl extends BaseController
     return
   downloadFileAttachment: (fileattachmentId) ->
     @DocumentContentModel.downloadFileAttachment(fileattachmentId)
+    return
+  deleteFileAttachment: (fileAttachmentId, attachmentName) ->
+    that = @
+    confirmResult = confirm(
+      "Are you sure you want to delete the attachement '" +
+      attachmentName + "'"
+    )
+    if (confirmResult == true)
+      @DocumentContentModel.deleteFileAttachment(
+        fileAttachmentId, that.$scope.attachments.files
+      )
     return
   refreshFileList: ->
     that = @

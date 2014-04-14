@@ -121,6 +121,20 @@ class DocumentContentModel extends BaseEventDispatcher
       that.activeDocumentId
     )
     return
+  deleteFileAttachment: (fileattachmentId, files) ->
+    that = @
+    deleteFileAttachmentTask =
+      @DocumentContentService.deleteFileAttachment(
+        that.activeDocumentId, fileattachmentId
+      )
+    deleteFileAttachmentTask.success((success) ->
+      files.remove((n) ->
+        return n['id'] == fileattachmentId
+      )
+      return
+    )
+    return
+
 
 documentContentModel.factory "DocumentContentModel",
   ['$log', 'DocumentContentService', '$rootScope', 'SecurityService'
