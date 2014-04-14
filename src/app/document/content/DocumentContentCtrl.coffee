@@ -21,6 +21,7 @@ documentContentController =
   ])
 
 class DocumentContentCtrl extends BaseController
+  currentAttachmentItem: null
   constructor: (@$scope, @$log, @DocumentContentModel,
                 @$rootScope, @$modal, @SecurityService) ->
     @log = $log.getInstance "DocumentContentController"
@@ -61,6 +62,7 @@ class DocumentContentCtrl extends BaseController
     @$scope.openAttachmentUploadModal = @openAttachmentUploadModal.bind(@)
     @$scope.downloadFileAttachment = @downloadFileAttachment.bind(@)
     @$scope.deleteFileAttachment = @deleteFileAttachment.bind(@)
+    @$scope.triggerEditMode = @triggerEditMode.bind(@)
     return
   initScopeWatches: ->
     that = @
@@ -206,6 +208,33 @@ class DocumentContentCtrl extends BaseController
     loadHyperlinksTask.success (hyperlinksAttachments) ->
       that.$scope.attachments.hyperlinks = hyperlinksAttachments
       return
+    return
+  triggerEditMode: (cmd, item, attributeName, oldVal) ->
+    that = @
+    console.log(item)
+    if (
+      angular.isDefined(@currentAttachmentItem) &&
+      @currentAttachmentItem != null &&
+      @currentAttachmentItem != item
+    )
+      @currentAttachmentItem.editmode = false
+      if angular.isDefined @currentAttachmentItem.rememberOldVal
+        angular.forEach(@currentAttachmentItem.rememberOldVal, (value, key) ->
+          that.currentAttachmentItem[key] = value
+          return
+        )
+    if angular.isUndefined(item.editmode) || item.editmode == false
+      #If edit mode is starting
+      item.rememberOldVal = {}
+      item.rememberOldVal[attributeName] = oldVal
+      @currentAttachmentItem = item
+    else
+      #If edit mode is ending
+      if cmd == 'cancel'
+        item[attributeName] = item.rememberOldVal[attributeName]
+      else if cmd == 'save'
+        console.log "Save triggered with item value=" + item[attributeName]
+    item.editmode = !item.editmode
     return
 
 DocumentContentCtrl.$inject =

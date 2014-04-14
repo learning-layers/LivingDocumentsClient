@@ -124,18 +124,28 @@
                                 <th>Options</th>
                                 <tr ng-repeat="file in attachments.files">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ file.name }}</td>
+                                    <td>
+                                        <span ng-hide="file.editmode">{{ file.name }}</span>
+                                        <span ng-show="file.editmode"><input type="text" class="form-control" ng-model="file.name"></span>
+                                    </td>
                                     <td>{{ file.size }}</td>
                                     <td>
                                         <button class="btn btn-default" ng-click="downloadFileAttachment(file.id)">
                                             <span class="glyphicon glyphicon-download-alt"></span>
                                              Download
                                         </button>
-                                        <button class="btn btn-default">
+                                        <button ng-hide="file.editmode" class="btn btn-default" ng-click="triggerEditMode('edit', file, 'name', file.name)">
                                             <span class="glyphicon glyphicon-pencil"></span>
                                              Edit
                                         </button>
-                                        <button ng-show="file.creatorId === SecurityService.currentUser.id"
+                                        <button ng-show="file.editmode" class="btn btn-danger" ng-click="triggerEditMode('cancel', file, 'name', file.name)">
+                                            &times;
+                                        </button>
+                                        <button ng-show="file.editmode" class="btn btn-success" ng-click="triggerEditMode('save', file, 'name', file.name)">
+                                            <span class="glyphicon glyphicon-hdd"></span>
+                                            Save
+                                        </button>
+                                        <button ng-hide="file.editmode" ng-show="file.creatorId === SecurityService.currentUser.id"
                                                 class="btn btn-danger"
                                                 ng-click="deleteFileAttachment(file.id, file.name)">
                                             <span class="glyphicon glyphicon-trash"></span>
