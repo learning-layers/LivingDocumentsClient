@@ -221,6 +221,9 @@ angular.module( 'LivingDocuments.navigation', [
                     getUserAvatar();
                 }
             });
+            this.$rootScope.$on('searchModeChange', function(ev, searchMode) {
+                outerThis.$scope.searchMode = searchMode;
+            });
         }
     });
     return NavigationController;

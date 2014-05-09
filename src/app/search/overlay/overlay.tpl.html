@@ -1,6 +1,6 @@
 <div id="search-overlay" class="container" ng-show="searchMode">
-    <div class="search-panel container">
-        <div class="search-panel-content">
+    <div class="search-panel container" data-ng-click="dismissSearchOverlay()">
+        <div class="search-panel-content" ng-click="$event.stopPropagation()">
             <accordion close-others="accordionCloseOthers">
                 <accordion-group ng-init="documentsOpen = $parent.accordionTabIsOpen" is-open="documentsOpen">
                     <accordion-heading>

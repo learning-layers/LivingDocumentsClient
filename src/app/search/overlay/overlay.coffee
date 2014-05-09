@@ -34,6 +34,7 @@ class SearchOverlayCtrl extends BaseController
   initScopeMethods: ->
     #Add searchUser to scope and bind this
     @$scope.searchuser = @searchUser.bind(@)
+    @$scope.dismissSearchOverlay = @dismissSearchOverlay
     return
   initScopeEvents: ->
     that = @
@@ -61,6 +62,10 @@ class SearchOverlayCtrl extends BaseController
       .error((error) ->
         that.$log.error "Error while retrieving user search results!"
       )
+    return
+  dismissSearchOverlay: =>
+    #switch search mode to false
+    @$rootScope.$emit('searchModeChange', false)
     return
 SearchOverlayCtrl.$inject =
   ['$scope', '$rootScope', '$log', 'SearchService']
