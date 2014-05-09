@@ -25,10 +25,12 @@ documentContentModule.directive "documentContent", ->
   linker = (scope, element, attrs) ->
     return
   controller = ($scope, $log, DocumentContentModel,
-                $rootScope, $modal, SecurityService) ->
+                $rootScope, $modal, SecurityService
+                $timeout) ->
     new DocumentContentCtrl(
       $scope, $log, DocumentContentModel,
-      $rootScope, $modal, SecurityService
+      $rootScope, $modal, SecurityService,
+      $timeout
     )
   scope = {
     document: '='
@@ -39,7 +41,7 @@ documentContentModule.directive "documentContent", ->
       "documentContentDirective.tpl.html"
     controller: [
       '$scope', '$log', 'DocumentContentModel',
-      '$rootScope', '$modal', 'SecurityService', controller
+      '$rootScope', '$modal', 'SecurityService', '$timeout', controller
     ]
     link: linker
     scope: scope

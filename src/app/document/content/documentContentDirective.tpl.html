@@ -37,7 +37,7 @@
                     <div ng-if="!editorActive" class="form-control editor" ng-bind-html="documentContent.content.content">
                     </div>
                 </div>
-                <div ng-if="editorActive" class="editor-wrapper">
+                <div ng-if="editorActive" class="editor-wrapper" ng-click="summernoteAreaClick()">
                     <summernote></summernote>
                     <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
                         <div class="btn-group">

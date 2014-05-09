@@ -23,7 +23,7 @@ documentContentController =
 class DocumentContentCtrl extends BaseController
   currentAttachmentItem: null
   constructor: (@$scope, @$log, @DocumentContentModel,
-                @$rootScope, @$modal, @SecurityService) ->
+                @$rootScope, @$modal, @SecurityService, @$timeout) ->
     @log = $log.getInstance "DocumentContentController"
     @documentContent = @DocumentContentModel.getActiveDocumentContent()
     @initScopeVars()
@@ -63,6 +63,7 @@ class DocumentContentCtrl extends BaseController
     @$scope.downloadFileAttachment = @downloadFileAttachment.bind(@)
     @$scope.deleteFileAttachment = @deleteFileAttachment.bind(@)
     @$scope.triggerEditMode = @triggerEditMode.bind(@)
+    @$scope.summernoteAreaClick = @summernoteAreaClick
     return
   initScopeWatches: ->
     that = @
@@ -245,6 +246,18 @@ class DocumentContentCtrl extends BaseController
           return
         )
     item.editmode = !item.editmode
+    return
+  summernoteAreaClick: =>
+    console.log("summernoteAreaClicked")
+    $( "body" ).addClass( "hide-summernote-backdrop-workaround" )
+    @$timeout(
+      ->
+        $('.modal-backdrop').remove()
+        $( "body" ).removeClass( "hide-summernote-backdrop-workaround" )
+        return
+      ,
+      200
+    )
     return
 
 DocumentContentCtrl.$inject =
