@@ -25,6 +25,14 @@
         padding: 0;
     }
     accordion {
+        .discussion-title {
+          display: inline-block;
+          max-width: 237px;
+          white-space: nowrap;
+          overflow: hidden;           /* required for text-overflow */
+          text-overflow: ellipsis;    /* for IE and WebKit (Safari, Chrome) */
+          -o-text-overflow: ellipsis; /* for Opera since 9.0 */
+        }
         .panel-body {
           max-height: 230px;
           overflow: hidden;

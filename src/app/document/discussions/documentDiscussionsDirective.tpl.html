@@ -12,7 +12,9 @@
         <accordion close-others="'true'">
             <accordion-group is-open="discussion.isOpen" ng-repeat="discussion in discussions.discussions">
                 <accordion-heading>
-                    {{ discussion.title }}
+                    <div class="discussion-title">
+                        {{ discussion.title }}
+                    </div>
                     <span class="badge pull-right"><span class="glyphicon glyphicon-user"></span> {{ discussion.content.authors.length }}</span>
                     <div id="documentDiscussionMaturityIndicator" class="pull-right">
                         <div class="maturity-low"></div>
