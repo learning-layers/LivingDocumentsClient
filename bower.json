@@ -18,7 +18,9 @@
     "angular-ui-utils": "0.0.4",
     "angular-animate": "1.2.10",
     "modernizr": "2.7.1",
-    "angular-uuid": "0.1.0"
+    "angular-uuid": "0.1.0",
+    "summernote": "v0.5.1",
+    "angular-summernote": "0.2.1"
   },
   "dependencies": {},
   "resolutions": {

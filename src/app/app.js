@@ -26,6 +26,7 @@ angular.module( 'LivingDocuments', [
     'angularFileUpload',
     'ui.keypress',
     'ngSanitize',
+    'summernote',
 
     /* application module dependencies */
     'LivingDocuments.core',

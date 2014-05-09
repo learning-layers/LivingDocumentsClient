@@ -83,9 +83,11 @@ module.exports = {
       'vendor/angular-resource/angular-resource.min.js',
       'vendor/angular-cookies/angular-cookies.min.js',
       'vendor/angular-uuid/uuid.js',
+      'vendor/summernote/dist/summernote.min.js',
       'vendor/angular-local-storage/angular-local-storage.min.js',
       'vendor/angular-treeview-custom/angular.treeview.js',
-      'vendor/ng-file-upload/angular-file-upload.min.js'
+      'vendor/ng-file-upload/angular-file-upload.min.js',
+      'vendor/angular-summernote/dist/angular-summernote.min.js'
     ],
     css: [
     ],
