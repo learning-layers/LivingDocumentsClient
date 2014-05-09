@@ -254,7 +254,6 @@ class DocumentContentCtrl extends BaseController
     item.editmode = !item.editmode
     return
   summernoteAreaClick: =>
-    console.log("summernoteAreaClicked")
     $( "body" ).addClass( "hide-summernote-backdrop-workaround" )
     @$timeout(
       ->

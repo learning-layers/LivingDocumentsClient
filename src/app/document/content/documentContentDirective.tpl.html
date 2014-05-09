@@ -39,53 +39,7 @@
                 </div>
                 <div ng-if="editorActive" class="editor-wrapper" ng-click="summernoteAreaClick()">
                     <summernote></summernote>
-                    <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
-                        <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="glyphicon glyphicon-font"></i><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a data-edit="fontName Serif" style="font-family:'Serif'">Serif</a></li><li><a data-edit="fontName Sans" style="font-family:'Sans'">Sans</a></li><li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li><li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li><li><a data-edit="fontName Courier" style="font-family:'Courier'">Courier</a></li><li><a data-edit="fontName Courier New" style="font-family:'Courier New'">Courier New</a></li><li><a data-edit="fontName Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans MS</a></li><li><a data-edit="fontName Helvetica" style="font-family:'Helvetica'">Helvetica</a></li><li><a data-edit="fontName Impact" style="font-family:'Impact'">Impact</a></li><li><a data-edit="fontName Lucida Grande" style="font-family:'Lucida Grande'">Lucida Grande</a></li><li><a data-edit="fontName Lucida Sans" style="font-family:'Lucida Sans'">Lucida Sans</a></li><li><a data-edit="fontName Tahoma" style="font-family:'Tahoma'">Tahoma</a></li><li><a data-edit="fontName Times" style="font-family:'Times'">Times</a></li><li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li><li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Size"><i class="glyphicon glyphicon-text-height"></i>&nbsp;<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
-                                <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
-                                <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default" data-edit="bold" data-original-title="Bold (Ctrl/Cmd+B)" title="Bold"><span class="glyphicon glyphicon-bold"></span></a>
-                            <a class="btn btn-default" data-edit="italic" data-original-title="Italic (Ctrl/Cmd+I)" title="Italic"><span class="glyphicon glyphicon-italic"></span></a>
-                            <a class="btn btn-default" data-edit="underline" data-original-title="Underline (Ctrl/Cmd+U)" title="Underline"><span class="glyphicon glyphicon-text-width"></span></a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn btn-default" data-edit="insertunorderedlist" data-original-title="Bullet list" title="Bullet list"><span class="glyphicon glyphicon-tasks"></span></a>
-                            <a class="btn btn-default" data-edit="insertorderedlist" data-original-title="Number list" title="Number list"><span class="glyphicon glyphicon-list"></span></a>
-                            <a class="btn btn-default" data-edit="outdent" data-original-title="Reduce indent (Shift+Tab)" title="Reduce indent"><span class="glyphicon glyphicon-indent-left"></span></a>
-                            <a class="btn btn-default" data-edit="indent" data-original-title="Indent (Tab)" title="Indent"><span class="glyphicon glyphicon-indent-right"></span></a>
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-original-title="Hyperlink" title="Hyperlink"><span class="glyphicon glyphicon-link"></span></a>
-                            <div class="dropdown-menu input-append">
-                                <input class="span2" placeholder="URL" type="text" data-edit="createLink">
-                                <button class="btn" type="button">Add</button>
-                            </div>
-                            <!-- <a class="btn btn-default" data-edit="unlink" data-original-title="Remove Hyperlink" title="Remove hyperlink"><span class="icon-unlink"></span></a> -->
-                            <a class="btn btn-default" id="pictureBtn" data-original-title="Insert picture (or just drag &amp; drop)" title="Inser image" href="javascript: $('#pictureChooser').click();"><span class="glyphicon glyphicon-picture"></span><input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" id="pictureChooser" style="visibility: hidden; position: absolute;"></a>
-                        </div>
-
-                        <div class="btn-group">
-                            <a class="btn btn-default" data-edit="undo" data-original-title="Undo (Ctrl/Cmd+Z)" title="Undo"><i class="glyphicon glyphicon-share-alt"></i></a>
-                            <a class="btn btn-default" data-edit="redo" data-original-title="Redo (Ctrl/Cmd+Y)" title="Redo"><span class="glyphicon glyphicon-share-alt"></span></a>
-                        </div>
-
-                        <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
-
-                    </div>
-                    <div id="editor" class="form-control editor" ng-init="setEditorContent()" contenteditable="true" bootstrap-wysiwyg="">
-                    </div>
+                    <div ng-init="setEditorContent()"></div>
                 </div>
             </div>
         </div>

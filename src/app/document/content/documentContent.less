@@ -9,10 +9,15 @@
 }
 
 #document {
-  .note-dialog {
-    .modal-dialog {
-      position: relative;
-      z-index: 1200;
+  document-content {
+    .note-dialog {
+      .modal-dialog {
+        position: relative;
+        z-index: 1200;
+      }
+    }
+    .note-editable {
+      height: 220px;
     }
   }
   .flip-container {
@@ -127,12 +132,6 @@
     border: none;
     width: 20px;
     height: 30px;
-  }
-
-  #editor {
-    min-height: 200px;
-    border: 1px solid grey;
-    overflow: auto;
   }
 
   a[data-original-title="Font"] {
