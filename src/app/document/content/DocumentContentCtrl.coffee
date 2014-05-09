@@ -137,8 +137,11 @@ class DocumentContentCtrl extends BaseController
     return
   saveEditorContent: ->
     that = @
-    editorElement = angular.element( document.querySelector( '#editor' ) )
-    editorContent = editorElement.cleanHtml()
+    editorElement = angular.element(
+      document.querySelector( '.note-editable' )
+    )
+    editorContent = editorElement[0].innerHTML
+    console.log(editorContent)
     saveEditorContentTask =
       @DocumentContentModel.saveEditorContent(editorContent)
     saveEditorContentTask.success(
@@ -146,8 +149,11 @@ class DocumentContentCtrl extends BaseController
         that.$scope.editorActive = false
         return
     )
+    return
   setEditorContent: ->
-    editorElement = angular.element( document.querySelector( '#editor' ) )
+    editorElement = angular.element(
+      document.querySelector( '.note-editable' )
+    )
     editorElement.html( @documentContent.content.content )
     return
   showContextMenu: (ev) ->
