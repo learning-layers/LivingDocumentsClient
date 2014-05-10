@@ -61,62 +61,59 @@ class DocumentContentCtrl extends BaseController
       ]
     }
     return
-  initScopeMethods: ->
-    that = @
-    @$scope.openUserInfoModal = @openUserInfoModal.bind(@)
-    @$scope.saveEditorContent = @saveEditorContent.bind(@)
-    @$scope.openAuthorList = @openAuthorList.bind(@)
-    @$scope.openViewerList = @openViewerList.bind(@)
-    @$scope.setEditorContent = @setEditorContent.bind(@)
-    @$scope.showContextMenu = @showContextMenu.bind(@)
-    @$scope.switchToAttachments = @switchToAttachments.bind(@)
-    @$scope.switchToDocumentContent = @switchToDocumentContent.bind(@)
-    @$scope.openAttachmentUploadModal = @openAttachmentUploadModal.bind(@)
-    @$scope.downloadFileAttachment = @downloadFileAttachment.bind(@)
-    @$scope.deleteFileAttachment = @deleteFileAttachment.bind(@)
-    @$scope.triggerEditMode = @triggerEditMode.bind(@)
+  initScopeMethods: =>
+    @$scope.openUserInfoModal = @openUserInfoModal
+    @$scope.saveEditorContent = @saveEditorContent
+    @$scope.openAuthorList = @openAuthorList
+    @$scope.openViewerList = @openViewerList
+    @$scope.setEditorContent = @setEditorContent
+    @$scope.showContextMenu = @showContextMenu
+    @$scope.switchToAttachments = @switchToAttachments
+    @$scope.switchToDocumentContent = @switchToDocumentContent
+    @$scope.openAttachmentUploadModal = @openAttachmentUploadModal
+    @$scope.downloadFileAttachment = @downloadFileAttachment
+    @$scope.deleteFileAttachment = @deleteFileAttachment
+    @$scope.triggerEditMode = @triggerEditMode
     @$scope.summernoteAreaClick = @summernoteAreaClick
     return
-  initScopeWatches: ->
-    that = @
+  initScopeWatches: =>
     @$log.debug("Initializing scope watches")
-    @$scope.$watch 'tabs.filesActive', (newVal) ->
+    @$scope.$watch 'tabs.filesActive', (newVal) =>
       if newVal == true
-        that.$log.debug("File tab opened")
-        that.refreshFileList()
+        @$log.debug("File tab opened")
+        @refreshFileList()
       return
-    @$rootScope.$on("finishedFileUpload", ->
-      that.refreshFileList()
-      that.log.debug "Refreshing file list after successful upload"
+    @$rootScope.$on("finishedFileUpload", =>
+      @refreshFileList()
+      @log.debug "Refreshing file list after successful upload"
       return
     )
-    @$scope.$watch 'tabs.linksActive', (newVal) ->
+    @$scope.$watch 'tabs.linksActive', (newVal) =>
       if newVal == true
-        that.$log.debug("Hyperlink tab opened")
-        that.refreshHyperLinks()
+        @$log.debug("Hyperlink tab opened")
+        @refreshHyperLinks()
       return
-    @$rootScope.$on("hyperLinkAdded", ->
-      that.refreshHyperLinks()
-      that.log.debug "Refreshing file list after successful upload"
+    @$rootScope.$on("hyperLinkAdded", =>
+      @refreshHyperLinks()
+      @log.debug "Refreshing file list after successful upload"
       return
     )
-    @$scope.$watch 'tabs.imgAVidsActive', (newVal) ->
+    @$scope.$watch 'tabs.imgAVidsActive', (newVal) =>
       if newVal == true
-        that.$log.debug("ImgAVids tab opened")
+        @$log.debug("ImgAVids tab opened")
       return
     return
-  switchToAttachments: ->
+  switchToAttachments: =>
     @$log.debug "Attachments active"
     @$scope.attachmentsActive = true
     @refreshFileList()
     @refreshHyperLinks()
     return
-  switchToDocumentContent: ->
+  switchToDocumentContent: =>
     @$log.debug "Document content active"
     @$scope.attachmentsActive = false
     return
-  openAttachmentUploadModal: ->
-    that = @
+  openAttachmentUploadModal: =>
     @switchToDocumentContent()
     @$modal.open(
       {
@@ -124,31 +121,30 @@ class DocumentContentCtrl extends BaseController
           '/uploadmodal.tpl.html'
         controller: AttachmentUploadModalCtrl
         resolve: {
-          attachmentsActiveScope: ->
-            return that.$scope
+          attachmentsActiveScope: =>
+            return @$scope
         }
       }
     )
     return
-  openUserInfoModal: (userId) ->
+  openUserInfoModal: (userId) =>
     @$rootScope.$emit('openUserProfile', userId)
     return
-  openAuthorList: ->
+  openAuthorList: =>
     ids = []
-    angular.forEach @documentContent.content.authors, (value, key) ->
+    angular.forEach @documentContent.content.authors, (value, key) =>
       ids.push value['id']
       return
     @$rootScope.$emit('openUserList', 'Authors', ids)
     return
-  openViewerList: ->
+  openViewerList: =>
     ids = []
-    angular.forEach @$scope.document.viewers, (value, key) ->
+    angular.forEach @$scope.document.viewers, (value, key) =>
       ids.push value['id']
       return
     @$rootScope.$emit('openUserList', 'Viewers', ids)
     return
-  saveEditorContent: ->
-    that = @
+  saveEditorContent: =>
     editorElement = angular.element(
       document.querySelector( '.note-editable' )
     )
@@ -157,23 +153,22 @@ class DocumentContentCtrl extends BaseController
     saveEditorContentTask =
       @DocumentContentModel.saveEditorContent(editorContent)
     saveEditorContentTask.success(
-      (success) ->
-        that.$scope.editorActive = false
+      (success) =>
+        @$scope.editorActive = false
         return
     )
     return
-  setEditorContent: ->
+  setEditorContent: =>
     editorElement = angular.element(
       document.querySelector( '.note-editable' )
     )
     editorElement.html( @documentContent.content.content )
     return
-  showContextMenu: (ev) ->
-    that = @
-    @getCurrentSelection (currentSelection) ->
+  showContextMenu: (ev) =>
+    @getCurrentSelection (currentSelection) =>
       if currentSelection.startOffset < currentSelection.endOffset
         console.log(currentSelection)
-        that.$rootScope.$emit(
+        @$rootScope.$emit(
           "ContextMenu:open:DocumentContent",
           {
             clientX: ev.clientX,
@@ -182,7 +177,7 @@ class DocumentContentCtrl extends BaseController
           }
         )
     return
-  getCurrentSelection: (callback)->
+  getCurrentSelection: (callback) =>
     selectionObj = window.getSelection().getRangeAt(0)
     content = selectionObj.cloneContents()
     span = window.document.createElement('SPAN')
@@ -198,39 +193,34 @@ class DocumentContentCtrl extends BaseController
     # + selectionObj.endOffset + ", htmlContent=" + htmlContent)
     callback(currentSelection)
     return
-  downloadFileAttachment: (fileattachmentId) ->
+  downloadFileAttachment: (fileattachmentId) =>
     @DocumentContentModel.downloadFileAttachment(fileattachmentId)
     return
-  deleteFileAttachment: (fileAttachmentId, attachmentName) ->
-    that = @
+  deleteFileAttachment: (fileAttachmentId, attachmentName) =>
     confirmResult = confirm(
       "Are you sure you want to delete the attachement '" +
       attachmentName + "'"
     )
     if (confirmResult == true)
       @DocumentContentModel.deleteFileAttachment(
-        fileAttachmentId, that.$scope.attachments.files
+        fileAttachmentId, @$scope.attachments.files
       )
     return
-  refreshFileList: ->
-    that = @
+  refreshFileList: =>
     loadFileAttachmentsTask =
-      that.DocumentContentModel.loadFileAttachments()
-    loadFileAttachmentsTask.success (fileAttachments) ->
-      that.$scope.attachments.files = fileAttachments
+      @DocumentContentModel.loadFileAttachments()
+    loadFileAttachmentsTask.success (fileAttachments) =>
+      @$scope.attachments.files = fileAttachments
       return
     return
-  refreshHyperLinks: ->
-    that = @
+  refreshHyperLinks: =>
     loadHyperlinksTask =
-      that.DocumentContentModel.loadHyperlinks()
-    loadHyperlinksTask.success (hyperlinksAttachments) ->
-      that.$scope.attachments.hyperlinks = hyperlinksAttachments
+      @DocumentContentModel.loadHyperlinks()
+    loadHyperlinksTask.success (hyperlinksAttachments) =>
+      @$scope.attachments.hyperlinks = hyperlinksAttachments
       return
     return
-  triggerEditMode: (cmd, itemType, item, attributeName, oldVal) ->
-    that = @
-    console.log(item)
+  triggerEditMode: (cmd, itemType, item, attributeName, oldVal) =>
     if (
       angular.isDefined(@currentAttachmentItem) &&
       @currentAttachmentItem != null &&
@@ -238,8 +228,8 @@ class DocumentContentCtrl extends BaseController
     )
       @currentAttachmentItem.editmode = false
       if angular.isDefined @currentAttachmentItem.rememberOldVal
-        angular.forEach(@currentAttachmentItem.rememberOldVal, (value, key) ->
-          that.currentAttachmentItem[key] = value
+        angular.forEach(@currentAttachmentItem.rememberOldVal, (value, key) =>
+          @currentAttachmentItem[key] = value
           return
         )
     if angular.isUndefined(item.editmode) || item.editmode == false
@@ -256,10 +246,10 @@ class DocumentContentCtrl extends BaseController
         newValueSaveTask = @DocumentContentModel.saveNewValueFor(
           itemType, item, attributeName, item[attributeName]
         )
-        newValueSaveTask.success( ->
+        newValueSaveTask.success(=>
           return
         )
-        newValueSaveTask.error( ->
+        newValueSaveTask.error(=>
           item[attributeName] = item.rememberOldVal[attributeName]
           return
         )
@@ -298,36 +288,34 @@ class DocumentContentContextMenuCtrl  extends BaseController
     @$scope.discussSelection = @discussSelection.bind(@)
     @selection = null
     return
-  defineListeners: ->
+  defineListeners: =>
     super()
-    that = @
     @$rootScope.$on(
       'ContextMenu:open:DocumentContent',
-      (ev, selection) ->
-        that.selection = selection
-        that.$scope.$apply( ->
-          that.$scope.visible = true
-          that.$scope.top = selection.clientY + "px"
-          that.$scope.left = selection.clientX + "px"
+      (ev, selection) =>
+        @selection = selection
+        @$scope.$apply( =>
+          @$scope.visible = true
+          @$scope.top = selection.clientY + "px"
+          @$scope.left = selection.clientX + "px"
         )
         return
     )
     @$rootScope.$on(
       'ContextMenu:close:DocumentContent',
-      (ev) ->
-        that.$scope.visible = false
+      (ev) =>
+        @$scope.visible = false
         return
     )
     return
-  hide: ->
+  hide: =>
     @$scope.visible = false
     return
-  discussSelection: ->
-    that = @
+  discussSelection: =>
     @$scope.visible = false
     @$rootScope.$emit(
       'discussSelection',
-      that.selection
+      @selection
     )
     return
 
