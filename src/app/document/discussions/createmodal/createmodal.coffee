@@ -31,26 +31,24 @@ class CreateDiscussionModalCtrl extends BaseController
                 @selection, @$location) ->
     super($scope)
     return
-  defineScope: ->
-    that = @
+  defineScope: =>
     @$scope.document = @document
-    @$scope.createDiscussion = @createDiscussion.bind(@)
-    @$scope.cancel = ->
-      that.$modalInstance.dismiss('cancel')
+    @$scope.createDiscussion = @createDiscussion
+    @$scope.cancel = =>
+      @$modalInstance.dismiss('cancel')
       return
     @$scope.selection = @selection
     return
-  createDiscussion: ->
-    that = @
+  createDiscussion: =>
     createDiscussionTask =
       @DocumentDiscussionModel.createDiscussion(
         @$scope.document.id,
         @$scope.title,
         @$scope.selection
       )
-    createDiscussionTask.success( (success) ->
-      that.$location.path('/document/' + success.discussion.id)
-      that.$modalInstance.dismiss('close')
+    createDiscussionTask.success( (success) =>
+      @$location.path('/document/' + success.discussion.id)
+      @$modalInstance.dismiss('close')
     )
     return
 

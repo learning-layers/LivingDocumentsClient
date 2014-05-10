@@ -30,23 +30,21 @@ class DocumentDiscussionsController extends BaseController
     return
   defineScope: ->
     @$scope.$rootScope = @$rootScope
-    @$scope.openUserInfoModal = @openUserInfoModal.bind(@)
-    @$scope.openCreateDiscussionModal = @openCreateDiscussionModal.bind(@)
+    @$scope.openUserInfoModal = @openUserInfoModal
+    @$scope.openCreateDiscussionModal = @openCreateDiscussionModal
     @$scope.discussions = @DocumentDiscussionModel.getActiveDiscussions()
-    @$scope.loadUserImgSrc = @loadUserImgSrc.bind(@)
+    @$scope.loadUserImgSrc = @loadUserImgSrc
     return
-  defineListeners: ->
-    that = @
+  defineListeners: =>
     discussionWatches = []
-    @$rootScope.$on 'discussSelection', (ev, selection) ->
-      that.openCreateDiscussionModal(selection)
+    @$rootScope.$on 'discussSelection', (ev, selection) =>
+      @openCreateDiscussionModal(selection)
       return
     return
-  openUserInfoModal: (userId) ->
+  openUserInfoModal: (userId) =>
     @$rootScope.$emit('openUserProfile', userId)
     return
-  openCreateDiscussionModal: (selection) ->
-    that = @
+  openCreateDiscussionModal: (selection) =>
     @$modal.open(
       {
         templateUrl: 'document/discussions/createmodal' +
@@ -54,9 +52,9 @@ class DocumentDiscussionsController extends BaseController
         controller: CreateDiscussionModalCtrl
         resolve: {
           document: ->
-            return that.$scope.document
+            return @$scope.document
           DocumentDiscussionModel: ->
-            return that.DocumentDiscussionModel
+            return @DocumentDiscussionModel
           selection: ->
             return selection
         }

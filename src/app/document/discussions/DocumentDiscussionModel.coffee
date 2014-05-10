@@ -32,24 +32,23 @@ class DocumentDiscussionModel extends BaseEventDispatcher
     }
     @defineListeners()
     return
-  defineListeners: ->
-    that = @
+  defineListeners: =>
     @$rootScope.$on('ReceivedData:document',
-      (ev, id, document) ->
-        that.activeDocumentId = id
-        that.activeDiscussions.discussions = []
-        @that.$log.debug("Resetted discussions")
+      (ev, id, document) =>
+        @activeDocumentId = id
+        @activeDiscussions.discussions = []
+        @$log.debug("Resetted discussions")
         return
     )
     @$rootScope.$on('ReceivedData:document.discussions',
-      (ev, id, discussions) ->
+      (ev, id, discussions) =>
         if(
           angular.isDefined(discussions) &&
           discussions != null &&
           discussions.length > 0
         )
           discussions[0].isOpen = true
-          that.refreshDocumentDiscussions(id, discussions)
+          @refreshDocumentDiscussions(id, discussions)
         return
     )
     return
@@ -62,17 +61,17 @@ class DocumentDiscussionModel extends BaseEventDispatcher
     return @DocumentDiscussionService.createDiscussion(
       parentId, title, selection
     )
-  getUserAvatar: (userId, srcToUpdate) ->
+  getUserAvatar: (userId, srcToUpdate) =>
     basePath =
-      that.SecurityService.getInitialConfiguration().restServerAddress
+      @SecurityService.getInitialConfiguration().restServerAddress
     userPath = '/user/' + userId + '/profile/image'
-    that.$http(
+    @$http(
       {
         method: 'GET',
         url: basePath + userPath,
         headers: {
           'Authorization':
-            that.SecurityService.currentUser.authorizationString
+            @SecurityService.currentUser.authorizationString
         }
       }
     )
