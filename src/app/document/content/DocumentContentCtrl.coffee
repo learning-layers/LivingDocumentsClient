@@ -48,6 +48,18 @@ class DocumentContentCtrl extends BaseController
       hyperlinks: [],
       images: []
     }
+    @$scope.options = {
+      focus: true,
+      toolbar: [
+        ['style', ['style', 'bold', 'italic', 'underline', 'clear']],
+        ['fontsize', ['fontsize']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert', ['link', 'picture', 'video']],
+        ['table', ['table']]
+      ]
+    }
     return
   initScopeMethods: ->
     that = @
