@@ -23,49 +23,47 @@ class DocumentContentService extends BaseService
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentContentService")
     return
-  saveEditorContent: (documentId, editorContent) ->
+  saveEditorContent: (documentId, editorContent) =>
     return @$http({
       method: 'PUT',
       url: @basePath + '/document/' + documentId +
         '/content',
       data: {editorContent: editorContent},
       headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
-    }).success (success) ->
-      that.$log.debug "Successfully updated document content!"
+        @SecurityService.currentUser.authorizationString}
+    }).success (success) =>
+      @$log.debug "Successfully updated document content!"
       return
-  loadFileAttachments: (documentId) ->
+  loadFileAttachments: (documentId) =>
     @$log.debug("Loading file attachments")
     return @$http({
       method: 'GET',
       url: @basePath + '/document/' + documentId +
         '/fileattachment',
       headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
-    }).success (success) ->
-      that.$log.debug success
+        @SecurityService.currentUser.authorizationString}
+    }).success (success) =>
+      @$log.debug success
       return
     return
-  downloadFileAttachment: (fileattachmentId)->
-    that = @
+  downloadFileAttachment: (fileattachmentId) =>
     @$http({
       method: 'GET',
       url: @basePath + '/prepdownload/attachment/' +
         fileattachmentId,
       headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
+        @SecurityService.currentUser.authorizationString}
     })
-    .success (success) ->
-      that.$log.debug "Successfully downloaded " +
+    .success (success) =>
+      @$log.debug "Successfully downloaded " +
         "document file attachment!"
 
-      document.location = that.basePath + '/dodownload/attachment/' +
-        that.SecurityService.currentUser.id + '/' +
+      document.location = @basePath + '/dodownload/attachment/' +
+        @SecurityService.currentUser.id + '/' +
         success.uuid + '/' + success.attachmentname
       return
     return
-  addHyperlink: (documentId, hyperlink, description) ->
-    that = @
+  addHyperlink: (documentId, hyperlink, description) =>
     return @$http({
       method: 'POST',
       url: @basePath + '/document/' + documentId + '/attachment/hyperlink',
@@ -74,44 +72,41 @@ class DocumentContentService extends BaseService
         description: description
       },
       headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
-    }).success (success) ->
-      that.$log.debug(
+        @SecurityService.currentUser.authorizationString}
+    }).success (success) =>
+      @$log.debug(
         "Successfully added new hyperlink" +
         "to document with id=" + documentId
       )
-  loadHyperlinks: (documentId) ->
-    that = @
+  loadHyperlinks: (documentId) =>
     return @$http({
       method: 'GET',
       url: @basePath + '/document/' + documentId + '/attachment/hyperlink',
       headers: {
-        'Authorization': that.SecurityService.currentUser.authorizationString
+        'Authorization': @SecurityService.currentUser.authorizationString
       }
-    }).success (success) ->
-      that.$log.debug(
+    }).success (success) =>
+      @$log.debug(
         "Successfully retrieved hyperlinks for document with id=" +
         documentId
       )
       return
     return
-  deleteFileAttachment: (documentId, fileAttachmentId) ->
-    that = @
+  deleteFileAttachment: (documentId, fileAttachmentId) =>
     return @$http({
       method: 'DELETE',
       url: @basePath + '/document/' + documentId +
         '/fileattachment/' + fileAttachmentId,
       headers: {
-        'Authorization': that.SecurityService.currentUser.authorizationString
+        'Authorization': @SecurityService.currentUser.authorizationString
       }
-    }).success (success) ->
-      that.$log.debug(
+    }).success (success) =>
+      @$log.debug(
         "Successfully deleted file attachment for document with id=" +
         documentId
       )
     return
-  saveNewFile: (documentId, item, attributeName, value) ->
-    that = @
+  saveNewFile: (documentId, item, attributeName, value) =>
     data = {}
     data[attributeName] = value
     return @$http({
@@ -120,10 +115,10 @@ class DocumentContentService extends BaseService
         '/fileattachment/' + item.id,
       data: data
       headers: {
-        'Authorization': that.SecurityService.currentUser.authorizationString
+        'Authorization': @SecurityService.currentUser.authorizationString
       }
-    }).success (success) ->
-      that.$log.debug(
+    }).success (success) =>
+      @$log.debug(
         "Successfully changed file attachment name " +
         "for attachment with id=" +
         item.id + " to newvalue=" + value
