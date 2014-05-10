@@ -31,11 +31,10 @@ class AttachmentUploadModalCtrl extends BaseController
                 @attachmentsActiveScope, @documentId) ->
     super($scope)
     return
-  defineScope: ->
-    that = @
-    @$scope.cancel = ->
-      that.attachmentsActiveScope.attachmentsActive = true
-      that.$modalInstance.dismiss('cancel')
+  defineScope: =>
+    @$scope.cancel = =>
+      @attachmentsActiveScope.attachmentsActive = true
+      @$modalInstance.dismiss('cancel')
       return
     return
 
@@ -54,26 +53,24 @@ class FileAndMediaUploadCtrl extends BaseController
     super($scope)
     @log = $log.getInstance("FileAndMediaUploadCtrl")
     return
-  defineScope: ->
-    that = @
-    @$scope.onFileSelect = @onFileSelect.bind(@)
+  defineScope: =>
+    @$scope.onFileSelect = @onFileSelect
     return
-  onFileSelect: ($files) ->
-    that = @
+  onFileSelect: ($files) =>
     ProgressImageMessage =
       @ClassManager.getRegisteredClass('ProgressImageMessage')
     progressImageMessageInstance =
       new ProgressImageMessage("Profile image upload")
     @$rootScope.$broadcast('info', progressImageMessageInstance)
     #$files: an array of files selected, each file has name, size, and type.
-    successFunction = (data, status, headers, config) ->
+    successFunction = (data, status, headers, config) =>
       #file is uploaded successfully
-      that.log.debug(data)
+      @log.debug(data)
       progressImageMessageInstance.fireIsFinished()
-      that.$rootScope.$broadcast('finishedFileUpload', "")
+      @$rootScope.$broadcast('finishedFileUpload', "")
       return
-    progressFunction = (evt) ->
-      that.log.debug('percent: ' +
+    progressFunction = (evt) =>
+      @log.debug('percent: ' +
         parseInt(100.0 * evt.loaded / evt.total, 10))
       progressImageMessageInstance.setProgressPercentage(
         parseInt(100.0 * evt.loaded / evt.total, 10)
@@ -81,7 +78,7 @@ class FileAndMediaUploadCtrl extends BaseController
       return
     for file, i in $files
       @DocumentContentModel.addAttachment(
-        file, @$upload, that.$scope.myModelObj,
+        file, @$upload, @$scope.myModelObj,
         progressFunction, successFunction
       )
     return
@@ -99,18 +96,17 @@ class AddDocumentContentLinkCtrl extends BaseController
     @log = $log.getInstance("AddDocumentContentLinkCtrl")
     return
   defineScope: ->
-    @$scope.createHyperlink = @createHyperlink.bind(@)
+    @$scope.createHyperlink = @createHyperlink
     return
-  createHyperlink: ->
-    that = @
+  createHyperlink: =>
     @log.debug(
       "createHypelink called with hyperlink=" + @$scope.hyperlink +
       ", and description=" + @$scope.description
     )
     @DocumentContentModel.addHyperlink(
-      that.$scope.hyperlink, that.$scope.description
-    ).success((success) ->
-      that.$rootScope.$broadcast("hyperLinkAdded", "")
+      @$scope.hyperlink, @$scope.description
+    ).success((success) =>
+      @$rootScope.$broadcast("hyperLinkAdded", "")
     )
     return
 

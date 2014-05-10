@@ -48,7 +48,7 @@ class DocumentContentModel extends BaseEventDispatcher
     return
   getActiveDocumentContent: =>
     return @activeDocumentContent
-  initActiveDocumentContent: ->
+  initActiveDocumentContent: =>
     return {
       content: {
         content: '',

@@ -24,7 +24,8 @@ documentDiscussionModel = angular.module(
 )
 
 class DocumentDiscussionModel extends BaseEventDispatcher
-  constructor: ($log, @DocumentDiscussionService, @$rootScope) ->
+  constructor: ($log, @DocumentDiscussionService,
+                @$rootScope, @$http, @SecurityService) ->
     @$log = $log.getInstance("DocumentDiscussionModel")
     @activeDocumentId = -1
     @activeDiscussions = {
@@ -52,12 +53,12 @@ class DocumentDiscussionModel extends BaseEventDispatcher
         return
     )
     return
-  getActiveDiscussions: ->
+  getActiveDiscussions: =>
     return @activeDiscussions
-  refreshDocumentDiscussions: (id, discussions) ->
+  refreshDocumentDiscussions: (id, discussions) =>
     @activeDiscussions.discussions = discussions
     return
-  createDiscussion: (parentId, title, selection) ->
+  createDiscussion: (parentId, title, selection) =>
     return @DocumentDiscussionService.createDiscussion(
       parentId, title, selection
     )
@@ -70,19 +71,19 @@ class DocumentDiscussionModel extends BaseEventDispatcher
         method: 'GET',
         url: basePath + userPath,
         headers: {
-          'Authorization':
-            @SecurityService.currentUser.authorizationString
+          'Authorization': @SecurityService.currentUser.authorizationString
         }
       }
     )
-    .success (success, status) ->
+    .success (success, status) =>
       srcToUpdate.img = 'data:' + success.type + ';base64,' + success.content
       return
     return
 
 documentDiscussionModel.factory "DocumentDiscussionModel",
-  ['$log', 'DocumentDiscussionService', '$rootScope',
-    ($log, DocumentDicussionService, $rootScope) ->
+  ['$log', 'DocumentDiscussionService',
+   '$rootScope', '$http', 'SecurityService',
+    ($log, DocumentDicussionService, $rootScope, $http, SecurityService) ->
       return new DocumentDiscussionModel($log,
-        DocumentDicussionService, $rootScope)
+        DocumentDicussionService, $rootScope, $http, SecurityService)
   ]

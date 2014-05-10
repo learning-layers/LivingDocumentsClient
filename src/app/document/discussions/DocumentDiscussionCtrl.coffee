@@ -53,7 +53,7 @@ class DocumentDiscussionsController extends BaseController
         resolve: {
           document: ->
             return @$scope.document
-          DocumentDiscussionModel: ->
+          DocumentDiscussionModel: =>
             return @DocumentDiscussionModel
           selection: ->
             return selection
@@ -61,6 +61,6 @@ class DocumentDiscussionsController extends BaseController
       }
     )
     return
-  loadUserImgSrc: (userId, srcToUpdate) ->
+  loadUserImgSrc: (userId, srcToUpdate) =>
     @DocumentDiscussionModel.getUserAvatar(userId, srcToUpdate)
     return

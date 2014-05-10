@@ -24,58 +24,54 @@ class DocumentModel extends BaseEventDispatcher
     @$log = $log.getInstance("DocumentModel")
     @activeDocument = @initActiveDocument()
     @activeDocumentLoading
-    @addTag.bind(@)
-    @removeTag.bind(@)
+    @addTag
+    @removeTag
     return
   getActiveDocument: ->
     return @activeDocument
-  get: (id, embed) ->
-    that = @
+  get: (id, embed) =>
     return documentLoadTask =
       @DocumentService.get(id, embed)
-      .success (data) ->
-        that.$log.debug "Received document data="
-        that.$log.debug data
-        that.refreshDocumentModel data.document.id, data.document
+      .success (data) =>
+        @$log.debug "Received document data="
+        @$log.debug data
+        @refreshDocumentModel data.document.id, data.document
         return
-      .error (error) ->
-        that.$log.debug "Error receiving document data"
+      .error (error) =>
+        @$log.debug "Error receiving document data"
         return
-  addTag: (tagname) ->
-    that = @
+  addTag: (tagname) =>
     id = @activeDocument.id
     addTagTask = @DocumentService.addTag(id, tagname)
-    addTagTask.success (data) ->
-      that.$log.debug("Successfully added tag! id=" + data.id)
-      that.activeDocument.tags.add {id:data.id, name: tagname}
+    addTagTask.success (data) =>
+      @$log.debug("Successfully added tag! id=" + data.id)
+      @activeDocument.tags.add {id:data.id, name: tagname}
       return
     return
-  removeTag: (tag) ->
-    that = @
+  removeTag: (tag) =>
     id = @activeDocument.id
     addTagTask = @DocumentService.removeTag(id, tag.name)
-    addTagTask.success (data) ->
-      that.$log.debug("Successfully removed tag!")
-      that.activeDocument.tags.remove tag
+    addTagTask.success (data) =>
+      @$log.debug("Successfully removed tag!")
+      @activeDocument.tags.remove tag
       return
     return
-  updateSubscriptions: (subscriptionChangeObj) ->
-    that = @
+  updateSubscriptions: (subscriptionChangeObj) =>
     @$log.debug "Changing subscriptions of document with id=" +
       document.id + ", update="
     @$log.debug subscriptionChangeObj
     subscriptionChange = @DocumentService.updateSubscriptions(
       @activeDocument.id, subscriptionChangeObj)
-    subscriptionChange.success ->
-      that.$log.debug "Subscription change success"
-      that.$rootScope.$emit "success", "Successfully updated subscriptions"
+    subscriptionChange.success =>
+      @$log.debug "Subscription change success"
+      @$rootScope.$emit "success", "Successfully updated subscriptions"
       return
-    subscriptionChange.error ->
-      that.$log.debug "Subscription change error"
-      that.$rootScope.$emit "error", "Error updating subscriptions"
+    subscriptionChange.error =>
+      @$log.debug "Subscription change error"
+      @$rootScope.$emit "error", "Error updating subscriptions"
       return
     return
-  refreshDocumentModel: (id, document) ->
+  refreshDocumentModel: (id, document) =>
     @$log.debug ">> Updating document model"
     @$rootScope.$emit(
       'ReceivedData:document', document.id, document
@@ -101,7 +97,7 @@ class DocumentModel extends BaseEventDispatcher
       @$rootScope.$emit('ReceivedData:document.comments',
         document.id, document.comments)
     return
-  initActiveDocument: ->
+  initActiveDocument: =>
     return {
       id: null
       title: "Loading..."
@@ -121,9 +117,9 @@ class DocumentModel extends BaseEventDispatcher
       ]
       viewers: [
       ]
-      checkHasSubscriptions: ->
+      checkHasSubscriptions: =>
         hasSubscriptions = false
-        angular.forEach @subscriptions, (value, key) ->
+        angular.forEach @subscriptions, (value, key) =>
           if !hasSubscriptions
             if value == true
               hasSubscriptions = true

@@ -27,8 +27,7 @@ class DocumentCommentService extends BaseService
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentCommentService")
     return
-  createComment: (documentId, commentTitle, commentText, parentComment) ->
-    that = @
+  createComment: (documentId, commentTitle, commentText, parentComment) =>
     return @$http.post(
       @basePath + '/document/' + documentId + '/comment',
       {
@@ -38,13 +37,12 @@ class DocumentCommentService extends BaseService
         parentComment: parentComment
       },
       headers: {
-        "Authorization": that.SecurityService.currentUser.authorizationString
+        "Authorization": @SecurityService.currentUser.authorizationString
       }
-    ).success (success) ->
-      that.$log.debug "Created comment with id=" + success.commentId
+    ).success (success) =>
+      @$log.debug "Created comment with id=" + success.commentId
       return
-  editComment: (documentId, commentId, commentTitle, commentText) ->
-    that = @
+  editComment: (documentId, commentId, commentTitle, commentText) =>
     return @$http.put(
       @basePath + '/document/' + documentId + '/comment',
       {
@@ -53,10 +51,10 @@ class DocumentCommentService extends BaseService
         commentText: commentText
       },
       headers: {
-        "Authorization": that.SecurityService.currentUser.authorizationString
+        "Authorization": @SecurityService.currentUser.authorizationString
       }
-    ).success (success) ->
-      that.$log.debug "Edited comment with id=" + commentId
+    ).success (success) =>
+      @$log.debug "Edited comment with id=" + commentId
       return
     return
 

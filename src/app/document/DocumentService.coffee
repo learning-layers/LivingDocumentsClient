@@ -22,60 +22,58 @@ class DocumentService extends BaseService
     super(SecurityService, $http)
     @$log = $log.getInstance("DocumentService")
     return
-  get: (id, embed) ->
-    that = @
+  get: (id, embed) =>
     embedString = null
     if embed == null
       embedString = ""
     else
       embedString = embed
-    return @$http.get(@basePath + '/document/' + id + embedString,
-      headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString})
-      .success (status) ->
-        that.$log.debug "Fetching document with id=" + id +
-          " and embeddingString=" + embed
-        return
-  addTag: (id, tagname) ->
-    that = @
-    return @$http.put(@basePath + '/document/' + id + '/tag',
-    {tagname: tagname},
-      headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
-    )
-    .success (status) ->
-      that.$log.debug "Adding tag with name=" + tagname +
+    return @$http.get(
+      @basePath + '/document/' + id + embedString,
+      headers: {
+        'Authorization': @SecurityService.currentUser.authorizationString}
+    ).success (status) =>
+      @$log.debug "Fetching document with id=" + id +
+        " and embeddingString=" + embed
+      return
+  addTag: (id, tagname) =>
+    return @$http.put(
+      @basePath + '/document/' + id + '/tag',
+      {tagname: tagname},
+      headers: {
+        'Authorization': @SecurityService.currentUser.authorizationString
+      }
+    ).success (status) =>
+      @$log.debug "Adding tag with name=" + tagname +
       "to document with id=" + id
       return
-  removeTag: (id, tagname) ->
-    that = @
+  removeTag: (id, tagname) =>
     return @$http.delete(
       @basePath + '/document/' + id + '/tag',
       {
         data: {tagname: tagname},
-        headers: {'Authorization':
-          that.SecurityService.currentUser.authorizationString}
+        headers: {
+          'Authorization': @SecurityService.currentUser.authorizationString
+        }
       }
-    )
-    .success (status) ->
-      that.$log.debug "Adding tag with name=" + tagname +
+    ).success (status) =>
+      @$log.debug "Adding tag with name=" + tagname +
       "to document with id=" + id
       return
-  updateSubscriptions: (documentId, subscriptionChangeObj) ->
-    that = @
-    that.$log.debug "Updating subscriptions of  document with id=" +
+  updateSubscriptions: (documentId, subscriptionChangeObj) =>
+    @$log.debug "Updating subscriptions of  document with id=" +
       documentId + " to="
-    that.$log.debug subscriptionChangeObj
+    @$log.debug subscriptionChangeObj
     return @$http({
       method: 'PUT',
       url: @basePath + '/document/' + documentId +
         '?method=updateSubscriptions',
       data: subscriptionChangeObj,
-      headers: {'Authorization':
-        that.SecurityService.currentUser.authorizationString}
-    })
-    .success (status) ->
-      that.$log.debug "Subscriptions of document with id=" + documentId +
+      headers: {
+        'Authorization': @SecurityService.currentUser.authorizationString
+      }
+    }).success (status) =>
+      @$log.debug "Subscriptions of document with id=" + documentId +
         " updated successfully."
 
 DocumentService.$inject = ['SecurityService','$http', '$log']

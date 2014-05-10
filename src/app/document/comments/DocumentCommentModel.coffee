@@ -28,26 +28,25 @@ class DocumentCommentModel extends BaseEventDispatcher
     @activeDocumentComments = @initActiveDocumentComments()
     @defineListeners()
     return
-  defineListeners: ->
-    that = @
+  defineListeners: =>
     @$rootScope.$on(
       'ReceivedData:document.comments',
-      (ev, documentId, comments) ->
-        that.activeDocumentComments.comments = comments
+      (ev, documentId, comments) =>
+        @activeDocumentComments.comments = comments
         return
     )
     return
-  createComment: (documentId, commentTitle, commentText, parentComment) ->
+  createComment: (documentId, commentTitle, commentText, parentComment) =>
     return @DocumentCommentService.createComment(
       documentId, commentTitle, commentText, parentComment
     )
-  getActiveDocumentComments: ->
+  getActiveDocumentComments: =>
     return @activeDocumentComments
-  initActiveDocumentComments: ->
+  initActiveDocumentComments: =>
     return {
       comments: []
     }
-  editComment: (documentId, commentId, commentTitle, commentText) ->
+  editComment: (documentId, commentId, commentTitle, commentText) =>
     return @DocumentCommentService.editComment(
       documentId, commentId, commentTitle, commentText
     )
