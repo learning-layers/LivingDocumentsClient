@@ -28,26 +28,25 @@ class DocumentContentModel extends BaseEventDispatcher
     @activeDocumentId = -1
     @defineListeners()
     return
-  defineListeners: ->
-    that = @
-    @$rootScope.$on 'ReceivedData:document', (ev, id, document) ->
-      that.$log.debug("Received new document information.")
-      that.activeDocumentId = id
-      that.activeDocumentContent.content = {
+  defineListeners: =>
+    @$rootScope.$on 'ReceivedData:document', (ev, id, document) =>
+      @$log.debug("Received new document information.")
+      @activeDocumentId = id
+      @activeDocumentContent.content = {
         content: ''
         authors: []
         viewers: []
       }
       return
-    @$rootScope.$on 'ReceivedData:document.content', (ev, id, content) ->
-      that.activeDocumentId = id
-      that.$log.debug("Received new document content " +
+    @$rootScope.$on 'ReceivedData:document.content', (ev, id, content) =>
+      @activeDocumentId = id
+      @$log.debug("Received new document content " +
         "for document with id=" + id)
-      that.$log.debug(content.content)
-      that.refreshDocumentContent(id, content)
+      @$log.debug(content.content)
+      @refreshDocumentContent(id, content)
       return
     return
-  getActiveDocumentContent: ->
+  getActiveDocumentContent: =>
     return @activeDocumentContent
   initActiveDocumentContent: ->
     return {
@@ -57,40 +56,38 @@ class DocumentContentModel extends BaseEventDispatcher
         viewers: []
       }
     }
-  refreshDocumentContent: (id, content) ->
+  refreshDocumentContent: (id, content) =>
     @activeDocumentContent.content.content = content.content
     @activeDocumentContent.content.authors = content.authors
     return
-  saveEditorContent: (editorContent) ->
-    that = @
+  saveEditorContent: (editorContent) =>
     saveEditorContentTask = @DocumentContentService.saveEditorContent(
-      that.activeDocumentId, editorContent
+      @activeDocumentId, editorContent
     )
-    saveEditorContentTask.success (success) ->
-      that.activeDocumentContent.content.content =
+    saveEditorContentTask.success (success) =>
+      @activeDocumentContent.content.content =
         editorContent
-      that.activeDocumentContent.content.authors.push(
+      @activeDocumentContent.content.authors.push(
         {
-          id: that.SecurityService.currentUser.id,
-          displayname: that.SecurityService.currentUser.displayname
+          id: @SecurityService.currentUser.id,
+          displayname: @SecurityService.currentUser.displayname
         }
       )
       return
     return saveEditorContentTask
   addAttachment: (file, $upload, modelObj,
-                  progressFunction, successFunction) ->
-    that = @
+                  progressFunction, successFunction) =>
     basePath = @SecurityService.getInitialConfiguration().restServerAddress
     $upload.upload(
       {
         url: basePath + '/document/' +
-          that.activeDocumentId +
+          @activeDocumentId +
           '/attachment',
         #method: 'PUT',
         data: {myObj: modelObj},
         headers: {
           'Authorization':
-            that.SecurityService.currentUser.authorizationString
+            @SecurityService.currentUser.authorizationString
         },
         file: file
       }
@@ -98,43 +95,39 @@ class DocumentContentModel extends BaseEventDispatcher
     #.error(...)
     #.then(success, error, progress)
     return
-  loadFileAttachments: ->
-    that = @
+  loadFileAttachments: =>
     loadFileAttachmentsTask = @DocumentContentService.loadFileAttachments(
-      that.activeDocumentId
+      @activeDocumentId
     )
-    loadFileAttachmentsTask.success (success) ->
-      that.$log.debug success
+    loadFileAttachmentsTask.success (success) =>
+      @$log.debug success
       return
     return loadFileAttachmentsTask
-  downloadFileAttachment: (fileattachmentId) ->
+  downloadFileAttachment: (fileattachmentId) =>
     @DocumentContentService.downloadFileAttachment(fileattachmentId)
     return
-  addHyperlink: (hyperlink, description) ->
-    that = @
+  addHyperlink: (hyperlink, description) =>
     return @DocumentContentService.addHyperlink(
-      that.activeDocumentId, hyperlink, description
+      @activeDocumentId, hyperlink, description
     )
-  loadHyperlinks: ->
-    that = @
+  loadHyperlinks: =>
     return @DocumentContentService.loadHyperlinks(
-      that.activeDocumentId
+      @activeDocumentId
     )
     return
-  deleteFileAttachment: (fileattachmentId, files) ->
-    that = @
+  deleteFileAttachment: (fileattachmentId, files) =>
     deleteFileAttachmentTask =
       @DocumentContentService.deleteFileAttachment(
-        that.activeDocumentId, fileattachmentId
+        @activeDocumentId, fileattachmentId
       )
-    deleteFileAttachmentTask.success((success) ->
+    deleteFileAttachmentTask.success((success) =>
       files.remove((n) ->
         return n['id'] == fileattachmentId
       )
       return
     )
     return
-  saveNewValueFor: (itemType, item, attributeName, value) ->
+  saveNewValueFor: (itemType, item, attributeName, value) =>
     return @DocumentContentService.saveNewFile(
       @activeDocumentId, item, attributeName, value
     )
