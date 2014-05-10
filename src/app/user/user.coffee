@@ -29,8 +29,7 @@ class UserService extends BaseService
   constructor: (SecurityService, $http, $log) ->
     super(SecurityService, $http)
     @$log = $log.getInstance("UserService")
-  get: (id, embed) ->
-    that = @
+  get: (id, embed) =>
     embedString = null
     if embed == null
       embedString = ""
@@ -39,15 +38,14 @@ class UserService extends BaseService
       getUserTask = @$http.get(
         @basePath + '/user/' + id + embedString,
         headers: {
-          'Authorization': that.SecurityService.currentUser.authorizationString
+          'Authorization': @SecurityService.currentUser.authorizationString
         }
-      ).success (status) ->
-        that.$log.debug "Fetching user info from user with id=" + id +
+      ).success (status) =>
+        @$log.debug "Fetching user info from user with id=" + id +
           " and embeddingString=" + embed
         return
     return getUserTask
-  getList: (ids, embed) ->
-    that = @
+  getList: (ids, embed) =>
     if (angular.isDefined(ids) && ids.length > 0)
       listString = ids[0]
       if ids.length > 1
@@ -59,31 +57,30 @@ class UserService extends BaseService
       return @$http.get(
         @basePath + '/user' + '?ids=' + listString,
         headers: {
-          'Authorization':
-            that.SecurityService.currentUser.authorizationString
+          'Authorization': @SecurityService.currentUser.authorizationString
         }
-      ).success (status) ->
-        that.$log.debug("Received user list modal response")
+      ).success (status) =>
+        @$log.debug("Received user list modal response")
         return
     else
       return{
-        success: (callback) ->
+        success: (callback) =>
           callback({users:[]})
           return
-        error: (callback) ->
+        error: (callback) =>
           return
-        then: (callback) ->
+        then: (callback) =>
           callback()
           return
       }
-  getUserAvatar: (userId) ->
+  getUserAvatar: (userId) =>
     getUserAvatarTask = @$http.get(
       @basePath + '/user/' + userId + '/profile/image',
       headers: {
-        'Authorization': that.SecurityService.currentUser.authorizationString
+        'Authorization': @SecurityService.currentUser.authorizationString
       }
-    ).success (status) ->
-      that.$log.debug "Fetching user avatar"
+    ).success (status) =>
+      @$log.debug "Fetching user avatar"
       return
     return getUserAvatarTask
 

@@ -24,13 +24,15 @@ class SearchService extends BaseSecureService
     super(SecurityService, $http, $log)
     @$log = $log.getInstance("SearchService")
     return
-  get: (searchValue) ->
+  get: (searchValue) =>
     that = @
-    return @$http.get(@basePath +
+    return @$http.get(
+      @basePath +
       '/search/user?searchfields=all&searchvalue=' + searchValue,
-        headers: {'Authorization':
-          that.SecurityService.currentUser.authorizationString})
-    .success (status) ->
+      headers: {
+        'Authorization': @SecurityService.currentUser.authorizationString
+      }
+    ).success (status) ->
       that.$log.debug(status)
       return
 SearchService.$inject = ['SecurityService','$http', '$log']

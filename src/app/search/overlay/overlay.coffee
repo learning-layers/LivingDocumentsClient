@@ -31,36 +31,34 @@ class SearchOverlayCtrl extends BaseController
     @initScopeMethods()
     @initScopeEvents()
     return
-  initScopeMethods: ->
+  initScopeMethods: =>
     #Add searchUser to scope and bind this
-    @$scope.searchuser = @searchUser.bind(@)
+    @$scope.searchuser = @searchUser
     @$scope.dismissSearchOverlay = @dismissSearchOverlay
     return
-  initScopeEvents: ->
-    that = @
-    @$rootScope.$on 'searchModeChange', (ev, searchMode) ->
+  initScopeEvents: =>
+    @$rootScope.$on 'searchModeChange', (ev, searchMode) =>
       #Listen to searchModeChange events to react on the current
       # search mode (e. g. show the search overlay).
       console.log "Search overlay received searchMode=" + searchMode
-      that.$scope.searchMode = searchMode
-    @$rootScope.$on 'issueSearch', (ev, searchValue) ->
-      that.$log.debug "Received issued search with value=" + searchValue
-      that.searchUser searchValue
+      @$scope.searchMode = searchMode
+    @$rootScope.$on 'issueSearch', (ev, searchValue) =>
+      @$log.debug "Received issued search with value=" + searchValue
+      @searchUser searchValue
     return
-  searchUser: (searchValue) ->
-    that = @
+  searchUser: (searchValue) =>
     if angular.isDefined searchValue
       @SearchService.get(searchValue)
-      .success((success, status) ->
-        that.$log.debug "Successfully retrieved user search result!"
-        that.$log.debug(success)
+      .success((success, status) =>
+        @$log.debug "Successfully retrieved user search result!"
+        @$log.debug(success)
         if angular.isUndefined success.users
-          that.$scope.users = []
+          @$scope.users = []
         else
-          that.$scope.users = success.users
+          @$scope.users = success.users
       )
-      .error((error) ->
-        that.$log.error "Error while retrieving user search results!"
+      .error((error) =>
+        @$log.error "Error while retrieving user search results!"
       )
     return
   dismissSearchOverlay: =>

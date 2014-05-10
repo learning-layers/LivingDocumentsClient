@@ -30,27 +30,26 @@ class UserInfoListModalCtrl extends BaseController
     #Trigger user information retrieval in model
     $scope.loadingUsers = true
     userInfoLoadTask = @UserInfoListModel.get(@userIds, "")
-    userInfoLoadTask.then(->
+    userInfoLoadTask.then(=>
       $scope.loadingUsers = false
       return
     )
     return
-  defineScope: ->
-    that = @
+  defineScope: =>
     #Get reference to the currently active userInfo instance
     # that will then be replaced filled with the user data that
     # belongs to the user id we provided earlier
     # (when we triggered the user retrieval).
     @$scope.userInfoList = @UserInfoListModel.getActiveUserInfoList()
     @$scope.modalTitle = @modalTitle
-    @$scope.dismiss = @dismiss.bind(@)
-    @$scope.cancel = @cancel.bind(@)
+    @$scope.dismiss = @dismiss
+    @$scope.cancel = @cancel
     return
-  dismiss: ->
+  dismiss: =>
     @UserInfoListModel.resetActiveUserInfo()
     @$modalInstance.dismiss('openProfile')
     return
-  cancel: ->
+  cancel: =>
     @UserInfoListModel.resetActiveUserInfo()
     @$modalInstance.dismiss('cancel')
 UserInfoListModalCtrl.$inject =
@@ -67,26 +66,25 @@ class UserInfoListModel extends BaseEventDispatcher
     # the initial state.
     @activeUserInfoList = []
     return
-  getActiveUserInfoList: ->
+  getActiveUserInfoList: =>
     return @activeUserInfoList
-  get: (ids, embed) ->
-    that = @
+  get: (ids, embed) =>
     #Load user from backend -> could be later on also loaded
     # from cache first, and then be updated by backend calls
     userInfoLoadTask = @UserService.getList ids, embed
-    userInfoLoadTask.success (data) ->
-      that.updateUserInfoModel data.users
+    userInfoLoadTask.success (data) =>
+      @updateUserInfoModel data.users
       return
-    userInfoLoadTask.error (error) ->
-      that.$log.error "Error receiving user info data"
+    userInfoLoadTask.error (error) =>
+      @$log.error "Error receiving user info data"
       return
     return userInfoLoadTask
-  updateUserInfoModel: (users) ->
+  updateUserInfoModel: (users) =>
     @$log.debug ">> Updating user info list model"
     @$log.debug "Retrieved user info list"
     @activeUserInfoList.add users
     return
-  resetActiveUserInfo: ->
+  resetActiveUserInfo: =>
     @activeUserInfoList.removeAt(0, @activeUserInfoList.length)
     return
 

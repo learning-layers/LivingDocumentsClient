@@ -30,25 +30,24 @@ class UserInfoModalCtrl extends BaseController
     #Trigger user information retrieval in model
     @UserInfoModel.get @userId, ""
     return
-  defineScope: ->
-    that = @
+  defineScope: =>
     #Get reference to the currently active userInfo instance
     # that will then be replaced filled with the user data that
     # belongs to the user id we provided earlier
     # (when we triggered the user retrieval).
     @$scope.userInfo = @UserInfoModel.getActiveUserInfo()
     @$scope.profileinfo = @UserInfoModel.getActiveProfile()
-    @$scope.cancel = ->
-      that.$modalInstance.dismiss('cancel')
-      that.UserInfoModel.reset()
+    @$scope.cancel = =>
+      @$modalInstance.dismiss('cancel')
+      @UserInfoModel.reset()
       return
-    @$scope.close = (userId)->
-      that.$modalInstance.dismiss('close')
-      that.UserInfoModel.reset()
-      that.$location.path('/userprofile/' + userId)
+    @$scope.close = (userId) =>
+      @$modalInstance.dismiss('close')
+      @UserInfoModel.reset()
+      @$location.path('/userprofile/' + userId)
       return
     return
-  destroy: ->
+  destroy: =>
     @UserInfoModel.reset()
     return
 
