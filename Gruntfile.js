@@ -322,6 +322,15 @@ module.exports = function ( grunt ) {
         files: {
           src: [ '<%= app_files.coffeeunit %>' ]
         }
+      },
+      options: {
+        'indentation': {
+            'value': 2,
+            'level': 'error'
+        },
+        'max_line_length': {
+          'level': 'ignore'
+        }
       }
     },
 

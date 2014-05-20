@@ -197,4 +197,175 @@ angular.module( 'LivingDocuments', [
       @listeners.push callback
       return
   return
+
+  logsOutUserOn401 = [
+    '$q', '$location', '$rootScope',
+    ($q, $location, $rootScope) ->
+      success = (response) ->
+        if (response.config.url.toString().startsWith("http://"))
+          $rootScope.offlineMode = false
+        return response
+
+      error = (response) ->
+        console.log(response)
+        if (response.status == 401)
+          console.log("Unauthorized")
+          unauthorizedResponseInterceptor.notify(false)
+          #InitialConfiguration.rootScope.offlineMode = false;
+          #redirect them back to login page
+          #initialConfiguration.is401response = true
+          $location.path( initialConfiguration.defaultPath )
+          if (angular.isDefined($rootScope.triggerLogout))
+            $rootScope.triggerLogout()
+          return $q.reject(response)
+        if (response.status == 0 && response.data == "")
+          #TODO add serverstatus check here
+          #currently after aborting the file upload the offline mode
+          #is being triggered but it shouldn't be triggered
+          #because the server is in fact still online.
+          console.log("Server offline triggering offline mode.")
+          initialConfiguration.rootScope.offlineMode = true
+          return $q.reject(response)
+        else
+          initialConfiguration.rootScope.offlineMode = false
+          return $q.reject(response)
+      return
+    ]
+
+  $httpProvider.responseInterceptors.push(logsOutUserOn401)
+
+  $urlRouterProvider.otherwise( '/home' )
+)
+
+.run(($rootScope, $location, $http, $log,
+      localStorageService, SecurityService, ApplicationState) ->
+  $rootScope.$on('$locationChangeStart', (event) ->
+    $log.debug("Location url()=")
+    $log.debug($location.url())
+    $log.debug("Security.isAuthenticated evaluates to=")
+    $log.debug(SecurityService.isAuthenticated())
+    $log.debug("currentUser in localStorage is set evaluates to=")
+    $log.debug(localStorageService.get('currentUser') != null)
+
+    if ($location.url() == "/register")
+      #allowed urls no check needed
+    else
+      if ($location.url() == "/login" && SecurityService.isAuthenticated())
+        $location.path(
+          SecurityService.getInitialConfiguration().firstRequestURL
+        )
+        ApplicationState.triggerApplicationNormalMode()
+
+      else if (
+        SecurityService.getInitialConfiguration().firstRequestURL == "/login"
+      )
+        SecurityService.getInitialConfiguration().firstRequestURL = "/home"
+        if (!SecurityService.isAuthenticated() &&
+            localStorageService.get('currentUser') != null)
+          SecurityService.authenticate(
+            ->
+              #is authenticated
+              #do nothing
+              console.log(
+                "Checked if user is authenticated and it evaluated to: true"
+              )
+              $log.debug(
+                "After automatic auth security.isAuthenticated evaluates to=" +
+                SecurityService.isAuthenticated()
+              )
+              $log.debug(
+                "Redirecting to url=" +
+                SecurityService.getInitialConfiguration().firstRequestURL
+              )
+              $location.path(
+                SecurityService.getInitialConfiguration().firstRequestURL
+              )
+              ApplicationState.triggerApplicationNormalMode()
+              return
+            ,
+            ->
+              #not authenticated
+              ApplicationState.triggerApplicationLoginMode()
+              return
+          )
+        else if SecurityService.isAuthenticated()
+          $location.path(
+            SecurityService.getInitialConfiguration().firstRequestURL
+          )
+          ApplicationState.triggerApplicationNormalMode()
+
+      else if (
+        angular.isUndefined(
+          SecurityService.getInitialConfiguration().firstRequestURL
+        ) ||
+        SecurityService.getInitialConfiguration().firstRequestURL == null
+      )
+        SecurityService.getInitialConfiguration().firstRequestURL = "/home"
+
+      if (
+        SecurityService.getInitialConfiguration().firstRequestURL != "/login" &&
+        !SecurityService.isAuthenticated()
+      )
+        if (angular.isDefined(localStorageService.get('currentUser')))
+          $log.debug(
+            "Performing authentication=" +
+            (
+              SecurityService.getInitialConfiguration().firstRequestURL != '/login' &&
+              !SecurityService.isAuthenticated()
+            )
+          )
+          SecurityService.authenticate(
+            ->
+              #Is authenticated
+              #do nothing
+              console.log("Checked if user is authenticated and it evaluated to: true")
+              $log.debug(
+                "After automatic auth security.isAuthenticated evaluates to=" +
+                SecurityService.isAuthenticated()
+              )
+              $log.debug(
+                "Redirecting to url=" +
+                SecurityService.getInitialConfiguration().firstRequestURL
+              )
+              $location.path( SecurityService.getInitialConfiguration().firstRequestURL )
+              ApplicationState.triggerApplicationNormalMode()
+              return
+            ,
+            ->
+              #not authenticated
+              ApplicationState.triggerApplicationLoginMode()
+              return
+          )
+        $log.debug("Redirecting to login state")
+        $location.path( "/login" )
+        ApplicationState.triggerApplicationLoginMode()
+      else if (SecurityService.isAuthenticated())
+        if (SecurityService.getInitialConfiguration().is401response)
+          SecurityService.logout()
+          $location.path( "/login" )
+          ApplicationState.triggerApplicationLoginMode()
+    return
+  )
+
+  $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+    #check if client version is up to date
+    basePath = SecurityService.getInitialConfiguration().restServerAddress
+    currentClientVersion = SecurityService.getInitialConfiguration().currentClientVersion
+    $http({
+      method: 'GET',
+      url: basePath + '/clientversioncheck?version=' + currentClientVersion
+    })
+    .success((success) ->
+      $log.debug(
+        "Successfully checked the client version." +
+        " Current client version is compatible=" + success.compatible
+      )
+      if (!success.compatible)
+        window.location.reload(true)
+      return
+    )
+    return
+  )
+
+  return
 )
