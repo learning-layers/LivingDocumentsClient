@@ -63,7 +63,7 @@ angular.module( 'LivingDocuments', [
 
   initialConfiguration = {
     defaultPath: "/login"
-    restServerAddress: "http://its-clever.de/demo/livingDocumentsREST"
+    restServerAddress: "http://localhost/restNew"
     firstRequestURL: getFirstURL()
     is401response: false
     currentClientVersion: '0.1.2-alpha'

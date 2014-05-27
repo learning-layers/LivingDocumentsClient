@@ -57,11 +57,11 @@ class DocumentDiscussionsController extends BaseController
           '/createmodal.tpl.html'
         controller: CreateDiscussionModalCtrl
         resolve: {
-          document: ->
+          document: =>
             return @$scope.document
           DocumentDiscussionModel: =>
             return @DocumentDiscussionModel
-          selection: ->
+          selection: =>
             return selection
         }
       }

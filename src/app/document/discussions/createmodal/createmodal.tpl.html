@@ -5,8 +5,7 @@
     <div class="modal-body">
         <label for="discussionTitle">Discussion title: </label>
         <input id="discussionTitle" ng-model="$parent.title" class="form-control" type="text" placeholder="Discussion title">
-        <p ng-if="!!selection">
-            {{ selection.currentSelection.htmlContent }}
+        <p ng-if="!!selection" ng-bind-html="selection.currentSelection.htmlContent">
         </p>
     </div>
     <div class="modal-footer">
