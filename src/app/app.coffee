@@ -66,7 +66,7 @@ angular.module( 'LivingDocuments', [
     restServerAddress: "http://localhost/restNew"
     firstRequestURL: getFirstURL()
     is401response: false
-    currentClientVersion: '0.1.2-alpha'
+    currentClientVersion: '0.1.3-alpha'
   }
 
   SecurityServiceProvider.setInitialConfiguration(initialConfiguration)
