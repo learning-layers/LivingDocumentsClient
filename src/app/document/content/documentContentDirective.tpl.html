@@ -4,7 +4,7 @@
             <div class="panel-heading panel-heading-sm">
                 <div class="row first-row">
                     <button class="btn btn-info pull-left" ng-click="switchToAttachments()"><span class="glyphicon glyphicon-paperclip"></span>Attachments<span class="badge">{{ document.attachmentCount }}</span></button>
-                    <div id="documentContentMaturityIndicator" class="pull-left">
+                    <div id="documentContentMaturityIndicator" class="pull-left demo-hidden">
                         <div class="maturity-low"></div>
                         <div class="maturity-mid"></div>
                         <div class="maturity-high"></div>
@@ -18,7 +18,7 @@
                         <button class="btn btn-default" ng-click="openViewerList()">Viewers<span class="badge badge-grey">{{ document.viewers.length }}</span></button>
                         <!--on 2014-01-27 15:59:01 augmented by ; last update at 2014-01-27 15:59:01 -->
                     </div>
-                    <button class="btn btn-default"><span class="glyphicon glyphicon-info-sign"></span>More information</button>
+                    <button class="btn btn-default demo-hidden"><span class="glyphicon glyphicon-info-sign"></span>More information</button>
                 </div>
             </div>
             <div class="panel-body panel-body-sm">
