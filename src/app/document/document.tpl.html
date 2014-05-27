@@ -14,7 +14,7 @@
             </div>
             <div class="btn-group pull-right">
                 <a class="btn btn-info" href="#/document/{{ document.parent_document_id }}" ng-show="document.parent_document_id != null && document.parent_document_id != ''"><span class="glyphicon glyphicon-arrow-up"></span>Parent document</a>
-                <button class="btn btn-default" ng-show="!document.isAlreadyAddedToUserFolders" disabled><span class="glyphicon glyphicon-folder-close"></span>Add to your folders</button>
+                <button class="btn btn-default demo-hidden" ng-show="!document.isAlreadyAddedToUserFolders" disabled><span class="glyphicon glyphicon-folder-close"></span>Add to your folders</button>
                 <button class="btn btn-default" ng-show="document.isAlreadyAddedToUserFolders"><span class="glyphicon glyphicon-folder-close"></span>Move</button>
                 <button class="btn btn-default" ng-show="document.userHasSharingRights"><span class="glyphicon glyphicon-share-alt"></span>Share</button>
                 <div class="btn-group">

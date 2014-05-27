@@ -88,9 +88,9 @@ angular.module( 'LivingDocuments.home', [
     $scope.animate = false;
     $scope.animateGlobal = true;
     $scope.slides = [
-        { image: '', text: '' },
-        { image: '', text: '' },
-        { image: '', text: '' }
+        { image: 'assets/img/didyouknow/DiscussSelectionScreenshot.PNG', text: 'Dicuss selections' }//,
+        //{ image: '', text: 'Navigate to Discussions' }
+        //{ image: '', text: '' }
     ];
     $scope.myInterval = 5000;
 })
