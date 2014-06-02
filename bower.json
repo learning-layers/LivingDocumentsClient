@@ -21,7 +21,8 @@
     "angular-uuid": "0.1.0",
     "summernote": "v0.5.1",
     "angular-summernote": "0.2.1",
-    "respond": "1.4.2"
+    "respond": "1.4.2",
+    "tinymce": "4.0.0"
   },
   "dependencies": {},
   "resolutions": {
