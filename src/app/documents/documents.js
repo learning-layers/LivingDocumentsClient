@@ -36,8 +36,8 @@ angular.module( 'LivingDocuments.documents', [
   });
 })
 
-.controller( 'DocumentsCtrl', function ($scope, $http, ClassManager, SecurityService, $rootScope, $log) {
-    var FolderManagement =  Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
+.controller( 'DocumentsCtrl', function ($scope, $http, SecurityService, $rootScope, $log) {
+    /*var FolderManagement =  Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
         $scope: null,
         $http: null,
         basePath: null,
@@ -216,7 +216,7 @@ angular.module( 'LivingDocuments.documents', [
         }
     });
     
-    var folderManagementInstance = new FolderManagement($scope, $http, $rootScope, $log);
+    var folderManagementInstance = new FolderManagement($scope, $http, $rootScope, $log);*/
 })
 
 ;

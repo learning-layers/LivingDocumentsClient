@@ -54,7 +54,7 @@ contentAttachmentUploadModal.controller( 'AttachmentUploadModalCtrl',
 ###
 class FileAndMediaUploadCtrl extends BaseController
   constructor: ($scope, @$rootScope, @$upload,
-                @SecurityService, @ClassManager,
+                @SecurityService,
                 @$log, @DocumentContentModel) ->
     super($scope)
     @log = $log.getInstance("FileAndMediaUploadCtrl")
@@ -63,24 +63,24 @@ class FileAndMediaUploadCtrl extends BaseController
     @$scope.onFileSelect = @onFileSelect
     return
   onFileSelect: ($files) =>
-    ProgressImageMessage =
+    ###ProgressImageMessage =
       @ClassManager.getRegisteredClass('ProgressImageMessage')
     progressImageMessageInstance =
       new ProgressImageMessage("Profile image upload")
-    @$rootScope.$broadcast('info', progressImageMessageInstance)
+    @$rootScope.$broadcast('info', progressImageMessageInstance)###
     #$files: an array of files selected, each file has name, size, and type.
     successFunction = (data, status, headers, config) =>
       #file is uploaded successfully
       @log.debug(data)
-      progressImageMessageInstance.fireIsFinished()
+      #progressImageMessageInstance.fireIsFinished()
       @$rootScope.$broadcast('finishedFileUpload', "")
       return
     progressFunction = (evt) =>
       @log.debug('percent: ' +
         parseInt(100.0 * evt.loaded / evt.total, 10))
-      progressImageMessageInstance.setProgressPercentage(
+      ###progressImageMessageInstance.setProgressPercentage(
         parseInt(100.0 * evt.loaded / evt.total, 10)
-      )
+      )###
       return
     for file, i in $files
       @DocumentContentModel.addAttachment(
@@ -91,7 +91,7 @@ class FileAndMediaUploadCtrl extends BaseController
 
 FileAndMediaUploadCtrl.$inject =
   ['$scope', '$rootScope', '$upload',
-   'SecurityService', 'ClassManager',
+   'SecurityService',
    '$log', 'DocumentContentModel']
 contentAttachmentUploadModal.controller( 'FileAndMediaUploadCtrl',
   FileAndMediaUploadCtrl)

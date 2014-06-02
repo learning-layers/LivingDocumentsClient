@@ -20,11 +20,11 @@
  * limitations under the License.
  */
 angular.module( "LivingDocuments.core.busytask", [
-    "LivingDocuments.core.classmanager"
+    //"LivingDocuments.core.classmanager"
 ])
-.service('BusyTaskService', function($rootScope, ClassManager, uuid4) {
+.service('BusyTaskService', function($rootScope, uuid4) {
     var busyTasks = [];
-    var BusyTask = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
+    /*var BusyTask = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
         initialize: function(description) {
             this.description = description;
             this.uuid = uuid4.generate();
@@ -36,7 +36,7 @@ angular.module( "LivingDocuments.core.busytask", [
             return 'descritption:' + this.description + ', uuid:' + this.uuid;
         }
     });
-    ClassManager.registerClass('BusyTask', BusyTask);
+    ClassManager.registerClass('BusyTask', BusyTask);*/
 
     $rootScope.$on('AddBusyTask', function(ev, busyTask) {
         if (busyTask instanceof BusyTask) {

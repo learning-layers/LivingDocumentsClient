@@ -21,30 +21,29 @@
   limitations under the License.
 
 ###
-angular.module( "LivingDocuments.core", [
-  "LivingDocuments.core.coreSecurity"
-  #"LivingDocuments.core.classmanager"
-  "LivingDocuments.core.baseclass"
-  "LivingDocuments.core.util"
-  "LivingDocuments.core.resources"
-  "LivingDocuments.core.busytask"
-] )
+navigationModule = angular.module( "LivingDocuments.navigation", [
+  "LivingDocuments.navigation.controller"
+])
 
-.factory 'ApplicationState', ->
-  application = {
-    loginMode: true,
-    normalMode: false
+#navigationModule.controller "NavigationCtrl", NavigationCtrl
+
+navigationModule.directive "navigationBar", ->
+  linker = (scope, element, attrs) ->
+    return
+  controller = ($scope, $rootScope, $timeout,
+                $location, ApplicationState, BusyTaskService,
+                SecurityService, $modal, $log, $http) ->
+    return new NavigationCtrl(
+      $scope, $rootScope, $timeout,
+      $location, ApplicationState, BusyTaskService,
+      SecurityService, $modal, $log, $http
+    )
+  scope = {
   }
-  triggerApplicationNormalMode = ->
-    application.normalMode = true
-    application.loginMode = false
-    return
-  triggerApplicationLoginMode = ->
-    application.normalMode = false
-    application.loginMode = true
-    return
   return {
-    application: application,
-    triggerApplicationNormalMode: triggerApplicationNormalMode,
-    triggerApplicationLoginMode: triggerApplicationLoginMode
+    restrict: 'EA',
+    templateUrl: "navigation/navigationBarDirective.tpl.html",
+    controller: ['$scope', '$rootScope', '$timeout', '$location', 'ApplicationState', 'BusyTaskService', 'SecurityService', '$modal', '$log', '$http', controller],
+    link: linker,
+    scope: scope
   }

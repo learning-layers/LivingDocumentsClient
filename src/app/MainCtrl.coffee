@@ -25,7 +25,7 @@
 angular.module( "LivingDocuments.maincontroller", [
 ] )
 
-.controller( 'MainCtrl', ($scope, $rootScope, $timeout, $location, ApplicationState, ClassManager,
+.controller( 'MainCtrl', ($scope, $rootScope, $timeout, $location, ApplicationState,
                           uuid4, $modal, UserInfoModel, UserInfoListModel, $log) ->
 
   log = $log.getInstance("MainCtrl")
@@ -55,7 +55,7 @@ angular.module( "LivingDocuments.maincontroller", [
     console.log(JSON.stringify(msg))
     return
 
-  ImageMessage = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
+  ###ImageMessage = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
     image: {
       src: ''
     }
@@ -107,11 +107,11 @@ angular.module( "LivingDocuments.maincontroller", [
       return 'descritption:' + this.description + ', uuid:' + this.uuid
   })
   $scope.ProgressImageMessage = ProgressImageMessage
-  ClassManager.registerClass('ProgressImageMessage', ProgressImageMessage)
+  ClassManager.registerClass('ProgressImageMessage', ProgressImageMessage)###
 
   publishMessage = (messageArray, reason) ->
     message = {}
-    if (reason instanceof ProgressImageMessage)
+    ###if (reason instanceof ProgressImageMessage)
       progressImageMessage = reason
       message.uuid = progressImageMessage.uuid
       message.progress = progressImageMessage.progress
@@ -133,7 +133,7 @@ angular.module( "LivingDocuments.maincontroller", [
           return
         ,
         staysForMilliseconds
-      )
+      )###
     return
 
   $rootScope.$on('success', (ev, reason) ->

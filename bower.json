@@ -5,7 +5,7 @@
     "angular-local-storage": "git://github.com/grevory/angular-local-storage.git#0.0.1",
     "prototype-class-jquery": "git://github.com/protonet/jquery-class-create#master",
     "jquery.hotkeys": "git://github.com/tzuryby/jquery.hotkeys.git#master",
-    "jquery": "2.0.3",
+    "jquery": "1.11.0",
     "sugar": "1.4.1",
     "ng-file-upload": "1.2.9",
     "angular": "1.2.10",

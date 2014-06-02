@@ -19,19 +19,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-angular.module( 'LivingDocuments.navigation', [
+/*angular.module( 'LivingDocuments.navigation', [
 ])
 
 .factory('NavigationController', function(ClassManager) {
-    
-    
+
+
     var NavigationController = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
         $scope: null,
-        $rootScope: null, 
-        $timeout: null, 
-        $location: null, 
+        $rootScope: null,
+        $timeout: null,
+        $location: null,
         ApplicationState: null,
-        BusyTaskService: null, 
+        BusyTaskService: null,
         SecurityService: null,
         $modal: null,
         $log: null,
@@ -177,9 +177,9 @@ angular.module( 'LivingDocuments.navigation', [
         },
         initializeScopeEvents: function() {
             var outerThis = this;
-            
+
             var searchTimeout = null;
-            
+
             this.$scope.$watch('searchValue', function() {
                 if (searchTimeout !== null) {
                     outerThis.$timeout.cancel(searchTimeout);
@@ -190,9 +190,9 @@ angular.module( 'LivingDocuments.navigation', [
                     outerThis.$log.debug('searchValue changed to=' + outerThis.$scope.searchValue);
                 }, 350);
             });
-            
+
             this.$scope.$watch('searchMode', function() {
-                outerThis.$rootScope.$broadcast('searchModeChange', outerThis.$scope.searchMode);  
+                outerThis.$rootScope.$broadcast('searchModeChange', outerThis.$scope.searchMode);
             });
             if (angular.isUndefined(this.$scope.loginForm)) {
                 this.$scope.loginForm = '';
@@ -251,4 +251,4 @@ angular.module( 'LivingDocuments.navigation', [
     };
 })
 
-;
+;*/

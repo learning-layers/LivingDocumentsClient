@@ -189,24 +189,24 @@ angular.module( 'LivingDocuments.user.profile', [
     });
 })
 
-.controller('ProfileImageUploadCtrl', function($scope, $rootScope, $upload, SecurityService, ClassManager) {
+.controller('ProfileImageUploadCtrl', function($scope, $rootScope, $upload, SecurityService) {
     var basePath = SecurityService.getInitialConfiguration().restServerAddress;
     
     $scope.onFileSelect = function ($files) {
         console.log($files);
-        var ProgressImageMessage = ClassManager.getRegisteredClass('ProgressImageMessage');
-        var progressImageMessageInstance = new ProgressImageMessage("Profile image upload");
-        $rootScope.$broadcast('info', progressImageMessageInstance);
+        /*var ProgressImageMessage = ClassManager.getRegisteredClass('ProgressImageMessage');
+        var progressImageMessageInstance = new ProgressImageMessage("Profile image upload");*/
+        $rootScope.$broadcast('info', {});
         //$files: an array of files selected, each file has name, size, and type.
         var successFunction = function(data, status, headers, config) {
             // file is uploaded successfully
             console.log(data);
-            progressImageMessageInstance.fireIsFinished();
+            //progressImageMessageInstance.fireIsFinished();
             $rootScope.$broadcast('RefreshData:user.profileimg');
         };
         var progressFunction = function(evt) {
             console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
-            progressImageMessageInstance.setProgressPercentage(parseInt(100.0 * evt.loaded / evt.total, 10));
+            //progressImageMessageInstance.setProgressPercentage(parseInt(100.0 * evt.loaded / evt.total, 10));
         };
         for (var i = 0; i < $files.length; i++) {
             var file = $files[i];

@@ -22,8 +22,8 @@
 angular.module( 'LivingDocuments.core.resources', [
 ])
 
-.factory('Registration', function(ClassManager, uuid4, SecurityService, $http) {
-    var Registration = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
+.factory('Registration', function(uuid4, SecurityService, $http) {
+    /*var Registration = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {
         uuid: null,
         domain: null,
         loginname: null,
@@ -73,7 +73,7 @@ angular.module( 'LivingDocuments.core.resources', [
             });
         }
     });
-    ClassManager.registerClass('Registration', Registration);
+    ClassManager.registerClass('Registration', Registration);*/
     
     var getRegistrations = function(successCallback, errorCallback) {
         var basePath = SecurityService.getInitialConfiguration().restServerAddress; 
@@ -92,12 +92,12 @@ angular.module( 'LivingDocuments.core.resources', [
     };
     
     return {
-        Registration: Registration,
+        Registration: null,
         getRegistrations: getRegistrations
     };
 })
 
-.factory('User', function(ClassManager, uuid4, SecurityService, $http) {
+.factory('User', function(uuid4, SecurityService, $http) {
     
     var getUsers = function(successCallback, errorCallback) {
         var basePath = SecurityService.getInitialConfiguration().restServerAddress; 
@@ -188,7 +188,7 @@ angular.module( 'LivingDocuments.core.resources', [
     };
 })
 
-.factory('Role', function(ClassManager, uuid4, SecurityService, $http) {
+.factory('Role', function(uuid4, SecurityService, $http) {
     
     var getRoles = function(successCallback, errorCallback) {
         var basePath = SecurityService.getInitialConfiguration().restServerAddress; 
