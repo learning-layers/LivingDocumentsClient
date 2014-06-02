@@ -56,7 +56,7 @@ class NavigationCtrl extends BaseController
     @$rootScope.$broadcast('AddBusyTask', {})
     @SecurityService.login(@$scope.username, @$scope.password,
       (success) =>
-        console.log(success)
+        @$log.debug(success)
         @$rootScope.$broadcast('RemoveBusyTask', {})
         @$location.path( @SecurityService.getInitialConfiguration().firstRequestURL )
         @ApplicationState.triggerApplicationNormalMode()
@@ -65,7 +65,7 @@ class NavigationCtrl extends BaseController
         return
       ,
       (error) =>
-        console.error(error)
+        @$log.error(error)
         @$rootScope.$broadcast('RemoveBusyTask', {})
         @$scope.loginInProgress = false
         @$rootScope.$broadcast('error', "Login failed, username or password wrong!")
@@ -75,7 +75,7 @@ class NavigationCtrl extends BaseController
     @$scope.password = ''
     return
   logout: =>
-    console.log("Logout pressed")
+    @$log.debug("Logout pressed")
     @SecurityService.logout()
     return
   checkRoles: =>
@@ -114,7 +114,7 @@ class NavigationCtrl extends BaseController
       if (angular.isUndefined(@$scope.loginForm))
         @$scope.loginForm = ''
         @$scope.$watch('loginForm', =>
-          console.log("Login form change detected!")
+          @$log.debug("Login form change detected!")
           @$scope.$watch('loginForm.$invalid', =>
             if (@.$scope.loginForm.$invalid)
               @$rootScope.$broadcast('error', "Username contains a character that isn't allowed!")

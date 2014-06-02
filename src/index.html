@@ -56,50 +56,8 @@
     <div navigation-bar=""></div>
     <!-- <feedback></feedback> -->
     <div search-overlay=""></div>
-    <div id="messageBar">
-        <div ng-if="successMessages.length > 0" class="alert alert-success message-element">
-            <div ng-repeat="successMessage in successMessages">
-                <p>{{ successMessage.reason }}<span ng-if="!!successMessage.progress"> - Status: {{ successMessage.progress.status }}</span></p>
-                <div ng-if="!!successMessage.progress" class="progress progress-striped">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ successMessage.progress.percentage }}%">
-                        <span class="font-percentage">{{ successMessage.progress.percentage }}% Complete</span>
-                    </div>
-                </div>    
-            </div>
-        </div>
-        <div ng-if="infoMessages.length > 0" class="alert alert-info message-element">
-            <div ng-repeat="infoMessage in infoMessages" ng-cloak="">
-                <p>{{ infoMessage.reason }}<span ng-if="!!infoMessage.progress"> - Status: {{ infoMessage.progress.status }}</span></p>
-                <div ng-if="!!infoMessage.progress" class="progress progress-striped">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ infoMessage.progress.percentage }}%">
-                        <span class="font-percentage">{{ infoMessage.progress.percentage }}% Complete</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-if="warningMessages.length > 0" class="alert alert-warning message-element">
-            <div ng-repeat="warningMessage in warningMessages" ng-cloak="">
-                <p>{{ warningMessage.reason }}<span ng-if="!!warningMessage.progress"> - Status: {{ warningMessage.progress.status }}</span></p>
-                <div ng-if="!!warningMessage.progress" class="progress progress-striped">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ warningMessage.progress.percentage }}%">
-                        <span class="font-percentage">{{ warningMessage.progress.percentage }}% Complete</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div ng-if="errorMessages.length > 0" class="alert alert-danger message-element">
-            <div ng-repeat="errorMessage in errorMessages" ng-cloak="">
-                <p>{{ errorMessage.reason }}<span ng-if="!!errorMessage.progress"> - Status: {{ errorMessage.progress.status }}</span></p>
-                <div ng-if="!!errorMessage.progress" class="progress progress-striped">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ errorMessage.progress.percentage }}%">
-                        <span class="font-percentage">{{ errorMessage.progress.percentage }}% Complete</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container ui-container">
-        <div id="content" class="animate-ui-view" ui-view="main"></div>
+        <div id="content" class="animate-ui-view" data-ui-view="main"></div>
     </div>
     <div document-content-context-menu=""></div>
   </body>

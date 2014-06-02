@@ -25,7 +25,7 @@ angular.module( 'LivingDocuments.share.folderAndFiles', [
 .directive('folderAndFileSharing', function () {
     var linker = function(scope, element, attrs) {
     };
-    var controller = function($scope, SharingItemsModel) {
+    var controller = function($scope, $log, SharingItemsModel) {
         $scope.foldersAndFiles = SharingItemsModel.foldersAndFiles;
         
         $scope.searchPersonOrGroupOptions = ['Person', 'Group'];
@@ -64,7 +64,7 @@ angular.module( 'LivingDocuments.share.folderAndFiles', [
                 } else {
                     id = $scope.selectedGroup.id;
                 }
-                console.log('Shared ' + fileOrFolder + ' with ' + searchPersonOrGroupOption + ' with id=' + id + ' rights=' + accessRightOption);
+                $log.debug('Shared ' + fileOrFolder + ' with ' + searchPersonOrGroupOption + ' with id=' + id + ' rights=' + accessRightOption);
             }
         };
         
@@ -80,18 +80,18 @@ angular.module( 'LivingDocuments.share.folderAndFiles', [
                 angular.isDefined(currentNode.id) && 
                 angular.isDefined($scope.personsThatHaveAccess) && 
                 angular.isDefined($scope.groupsThatHaveAccess)) {
-                    
-                console.log(currentNode.id);
+
+                $log.debug(currentNode.id);
                 
                 $scope.personsThatHaveAccess = [];
                 SharingItemsModel.fetchPersonsThatHaveAccessRightsFor(currentNode.id, function (persons) {
-                    console.log(persons);
+                    $log.debug(persons);
                     $scope.personsThatHaveAccess = persons;
                 });
                 
                 $scope.groupsThatHaveAccess = [];
                 SharingItemsModel.fetchGroupsThatHaveAccessRightsFor(currentNode.id, function (groups) {
-                    console.log(groups);
+                    $log.debug(groups);
                     $scope.groupsThatHaveAccess = groups;
                 });
             }
@@ -106,7 +106,7 @@ angular.module( 'LivingDocuments.share.folderAndFiles', [
             } else {
                 fileOrFolder = 'Folder';
             }
-            console.log(message + fileOrFolder + ': id=' + currentNode.id);
+            $log.debug(message + fileOrFolder + ': id=' + currentNode.id);
         };
         $scope.deleteRights = function (personOrGroupCommand, personOrGroupId) {
             var message = "Deleted " + personOrGroupCommand + " rights of " + personOrGroupCommand + " with id=" + personOrGroupId + " for: ";
@@ -117,13 +117,13 @@ angular.module( 'LivingDocuments.share.folderAndFiles', [
             } else {
                 fileOrFolder = 'Folder';
             }
-            console.log(message + fileOrFolder + ': id=' + currentNode.id);
+            $log.debug(message + fileOrFolder + ': id=' + currentNode.id);
         };
     };
     return {
         restrict: 'EA',
         templateUrl: "share/folderAndFileSharingDirective.tpl.html",
-        controller: ['$scope', 'SharingItemsModel', controller],
+        controller: ['$scope', '$log', 'SharingItemsModel', controller],
         link: linker,
         scope: {
         }

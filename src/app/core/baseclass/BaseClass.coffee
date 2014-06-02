@@ -79,8 +79,8 @@ class BaseEventDispatcher
   dispatchEvent: ->
     listeners = null
     if !angular.isString(arguments[0])
-      console.warn 'EventDispatcher',
-        'First params must be an event type (String)'
+      ###console.warn 'EventDispatcher',
+        'First params must be an event type (String)'###
     else
       listeners = @listeners[arguments[0]]
       for key in listeners

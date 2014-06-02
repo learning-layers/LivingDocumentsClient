@@ -59,7 +59,7 @@ angular.module( 'LivingDocuments.admin.users', [
     $scope.getRoles = function() {
         Role.getRoles(
             function(success, status) {
-                console.log(success);
+                $log.debug(success);
                 $scope.roles = success.roles;
                 $scope.roles.add({id:-1, name:'normaluser'});
             }, function(error, status) {
@@ -123,7 +123,7 @@ angular.module( 'LivingDocuments.admin.users', [
         $scope.errorMessage = false;
         
         $scope.ok = function (deleteInput) {
-            console.log("Pressed ok with deleteInputValue=" + $scope.deleteInput);
+            $log.debug("Pressed ok with deleteInputValue=" + $scope.deleteInput);
             if (deleteInput == 'delete') {
                 $modalInstance.close();
             } else {
@@ -158,7 +158,7 @@ angular.module( 'LivingDocuments.admin.users', [
         $scope.errorMessage = false;
         
         $scope.ok = function (deleteInput) {
-            console.log("Pressed ok with deleteInputValue=" + $scope.deleteInput);
+            $log.debug("Pressed ok with deleteInputValue=" + $scope.deleteInput);
             if (deleteInput == 'delete') {
                 $modalInstance.close();
             } else {

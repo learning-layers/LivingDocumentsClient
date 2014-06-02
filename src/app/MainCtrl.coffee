@@ -30,7 +30,7 @@ angular.module( "LivingDocuments.maincontroller", [
 
   log = $log.getInstance("MainCtrl")
   $scope.$on('$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-    console.log('stateChangeSuccess with toState=' + toState.url)
+    $log.debug('stateChangeSuccess with toState=' + toState.url)
     if ( angular.isDefined( toState.data.pageTitle ) )
       $scope.pageTitle = toState.data.pageTitle + ' | LivingDocuments'
     return
@@ -52,7 +52,7 @@ angular.module( "LivingDocuments.maincontroller", [
   $scope.errorMessages = []
 
   $scope.consolelog = (msg) ->
-    console.log(JSON.stringify(msg))
+    $log.debug(JSON.stringify(msg))
     return
 
   ###ImageMessage = Class.create(ClassManager.getRegisteredClass('AbstractClass'), {

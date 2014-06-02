@@ -46,7 +46,7 @@ class SearchOverlayCtrl extends BaseController
     @$rootScope.$on 'searchModeChange', (ev, searchMode) =>
       #Listen to searchModeChange events to react on the current
       # search mode (e. g. show the search overlay).
-      console.log "Search overlay received searchMode=" + searchMode
+      @$log.debug "Search overlay received searchMode=" + searchMode
       @$scope.searchMode = searchMode
     @$rootScope.$on 'issueSearch', (ev, searchValue) =>
       @$log.debug "Received issued search with value=" + searchValue

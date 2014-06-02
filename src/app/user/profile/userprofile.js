@@ -49,7 +49,7 @@ angular.module( 'LivingDocuments.user.profile', [
         $scope.confirmNewPassword = '';
     });
     $scope.submitPasswordChange = function() {
-        console.log("Submitted password change");
+        $log.debug("Submitted password change");
         if ($scope.newpassword !== $scope.confirmNewPassword) {
             $rootScope.$broadcast('error', "New password and the confirmation of the password don't match!");
         } else {
@@ -65,7 +65,7 @@ angular.module( 'LivingDocuments.user.profile', [
     $scope.loadingProfileinfo = true;
     User.getUserById($scope.item, 
         function(success) {
-            console.log(success);
+            $log.debug(success);
             $scope.userprofile = success.user;
             $scope.loadingProfileinfo = false;
         }, function(error) {
@@ -83,7 +83,7 @@ angular.module( 'LivingDocuments.user.profile', [
     $scope.saveEdit = function(args) {
         var fieldname = args.fieldname;
         var value = args.value;
-        console.log("Input with value=[" + args.value + "] for field with name=[" + args.fieldname + "] saved.");
+        $log.debug("Input with value=[" + args.value + "] for field with name=[" + args.fieldname + "] saved.");
         var basePath = SecurityService.getInitialConfiguration().restServerAddress; 
         var userPath = '/user/' + $scope.item + '?method=updatefield';
         $http({
@@ -98,8 +98,8 @@ angular.module( 'LivingDocuments.user.profile', [
         .success(function(success, status) {
             $rootScope.$broadcast('success', "User profile updated.");
             $scope.userprofile[fieldname] = value;
-            console.log(value);
-            console.log($scope.userprofile);
+            $log.debug(value);
+            $log.debug($scope.userprofile);
         })
         .error(function(error, status) {
             $rootScope.$broadcast('error', "An error occured while trying to update the user profile!");
@@ -184,28 +184,28 @@ angular.module( 'LivingDocuments.user.profile', [
     getUserAvatar();
 
     $rootScope.$on('RefreshData:user.profileimg', function(ev) {
-        console.log("Refresh img triggered!");
+        $log.debug("Refresh img triggered!");
         getUserAvatar();
     });
 })
 
-.controller('ProfileImageUploadCtrl', function($scope, $rootScope, $upload, SecurityService) {
+.controller('ProfileImageUploadCtrl', function($scope, $log, $rootScope, $upload, SecurityService) {
     var basePath = SecurityService.getInitialConfiguration().restServerAddress;
     
     $scope.onFileSelect = function ($files) {
-        console.log($files);
+        $log.debug($files);
         /*var ProgressImageMessage = ClassManager.getRegisteredClass('ProgressImageMessage');
         var progressImageMessageInstance = new ProgressImageMessage("Profile image upload");*/
         $rootScope.$broadcast('info', {});
         //$files: an array of files selected, each file has name, size, and type.
         var successFunction = function(data, status, headers, config) {
             // file is uploaded successfully
-            console.log(data);
+            $log.debug(data);
             //progressImageMessageInstance.fireIsFinished();
             $rootScope.$broadcast('RefreshData:user.profileimg');
         };
         var progressFunction = function(evt) {
-            console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
+            $log.debug('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
             //progressImageMessageInstance.setProgressPercentage(parseInt(100.0 * evt.loaded / evt.total, 10));
         };
         for (var i = 0; i < $files.length; i++) {
@@ -223,7 +223,7 @@ angular.module( 'LivingDocuments.user.profile', [
     };
 })
 
-.directive('editInputText', function () {
+.directive('editInputText', function ($log) {
     return {
         restrict: 'EA',
         templateUrl: "user/profile/editInputText.tpl.html",
@@ -244,7 +244,7 @@ angular.module( 'LivingDocuments.user.profile', [
             scope.editedValue = Object.clone(scope.value);
             scope.editModeInputText = false;
             scope.saveEditedValue = function() {
-                console.log("Save has been pressed");
+                $log.debug("Save has been pressed");
                 scope.saveMethod({fieldname: scope.fieldname, value: scope.editedValue});
                 scope.editModeInputText = false;
             };
@@ -252,7 +252,7 @@ angular.module( 'LivingDocuments.user.profile', [
     };
 })
 
-.directive('editInputTextarea', function () {
+.directive('editInputTextarea', function ($log) {
     return {
         restrict: 'EA',
         templateUrl: "user/profile/editInputTextarea.tpl.html",
@@ -273,7 +273,7 @@ angular.module( 'LivingDocuments.user.profile', [
             scope.editedValue = Object.clone(scope.value);
             scope.editModeInputText = false;
             scope.saveEditedValue = function() {
-                console.log("Save has been pressed");
+                $log.debug("Save has been pressed");
                 scope.saveMethod({fieldname: scope.fieldname, value: scope.editedValue});
                 scope.editModeInputText = false;
             };

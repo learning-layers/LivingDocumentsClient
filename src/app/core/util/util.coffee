@@ -24,21 +24,23 @@
 coreUtil = angular.module( "LivingDocuments.core.util", [
 ] )
 
-coreUtil.directive 'setNgAnimate', ['$animate', ($animate) ->
+coreUtil.directive 'setNgAnimate', ($log, $animate) ->
   return {
     link:  ($scope, $element, $attrs) ->
-      $scope.$watch(->
+      $scope.$watch(
+        ->
           return $scope.$eval $attrs.setNgAnimate, $scope
-        , (valnew, valold)->
-            console.log 'Directive animation Enabled: ' + valnew
-            $animate.enabled !!valnew, $element
+        ,
+        (valnew, valold) ->
+          $log.debug 'Directive animation Enabled: ' + valnew
+          $animate.enabled !!valnew, $element
+          return
       )
       return
   }
-]
 
-coreUtil.directive 'bootstrapWysiwyg', ->
-  console.log('Called bootstrap wysiwyg.')
+coreUtil.directive 'bootstrapWysiwyg', ($log) ->
+  $log.debug('Called bootstrap wysiwyg.')
   return {
     restrict: 'A',
     link: (scope, element, attrs) ->

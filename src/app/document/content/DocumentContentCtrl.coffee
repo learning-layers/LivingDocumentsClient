@@ -155,7 +155,7 @@ class DocumentContentCtrl extends BaseController
       document.querySelector( '.note-editable' )
     )
     editorContent = editorElement[0].innerHTML
-    console.log(editorContent)
+    @$log.debug(editorContent)
     saveEditorContentTask =
       @DocumentContentModel.saveEditorContent(editorContent)
     saveEditorContentTask.success(
@@ -173,7 +173,7 @@ class DocumentContentCtrl extends BaseController
   showContextMenu: (ev) =>
     @getCurrentSelection (currentSelection) =>
       if currentSelection.startOffset < currentSelection.endOffset
-        console.log(currentSelection)
+        @$log.debug(currentSelection)
         @$rootScope.$emit(
           "ContextMenu:open:DocumentContent",
           {
@@ -248,7 +248,7 @@ class DocumentContentCtrl extends BaseController
       if cmd == 'cancel'
         item[attributeName] = item.rememberOldVal[attributeName]
       else if cmd == 'save'
-        console.log "Save triggered with item value=" + item[attributeName]
+        @$log.debug "Save triggered with item value=" + item[attributeName]
         newValueSaveTask = @DocumentContentModel.saveNewValueFor(
           itemType, item, attributeName, item[attributeName]
         )
