@@ -1,12 +1,12 @@
 <div id="search-overlay" class="container" ng-show="searchMode">
     <div class="search-panel container" data-ng-click="dismissSearchOverlay()">
         <div class="search-panel-content" ng-click="$event.stopPropagation()">
-            <accordion close-others="accordionCloseOthers">
-                <accordion-group ng-init="documentsOpen = $parent.accordionTabIsOpen" is-open="documentsOpen">
-                    <accordion-heading>
+            <div accordion="" close-others="accordionCloseOthers">
+                <div accordion-group="" ng-init="documentsOpen = $parent.accordionTabIsOpen" is-open="documentsOpen">
+                    <div accordion-heading="">
                         Documents
                         <span class="badge"><span class="glyphicon glyphicon-user"></span> {{ $parent.documents.length }}</span>
-                    </accordion-heading>
+                    </div>
                     <table class="table table-striped table-hover table-condensed">
                         <th>#</th>
                         <th>Displayname</th>
@@ -25,12 +25,12 @@
                             </td>
                         </tr>
                     </table>
-                </accordion-group>
-                <accordion-group ng-init="usersOpen = $parent.accordionTabIsOpen" is-open="usersOpen">
-                    <accordion-heading>
+                </div>
+                <div accordion-group="" ng-init="usersOpen = $parent.accordionTabIsOpen" is-open="usersOpen">
+                    <div accordion-heading="">
                         Users
                         <span class="badge"><span class="glyphicon glyphicon-user"></span> {{ $parent.users.length }}</span>
-                    </accordion-heading>
+                    </div>
                     <table class="table table-striped table-hover table-condensed">
                         <th>#</th>
                         <th>Displayname</th>
@@ -49,8 +49,8 @@
                             </td>
                         </tr>
                     </table>
-                </accordion-group>
-            </accordion>
+                </div>
+            </div>
         </div>
     </div>
 </div>

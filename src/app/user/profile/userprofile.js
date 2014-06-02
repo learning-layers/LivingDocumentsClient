@@ -225,7 +225,7 @@ angular.module( 'LivingDocuments.user.profile', [
 
 .directive('editInputText', function () {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: "user/profile/editInputText.tpl.html",
         scope: {
             editMode: "&",
@@ -254,7 +254,7 @@ angular.module( 'LivingDocuments.user.profile', [
 
 .directive('editInputTextarea', function () {
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: "user/profile/editInputTextarea.tpl.html",
         scope: {
             editMode: "&",

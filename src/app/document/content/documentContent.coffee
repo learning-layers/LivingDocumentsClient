@@ -42,7 +42,7 @@ documentContentModule.directive "documentContent", ->
     document: '='
   }
   return {
-    restrict: 'E'
+    restrict: 'EA'
     templateUrl: "document/content/" +
       "documentContentDirective.tpl.html"
     controller: [
@@ -63,7 +63,7 @@ documentContentModule.directive "documentContentContextMenu", ->
   scope = {
   }
   return {
-    restrict: 'E'
+    restrict: 'EA',
     templateUrl: "document/content/" +
       "documentContentContextMenuDirective.tpl.html"
     controller: [

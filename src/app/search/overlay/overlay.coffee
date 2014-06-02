@@ -80,7 +80,7 @@ searchOverlay.directive "searchOverlay", ->
   controller = ($scope, $rootScope, $log, SearchService) ->
     new SearchOverlayCtrl($scope, $rootScope, $log, SearchService)
   return {
-    restrict: 'E'
+    restrict: 'EA'
     templateUrl: "search/overlay/overlay.tpl.html"
     controller: ['$scope', '$rootScope', '$log', 'SearchService', controller]
     link: linker

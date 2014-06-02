@@ -38,7 +38,7 @@ documentDiscussions.directive "documentDiscussions", ->
     document: '='
   }
   return {
-    restrict: 'E',
+    restrict: 'EA',
     templateUrl: "document/discussions/" +
       "documentDiscussionsDirective.tpl.html",
     controller: ['$scope', '$rootScope', '$log', '$modal',

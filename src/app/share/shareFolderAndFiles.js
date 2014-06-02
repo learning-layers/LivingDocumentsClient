@@ -121,7 +121,7 @@ angular.module( 'LivingDocuments.share.folderAndFiles', [
         };
     };
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: "share/folderAndFileSharingDirective.tpl.html",
         controller: ['$scope', 'SharingItemsModel', controller],
         link: linker,

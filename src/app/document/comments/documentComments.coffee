@@ -79,7 +79,7 @@ documentCommentsModule.directive "documentComments",
       document: '='
     }
     return {
-      restrict: 'E',
+      restrict: 'EA',
       templateUrl: "document/comments/" +
         "documentCommentsDirective.tpl.html",
       controller: ['$scope', '$modal', '$log',

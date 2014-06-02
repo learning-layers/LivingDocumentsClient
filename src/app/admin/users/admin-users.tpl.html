@@ -1,9 +1,9 @@
 <div id="admin-users">
-    <tabset>
-        <tab>
-            <tab-heading>
+    <div tabset="">
+        <div tab="">
+            <div tab-heading="">
                 Users <span class="badge">{{users.length}}</span>
-            </tab-heading>
+            </div>
             <button class="btn btn-default" ng-click="getUsers()">Refresh</button>
             <table class="table table-striped table-hover table-condensed">
                 <th>#</th>
@@ -54,11 +54,11 @@
                     <td>{{ user.displayname }}</td>
                 </tr>
             </table>
-        </tab>
-        <tab>
-            <tab-heading>
+        </div>
+        <div tab="">
+            <div tab-heading="">
                 Registrations <span class="badge">{{registrations.length}}</span>
-            </tab-heading>
+            </div>
             <button class="btn btn-default" ng-click="getRegistrations()">Refresh</button>
             <table class="table table-striped table-hover table-condensed">
                 <th>#</th>
@@ -96,6 +96,6 @@
                     <td>{{ registration.displayname }}</td>
                 </tr>
             </table>
-        </tab>
-    </tabset>
+        </div>
+    </div>
 </div>

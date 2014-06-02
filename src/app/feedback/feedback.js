@@ -28,7 +28,7 @@ angular.module( 'LivingDocuments.feedback', [
     var controller = function($scope) {
     };
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: "feedback/feedback.tpl.html",
         controller: ['$scope', controller],
         link: linker,

@@ -242,7 +242,7 @@ angular.module( 'LivingDocuments.navigation', [
         return new NavigationController($scope, $rootScope, $timeout, $location, ApplicationState, BusyTaskService, SecurityService, $modal, $log, $http);
     };
     return {
-        restrict: 'E',
+        restrict: 'EA',
         templateUrl: "navigation/navigationBarDirective.tpl.html",
         controller: ['$scope', '$rootScope', '$timeout', '$location', 'ApplicationState', 'BusyTaskService', 'SecurityService', '$modal', '$log', '$http', controller],
         link: linker,

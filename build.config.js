@@ -64,7 +64,9 @@ module.exports = {
    */
   vendor_files: {
     js: [
+      'vendor/respond/dest/respond.min.js',
       'vendor/modernizr/modernizr.js',
+      'vendor/angular-ui-utils/modules/ie-shiv/ie-shiv.js',
       'vendor/ng-file-upload/angular-file-upload-shim.min.js',
       'vendor/jquery/jquery.min.js',
       'vendor/jqueryuicustom/jquery-ui-1.10.4.custom.js',

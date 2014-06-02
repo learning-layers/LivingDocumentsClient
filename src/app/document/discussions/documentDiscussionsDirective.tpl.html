@@ -9,9 +9,9 @@
         <div style="clear: both"></div>
     </div>
     <div class="panel-body">
-        <accordion close-others="'true'">
-            <accordion-group is-open="discussion.isOpen" ng-repeat="discussion in discussions.discussions">
-                <accordion-heading>
+        <div accordion="" close-others="'true'">
+            <div accordion-group="" is-open="discussion.isOpen" ng-repeat="discussion in discussions.discussions">
+                <div accordion-heading="">
                     <div class="discussion-title">
                         {{ discussion.title }}
                     </div>
@@ -22,7 +22,7 @@
                         <div class="maturity-high"></div>
                         <div class="maturity-norm"></div>
                     </div>
-                </accordion-heading>
+                </div>
                 <div class="col-lg-6" ng-bind-html="discussion.content.content">
                 </div>
                 <div class="col-lg-6">
@@ -36,7 +36,7 @@
                         </a>
                     </div>
                 </div>
-            </accordion-group>
-        </accordion>
+            </div>
+        </div>
     </div>
 </div>

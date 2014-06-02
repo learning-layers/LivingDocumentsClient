@@ -28,7 +28,7 @@ angular.module( "LivingDocuments.document.recommendations", [] )
     new DocumentRecommendationsController()
   scope = {}
   return {
-    restrict: "E"
+    restrict: "EA"
     templateUrl: "document/recommendations/" +
       "documentRecommendationsDirective.tpl.html"
     controller: ['$scope', controller]

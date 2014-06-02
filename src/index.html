@@ -11,6 +11,9 @@
         display: none !important;
     }
     </style>
+
+    <link rel="stylesheet" type="text/css" href="assets/tinymce/lightgray/skin.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/tinymce/lightgray/skin.ie7.min.css"/>
     
     <script type="text/javascript">
         (function() {
@@ -50,9 +53,9 @@
   </head>
   <!--ng-class="{'body-grey':ApplicationState.application.loginMode}"-->
   <body>
-    <navigation-bar></navigation-bar>
+    <div navigation-bar=""></div>
     <!-- <feedback></feedback> -->
-    <search-overlay></search-overlay>
+    <div search-overlay=""></div>
     <div id="messageBar">
         <div ng-if="successMessages.length > 0" class="alert alert-success message-element">
             <div ng-repeat="successMessage in successMessages">
@@ -98,6 +101,6 @@
     <div class="container ui-container">
         <div id="content" class="animate-ui-view" ui-view="main"></div>
     </div>
-    <document-content-context-menu></document-content-context-menu>
+    <div document-content-context-menu=""></div>
   </body>
 </html>
