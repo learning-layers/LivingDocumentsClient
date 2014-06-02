@@ -43,7 +43,10 @@ navigationModule.directive "navigationBar", ->
   return {
     restrict: 'EA',
     templateUrl: "navigation/navigationBarDirective.tpl.html",
-    controller: ['$scope', '$rootScope', '$timeout', '$location', 'ApplicationState', 'BusyTaskService', 'SecurityService', '$modal', '$log', '$http', controller],
+    controller: ['$scope', '$rootScope', '$timeout',
+                 '$location', 'ApplicationState', 'BusyTaskService',
+                 'SecurityService', '$modal', '$log',
+                 '$http', controller],
     link: linker,
     scope: scope
   }

@@ -30,23 +30,20 @@ class NavigationCtrl extends BaseController
                 @SecurityService, @$modal, @$log, @$http) ->
     super($scope)
     @$log = $log.getInstance("NavigationController")
-    @$scope.currentUser = this.SecurityService.currentUser
-    @initializeScopeMethods()
+    @$scope.currentUser = SecurityService.currentUser
     @initializeScopeEvents()
     return
   defineScope: ->
     @$scope.searchMode = false
-    @$scope.busyTasks = this.BusyTaskService.busyTasks
+    @$scope.busyTasks = @BusyTaskService.busyTasks
     @$scope.username = ''
     @$scope.password = ''
-    @$scope.ApplicationState = this.ApplicationState
+    @$scope.ApplicationState = @ApplicationState
     @$scope.loginInProgress = false
     @$scope.issueSearch = @issueSearch
     @$scope.login = @login
-    return
-  initializeScopeMethods: ->
-    return
-  initializeScopeEvents: ->
+    @$scope.logout = @logout
+    @$scope.checkRoles = @checkRoles
     return
   issueSearch: (searchValue) =>
     @$log.debug("Issued Search with searchValue=" + searchValue)
@@ -77,6 +74,84 @@ class NavigationCtrl extends BaseController
     @$scope.username = ''
     @$scope.password = ''
     return
+  logout: =>
+    console.log("Logout pressed")
+    @SecurityService.logout()
+    return
+  checkRoles: =>
+    currentUser  = @SecurityService.currentUser
+    if (angular.isDefined(currentUser.roles))
+      index = -1
+      try
+        index = currentUser.roles.indexOf('superadmin')
+      catch e
+        return
+      if (index != -1)
+        return true
+      else
+        return false
+    else
+      return false
+    return
+  initializeScopeEvents: ->
+    searchTimeout = null
+    @$scope.$watch('searchValue', =>
+      if (searchTimeout != null)
+        @$timeout.cancel(searchTimeout)
+        searchTimeout = null
+      searchTimeout = @$timeout(
+        =>
+          @$scope.issueSearch(@$scope.searchValue)
+          @$log.debug('searchValue changed to=' + @$scope.searchValue)
+          return
+        ,
+        350
+      )
+    )
+
+    @$scope.$watch('searchMode', =>
+      @$rootScope.$broadcast('searchModeChange', @$scope.searchMode)
+      if (angular.isUndefined(@$scope.loginForm))
+        @$scope.loginForm = ''
+        @$scope.$watch('loginForm', =>
+          console.log("Login form change detected!")
+          @$scope.$watch('loginForm.$invalid', =>
+            if (@.$scope.loginForm.$invalid)
+              @$rootScope.$broadcast('error', "Username contains a character that isn't allowed!")
+            return
+          )
+          return
+        )
+      return
+    )
+
+    @$scope.profileImgSrc = ''
+    getUserAvatar = =>
+      basePath = @SecurityService.getInitialConfiguration().restServerAddress
+      userPath = '/user/' + @SecurityService.currentUser.id + '/profile/image'
+      @$http({
+        method: 'GET',
+        url: basePath + userPath,
+        headers: {'Authorization': @SecurityService.currentUser.authorizationString}
+      })
+      .success((success, status) =>
+        @$scope.profileImgSrc = 'data:' + success.type + ';base64,' + success.content
+        return
+      )
+      .error((error, status) =>
+        return
+      )
+      return
+    @$scope.$watch('ApplicationState.application.loginMode', (newValue, oldValue) =>
+      if (!newValue)
+        getUserAvatar()
+      return
+    )
+    @$rootScope.$on('searchModeChange', (ev, searchMode) =>
+      @$scope.searchMode = searchMode
+      return
+    )
+
 
 NavigationCtrl.$inject =
   ['$scope', '$rootScope', '$timeout',

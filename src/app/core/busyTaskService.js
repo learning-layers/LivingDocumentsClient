@@ -39,14 +39,14 @@ angular.module( "LivingDocuments.core.busytask", [
     ClassManager.registerClass('BusyTask', BusyTask);*/
 
     $rootScope.$on('AddBusyTask', function(ev, busyTask) {
-        if (busyTask instanceof BusyTask) {
+        /*if (busyTask instanceof BusyTask) {
             busyTasks.add(busyTask);
-        }
+        }*/
     });
     $rootScope.$on('RemoveBusyTask', function(ev, busyTask) {
-        if (busyTask instanceof BusyTask) {
+        /*if (busyTask instanceof BusyTask) {
             busyTasks.remove(busyTask);
-        }
+        }*/
     });
 
     return {
