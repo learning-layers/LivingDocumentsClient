@@ -210,5 +210,22 @@ angular.module( "LivingDocuments.maincontroller", [
       return
     )
 
+  fireResize = ->
+    console.log("Fire resize triggered.")
+    $rootScope.$emit(
+      "window:resize",
+      $(window).width(),
+      $(window).height()
+    )
+    $rootScope.$apply(->
+      $rootScope.windowInnerWidth = $(window).width()
+      $rootScope.windowInnerHeight = $(window).height()
+      return
+    )
+    return
+
+  #calling resize broadcast on resize event
+  angular.element(window).resize(fireResize)
+
   return
 )

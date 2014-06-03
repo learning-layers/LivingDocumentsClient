@@ -1,7 +1,7 @@
 <div class="flip-container document-content-panel flip-panel document-content-panel-turn-around" ng-class="{'flip-container-turned':attachmentsActive}">
     <div class="flipper">
         <div class="front panel panel-default doc-content-panel">
-            <div class="panel-heading panel-heading-sm">
+            <div ng-if="!attachmentsActive" class="panel-heading panel-heading-sm">
                 <div class="row first-row">
                     <button class="btn btn-info pull-left" ng-click="switchToAttachments()"><span class="glyphicon glyphicon-paperclip"></span>Attachments<span class="badge">{{ document.attachmentCount }}</span></button>
                     <div id="documentContentMaturityIndicator" class="pull-left demo-hidden">
@@ -14,8 +14,8 @@
                 <div class="row second-row">
                     <div class="btn-group">
                         <button class="btn btn-default" ng-click="openUserInfoModal(document.owner.id)"><span class="glyphicon glyphicon-user"></span>Owner: {{ document.owner.displayname }}</button>
-                        <button class="btn btn-default" ng-click="openAuthorList()">Authors<span class="badge badge-grey">{{ documentContent.content.authors.length }}</span></button>
-                        <button class="btn btn-default" ng-click="openViewerList()">Viewers<span class="badge badge-grey">{{ document.viewers.length }}</span></button>
+                        <button class="btn btn-default" ng-click="openAuthorList()">Authors<span class="badge badge-grey demo-hidden">{{ documentContent.content.authors.length }}</span></button>
+                        <button class="btn btn-default" ng-click="openViewerList()">Viewers<span class="badge badge-grey demo-hidden">{{ document.viewers.length }}</span></button>
                         <!--on 2014-01-27 15:59:01 augmented by ; last update at 2014-01-27 15:59:01 -->
                     </div>
                     <button class="btn btn-default demo-hidden"><span class="glyphicon glyphicon-info-sign"></span>More information</button>

@@ -8,9 +8,10 @@
 /**
  * Load bootstrap and layers theme.
  */
-@import 'vendor/layers-bootstrap-components/bootstrap.min.less';
-@import 'vendor/layers-bootstrap-components/bootstrap-theme.min.less';
-@import 'vendor/layers-bootstrap-components/custom/theme.less';
+//@import 'vendor/layers-bootstrap-components/bootstrap.min.less';
+//@import 'vendor/layers-bootstrap-components/bootstrap-theme.min.less';
+//@import 'vendor/layers-bootstrap-components/custom/theme.less';
+@import 'vendor/bootstrap/less/bootstrap.less';
 @import "font-awesome.min.less";
 @import "summernote.less";
 @import "summernote-bs3.less";
@@ -43,7 +44,7 @@
 /**
  * Scrollbar styles
  */
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 10px;
 }
@@ -55,9 +56,12 @@
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(255, 255, 240, .6);
-}
+}*/
 
 .demo-hidden {
+  visibility: hidden!important;
+  height: 0!important;
+  width: 0!important;
   display: none!important;
 }
 
@@ -204,6 +208,9 @@ html {
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
+  visibility: hidden!important;
+  height: 0!important;
+  width: 0!important;
   display: none !important;
 }
 
@@ -229,6 +236,7 @@ html {
  */
 @media @xs-device {
   @import "../app/navigation/navigation-xs.less";
+  @import "../app/login/login-xs.less";
 }
 
 @media @sm-device {
@@ -247,6 +255,9 @@ html {
  */
 .hide-summernote-backdrop-workaround {
   .modal-backdrop {
+    visibility: hidden!important;
+    height: 0!important;
+    width: 0!important;
     display: none;
   }
 }

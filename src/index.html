@@ -1,7 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html ng-app="LivingDocuments" ng-controller="MainCtrl">
+<!DOCTYPE html>
+<html id="ng-app" data-ng-app="LivingDocuments" data-ng-controller="MainCtrl">
   <head>
-    <title ng-bind="pageTitle"></title>
+    <title data-ng-bind="pageTitle"></title>
+
+    <meta charset="utf-8">
 
     <!-- Mobile viewport optimized -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5"> <!-- , user-scalable=no -->
@@ -12,24 +14,9 @@
     }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="assets/tinymce/lightgray/skin.min.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/tinymce/lightgray/skin.ie7.min.css"/>
-    
-    <script type="text/javascript">
-        (function() {
-        var head = document.getElementsByTagName('head')[0];
-        var faviconLink = document.createElement('link');
-        faviconLink.setAttribute('rel', 'icon');
-        faviconLink.setAttribute('type', 'image/x-icon');
-        faviconLink.setAttribute('href', 'data:image/x-icon;base64,AAABAAEAQCsQAAAAAAAgBwAAFgAAACgAAABAAAAAVgAAAAEABAAAAAAAuAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////ACaA3QChiTUAVKp4AG2MVAA8iaoAh3MnAFiQYgAikvIASpiQADCCwwCLi0QAX6JpACuU3QCTfC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB39wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/Mz9wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH8zMzMz93AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/MzMzMzMz/3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfzMzMzMzMzMz/3AAAAAAAAAAAAAAAAAAAAAAAAAAB38zMzMzMzMzMzMzP3AAAAAAAAAAAAAAAAAAAAAAAAf/MzMzMzMzMzMzMzMzP3AAAAAAAAAAAAAAAAAAAAAH8zMzMzMzMzzMMzMzMzMzP3AAAAAAAAAAAAAAAAAAB/MzMzMzMzMzyIhVwzMzMzMzP3AAAAAAAAAAAAAAAAfzMzMzMzMzM8WN3diIVcMzMzMzP/cAAAAAAAAAAAAP8zMzMzMzMzM1jd3d3d3YhVwzMzMzM/cAAAAAAAAAD/MzMzMzMzMzPFjd3d3d3d3d2IXDMzMzM/cAAAAAAA8zMzMzMzMzMzNY3d3d3d3d3d3d3YhcwzMzM/cAAAB/MzMzMzMzMzMzxY3d3d3d3d3d3d3d3diFwzMzM/cADzMzMzMzMzMzMzWN3d3d3d3d3d3d3d3d3d2IXDMzM/8AADMzMzMzMzM8Xd3d3d3d3d3d3d3d3d3d3d3YVcMAAAAAAAMzMzMzM1jd3d3d3dZmZqpE3d3d3d3d3d3dhQAAAAAAAAAzMzPI3d3d3d3Ua7u7u7u2aqTd3d3d3UREgAAAAAAAAAAAxY3d3d3d3aa+7u7u7ru7u7ZqTdREREREiAAAAAAAAACN3d3d3d3au+7u7u7u7u7u67u7akREREQAAAAAAAAACERE3d3d3Wvu7u7u7u7u7u7u7u67tmRAAAAAAAAAAAhERERERN1Gvu7u7u7u7u7u7u7u7u7uu7AAAAAAAAAIRERERERESmvu7u7u7u7u7u7u7u7u7umZIgAAAAAACERERERERESr7u7u7u7u7u7u7u7u7u7pmZmZkiAAAAjURERERERERr7u7u7u7u7u7u7u7u7umZmZmZmZAAAAhERERERERERr7u7u7u7u7u7u7u7u7pmZmZmZkAAACIREREREREREq77u7u7u7u7u7u7u7u6ZmZmZmZAAAAAAREREREREREa+7u7u7u7u7u7u7u7umZmZmZmQAAAAAAAAAEREREREa+7u7u7u7u7u7u7u6ZmZmZmZkAAAAAAAAAAAAABERKvu7u7u7u7u7u7u7umZmZmZmZAAAAAAAAAAAAAAAAAGvu7u7u7u7u7u7u7pmZmZmZmQAAAAAAAAAAAAAAAAAAKZmZ7u7u7u7u7u6ZmZmZmZkAAAAAAAAAAAAAAAAAACKZmZmZmZmZ7u7umZmZmZmZAAAAAAAAAAAAAAAAAAACmZmZmZmZmZmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAApmZmZmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAspmZmZmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAKZmZmZmZmZmZmZmZmZmZmZkAAAAAAAAAAAAAAAAAACmZmZmZmZmZmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAApmZmZmZmZmZmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAAAmZmZmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAAAAAAAmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZmZmZAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////w/////////8A/////////AAf///////wAAf//////8AAAf/////+AAAAf/////gAAAAf////4AAAAAf///+AAAAAAf///gAAAAAAP//4AAAAAAAP/+AAAAAAAAP/gAAAAAAAAPwAAAAAAAAAOAAAAAAAAAAPAAAAAAAAAP/gAAAAAAAA//wAAAAAAAB//8AAAAAAAA//wAAAAAAAP/+AAAAAAAH//gAAAAAAAf/4AAAAAAAA/+AAAAAAAAAfgAAAAAAAAD8AAAAAAAAB+AAAAAAAAAf8AAAAAAAAH//AAAAAAAB///wAAAAAAf///4AAAAAH////gAAAAB////4AAAAAf////AAAAAD////wAAAAA////8AAAAAH////gAAAAB////4AAAAAf///+AAAAAD////8AAAAA//////gAAAH///////wD//////w==');
-        //<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-        head.appendChild(faviconLink);
-        })();
-    </script>
-    
-    <!-- font awesome from BootstrapCDN -->
-    <!-- <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
-    
+    <!-- <link rel="stylesheet" type="text/css" href="assets/tinymce/lightgray/skin.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/tinymce/lightgray/skin.ie7.min.css"/> -->
+
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
 
@@ -58,27 +45,22 @@
       }());
     </script>
 
-    <!--[if lt IE 9]>
-        <!-- <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/css3pie/1.0.0/PIE.js"></script> -->
-    <![endif]-->
+    <!-- <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/css3pie/1.0.0/PIE.js"></script> -->
 
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
-    
-    <!-- <script>
-    var $j = jQuery.noConflict();
-    // $j is now an alias to the jQuery function; creating the new alias is optional.
-     
-    /*$j(document).ready(function() {
-        $j( "div" ).hide();
-    });
-     
-    // The $ variable now has the prototype meaning, which is a shortcut for
-    // document.getElementById(). mainDiv below is a DOM element, not a jQuery object.
-    window.onload = function() {
-        var mainDiv = $( "main" );
-    }*/
-    </script> -->
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+
+    <script type="text/javascript">
+      (function() {
+          var head = document.getElementsByTagName('head')[0];
+          var faviconLink = document.createElement('link');
+          faviconLink.setAttribute('rel', 'icon');
+          faviconLink.setAttribute('type', 'image/x-icon');
+          faviconLink.setAttribute('href', 'data:image/x-icon;base64,AAABAAEAQCsQAAAAAAAgBwAAFgAAACgAAABAAAAAVgAAAAEABAAAAAAAuAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////ACaA3QChiTUAVKp4AG2MVAA8iaoAh3MnAFiQYgAikvIASpiQADCCwwCLi0QAX6JpACuU3QCTfC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB39wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/Mz9wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH8zMzMz93AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/MzMzMzMz/3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfzMzMzMzMzMz/3AAAAAAAAAAAAAAAAAAAAAAAAAAB38zMzMzMzMzMzMzP3AAAAAAAAAAAAAAAAAAAAAAAAf/MzMzMzMzMzMzMzMzP3AAAAAAAAAAAAAAAAAAAAAH8zMzMzMzMzzMMzMzMzMzP3AAAAAAAAAAAAAAAAAAB/MzMzMzMzMzyIhVwzMzMzMzP3AAAAAAAAAAAAAAAAfzMzMzMzMzM8WN3diIVcMzMzMzP/cAAAAAAAAAAAAP8zMzMzMzMzM1jd3d3d3YhVwzMzMzM/cAAAAAAAAAD/MzMzMzMzMzPFjd3d3d3d3d2IXDMzMzM/cAAAAAAA8zMzMzMzMzMzNY3d3d3d3d3d3d3YhcwzMzM/cAAAB/MzMzMzMzMzMzxY3d3d3d3d3d3d3d3diFwzMzM/cADzMzMzMzMzMzMzWN3d3d3d3d3d3d3d3d3d2IXDMzM/8AADMzMzMzMzM8Xd3d3d3d3d3d3d3d3d3d3d3YVcMAAAAAAAMzMzMzM1jd3d3d3dZmZqpE3d3d3d3d3d3dhQAAAAAAAAAzMzPI3d3d3d3Ua7u7u7u2aqTd3d3d3UREgAAAAAAAAAAAxY3d3d3d3aa+7u7u7ru7u7ZqTdREREREiAAAAAAAAACN3d3d3d3au+7u7u7u7u7u67u7akREREQAAAAAAAAACERE3d3d3Wvu7u7u7u7u7u7u7u67tmRAAAAAAAAAAAhERERERN1Gvu7u7u7u7u7u7u7u7u7uu7AAAAAAAAAIRERERERESmvu7u7u7u7u7u7u7u7u7umZIgAAAAAACERERERERESr7u7u7u7u7u7u7u7u7u7pmZmZkiAAAAjURERERERERr7u7u7u7u7u7u7u7u7umZmZmZmZAAAAhERERERERERr7u7u7u7u7u7u7u7u7pmZmZmZkAAACIREREREREREq77u7u7u7u7u7u7u7u6ZmZmZmZAAAAAAREREREREREa+7u7u7u7u7u7u7u7umZmZmZmQAAAAAAAAAEREREREa+7u7u7u7u7u7u7u6ZmZmZmZkAAAAAAAAAAAAABERKvu7u7u7u7u7u7u7umZmZmZmZAAAAAAAAAAAAAAAAAGvu7u7u7u7u7u7u7pmZmZmZmQAAAAAAAAAAAAAAAAAAKZmZ7u7u7u7u7u6ZmZmZmZkAAAAAAAAAAAAAAAAAACKZmZmZmZmZ7u7umZmZmZmZAAAAAAAAAAAAAAAAAAACmZmZmZmZmZmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAApmZmZmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAspmZmZmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAKZmZmZmZmZmZmZmZmZmZmZkAAAAAAAAAAAAAAAAAACmZmZmZmZmZmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAApmZmZmZmZmZmZmZmZmZmZmZAAAAAAAAAAAAAAAAAAAAmZmZmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAAAAAAAmZmZmZmZmZmZmZmZmQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZmZmZAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////w/////////8A/////////AAf///////wAAf//////8AAAf/////+AAAAf/////gAAAAf////4AAAAAf///+AAAAAAf///gAAAAAAP//4AAAAAAAP/+AAAAAAAAP/gAAAAAAAAPwAAAAAAAAAOAAAAAAAAAAPAAAAAAAAAP/gAAAAAAAA//wAAAAAAAB//8AAAAAAAA//wAAAAAAAP/+AAAAAAAH//gAAAAAAAf/4AAAAAAAA/+AAAAAAAAAfgAAAAAAAAD8AAAAAAAAB+AAAAAAAAAf8AAAAAAAAH//AAAAAAAB///wAAAAAAf///4AAAAAH////gAAAAB////4AAAAAf////AAAAAD////wAAAAA////8AAAAAH////gAAAAB////4AAAAAf///+AAAAAD////8AAAAA//////gAAAH///////wD//////w==');
+          head.appendChild(faviconLink);
+      })();
+    </script>
   </head>
   <!--ng-class="{'body-grey':ApplicationState.application.loginMode}"-->
   <body>
@@ -88,6 +70,7 @@
     <div class="container ui-container">
         <div id="content" class="animate-ui-view" data-ui-view="main"></div>
     </div>
+    <div>{{ windowInnerWidth }} x {{ windowInnerHeight }}</div>
     <div document-content-context-menu=""></div>
   </body>
 </html>
