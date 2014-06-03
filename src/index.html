@@ -58,6 +58,10 @@
       }());
     </script>
 
+    <!--[if lt IE 9]>
+        <!-- <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/css3pie/1.0.0/PIE.js"></script> -->
+    <![endif]-->
+
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
     

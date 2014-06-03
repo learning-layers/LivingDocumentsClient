@@ -38,6 +38,12 @@ angular.module( 'LivingDocuments.login', [
   })
 )
 
-.controller( 'LoginCtrl', ($scope, ApplicationState) ->
+.controller( 'LoginCtrl', ($scope, ApplicationState, $rootScope) ->
   $scope.ApplicationState = ApplicationState
+
+  if (angular.isDefined($rootScope.pieEles))
+    angular.forEach($rootScope.pieEles, (value, key) ->
+      window.PIE.attach(value)
+      return
+    )
 )

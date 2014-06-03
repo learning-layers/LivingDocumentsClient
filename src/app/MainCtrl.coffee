@@ -25,6 +25,18 @@
 angular.module( "LivingDocuments.maincontroller", [
 ] )
 
+.directive('applyPie', ($timeout, $rootScope) ->
+  return {
+  restrict: 'A',
+  link: (scope, elem, attr) ->
+    if (window.PIE)
+      if(angular.isUndefined($rootScope.pieEles))
+        $rootScope.pieEles = []
+      $rootScope.pieEles.push(elem)
+    return
+  }
+)
+
 .controller( 'MainCtrl', ($scope, $rootScope, $timeout, $location, ApplicationState,
                           uuid4, $modal, UserInfoModel, UserInfoListModel, $log) ->
 
@@ -191,6 +203,12 @@ angular.module( "LivingDocuments.maincontroller", [
     )
     return
   )
+
+  if (angular.isDefined($rootScope.pieEles))
+    angular.forEach($rootScope.pieEles, (value, key) ->
+      window.PIE.attach(value)
+      return
+    )
 
   return
 )
