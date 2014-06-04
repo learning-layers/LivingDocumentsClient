@@ -19,9 +19,21 @@
                     </div> -->
                     <div class="form-group" ng-class="{'login-mode':ApplicationState.application.loginMode}">
                         <label for="username" class="hide">Username:</label>
-                        <input id="username" class="form-control" type="text" placeholder="Username" ng-model="username" ng-pattern="/^[A-z0-9]+$/" ng-disabled="loginInProgress"></input>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input id="username" class="form-control" type="text"
+                                   placeholder="Username" ng-model="username"
+                                   ng-pattern="/^[A-z0-9]+$/" ng-disabled="loginInProgress"></input>
+                        </div>
                         <label for="password" class="hide">Password:</label>
-                        <input id="password" class="form-control" type="password" placeholder="Password" ng-model="password" ng-disabled="loginInProgress"></input>
+                        <div class="input-group-wrapper">
+                            <div class="input-group">
+                                <span class="input-group-addon key-input-group-addon"><i class="fa fa-key"></i></span>
+                                <input id="password" class="form-control" type="password"
+                                       placeholder="Password" ng-model="password"
+                                       ng-disabled="loginInProgress"></input>
+                            </div>
+                        </div>
                         <button class="btn btn-default collapsed-btn login-btn"
                                 ng-class="{'login-mode':ApplicationState.application.loginMode}"
                                 ng-click="login()"
