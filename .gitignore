@@ -14,3 +14,4 @@ vendor/*
 !vendor/jqueryuicustom/*
 !vendor/layers-bootstrap-components/*
 !vendor/toggle-switch-custom/*
+!vendor/custom-jquery-file-upload/*

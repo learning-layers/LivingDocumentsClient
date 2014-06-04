@@ -86,7 +86,7 @@ module.exports = {
       'vendor/summernote/dist/summernote.min.js',
       'vendor/angular-treeview-custom/angular.treeview.js',
       'vendor/angular-summernote/dist/angular-summernote.min.js',
-      'vendor/jquery-file-upload/dist/uploader.min.js'
+      'vendor/custom-jquery-file-upload/dist/uploader.js'
     ],
     css: [
     ],
