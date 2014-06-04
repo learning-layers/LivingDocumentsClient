@@ -22,7 +22,12 @@
                         <input id="username" class="form-control" type="text" placeholder="Username" ng-model="username" ng-pattern="/^[A-z0-9]+$/" ng-disabled="loginInProgress"></input>
                         <label for="password" class="hide">Password:</label>
                         <input id="password" class="form-control" type="password" placeholder="Password" ng-model="password" ng-disabled="loginInProgress"></input>
-                        <button class="btn btn-default collapsed-btn login-btn" ng-class="{'login-mode':ApplicationState.application.loginMode}" ng-click="login()" ng-disabled="loginInProgress || !loginForm.$valid">Login</button>
+                        <button class="btn btn-default collapsed-btn login-btn"
+                                ng-class="{'login-mode':ApplicationState.application.loginMode}"
+                                ng-click="login()"
+                                ng-disabled="loginInProgress || !loginForm.$valid">
+                            <i class="fa fa-sign-in"></i> Login
+                        </button>
                     </div>
                 </form>
             </div>
@@ -33,10 +38,10 @@
                 </li>
                 <li class="collapsed-btn" ng-if="ApplicationState.application.loginMode"
                     ui-route="/login" ng-class="{active:$uiRoute}">
-                    <a href="#/login">Home</a>
+                    <a href="#/login"><i class="fa fa-home"></i> Home</a>
                 </li>
                 <li class="collapsed-btn" ng-if="ApplicationState.application.loginMode" ui-route="/register" ng-class="{active:$uiRoute}">
-                    <a href="#/register">Register</a>
+                    <a href="#/register"><i class="fa fa-indent"></i> Register</a>
                 </li>
                 <li ng-if="!ApplicationState.application.loginMode" class="dropdown">
                     <a href="#/document" class="dropdown-toggle"  ui-route="/document/[0-9]*" ng-class="{active:$uiRoute}" data-toggle="dropdown">Document<strong class="caret"/></strong></a>
