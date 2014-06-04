@@ -2,6 +2,21 @@
   .navbar-nav {
     margin: 0;
   }
+  .navbar-toggle {
+    &:hover {
+      background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+      background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+      background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+      background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+      background-color: #e6e6e6;
+      border: 1px solid #555;
+      border-radius: 4px;
+    }
+    &:focus {
+      background-color: transparent;
+    }
+  }
   .coll-menu-space {
     margin-top: 30px;
   }
