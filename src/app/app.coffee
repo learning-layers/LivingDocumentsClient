@@ -36,6 +36,7 @@ angular.module( 'LivingDocuments', [
   "ui.keypress"
   "ngSanitize"
   "summernote"
+  "blueimp.fileupload"
 
   #dependencies of this application
   "LivingDocuments.core"
