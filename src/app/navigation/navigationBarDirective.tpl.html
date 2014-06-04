@@ -91,13 +91,15 @@
             <ul ng-if="!ApplicationState.application.loginMode" class="nav navbar-nav navbar-right" ng-class="{'search-mode-invisible':searchMode}">
                 <li class="dropdown user-option-dropdown">
                     <a href="" class="dropdown-toggle user-option-toggle" data-toggle="dropdown" ng-click="$parent.userDropDownOpen = !$parent.userDropDownOpen">
-                        <span class="img-thumbnail">
-                            <span ng-show="profileImgSrc === ''" class="glyphicon glyphicon-user"></span>
-                            <img ng-show="profileImgSrc !== ''" ng-src="{{ profileImgSrc }}" style="width: 30px; height: 30px; margin-top: -5px;">
-                             /
-                            <span class="glyphicon glyphicon-wrench"></span>
-                        </span>
-                        <strong class="caret"/></strong>
+                        <div class="settings-img-thumbnail">
+                            <span class="img-thumbnail">
+                                <span ng-show="profileImgSrc === ''" class="glyphicon glyphicon-user"></span>
+                                <img ng-show="profileImgSrc !== ''" ng-src="{{ profileImgSrc }}" style="width: 35px; height: 35px; margin-top: -5px;display: inline-block!important;">
+                                 /
+                                <span class="glyphicon glyphicon-wrench"></span>
+                            </span>
+                            <strong class="caret"/></strong>
+                        </div>
                     </a>
 
                     <ul class="dropdown-menu">
