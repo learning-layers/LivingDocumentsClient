@@ -32,11 +32,10 @@ angular.module( 'LivingDocuments', [
   "uuid"
   "LocalStorageModule"
   "angularTreeview"
-  "angularFileUpload"
   "ui.keypress"
   "ngSanitize"
   "summernote"
-  "blueimp.fileupload"
+  "uploadModule"
 
   #dependencies of this application
   "LivingDocuments.core"
