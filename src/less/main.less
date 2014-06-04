@@ -4,7 +4,6 @@
  * the Grunt configuration that is automatically processed.
  */
 //==============================================================================
-
 /**
  * Load bootstrap and layers theme.
  */
@@ -17,22 +16,18 @@
 @import "summernote-bs3.less";
 @import "modal.less";
 @import "button.less";
-
 /**
  * Load angular-treeview theme.
  */
 @import 'vendor/angular-treeview-custom/less/angular.treeview.less';
-
 /**
  * Load toggle switch.
  */
 @import 'vendor/toggle-switch-custom/dist/toggle-switch.less';
-
 /**
  * Load animations.
  */
 @import "vendor/animate.css-custom/animate.min.less";
-
 /**
  * This is our main variables file. It in turn imports the `variables` file from
  * Twitter Bootstrap. We must include it last so we can overwrite any variable
@@ -59,31 +54,32 @@
 }*/
 
 .demo-hidden {
-  visibility: hidden!important;
-  height: 0!important;
-  width: 0!important;
-  display: none!important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  display: none !important;
 }
 
 /**
  * Body styles
  */
 body {
-    height: 100vh;
-    padding-top: 0;
-    padding-bottom: 20px;
-    overflow: hidden;
-    font-size: 12px;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 12px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow-y: auto;
 }
 
 h1 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 #content {
-    padding-top: 70px;
-    min-height: 80%;
+  padding-top: 70px;
+  //height: 100%;
+  overflow-x: hidden;
 }
 
 strike {
@@ -94,123 +90,122 @@ strike {
  * Ui view animation
  */
 .animate-ui-view {
-    &.ng-enter {
-        transition-delay: 0.7s;
-        -webkit-animation: rotateInUpRight 0.7s;
-        -moz-animation: rotateInUpRight 0.7s;
-        -ms-animation: rotateInUpRight 0.7s;
-        animation: rotateInUpRight 0.7s;
-        z-index: 1031;
-        &.ng-enter-active {
-            opacity: 1;
-            z-index: 1031;
-        }
+  &.ng-enter {
+    transition-delay: 0.7s;
+    -webkit-animation: rotateInUpRight 0.7s;
+    -moz-animation: rotateInUpRight 0.7s;
+    -ms-animation: rotateInUpRight 0.7s;
+    animation: rotateInUpRight 0.7s;
+    z-index: 1031;
+    &.ng-enter-active {
+      opacity: 1;
+      z-index: 1031;
     }
-    &.ng-leave {
-        -webkit-animation: rotateOutUpLeft 0.7s;
-        -moz-animation: rotateOutUpLeft 0.7s;
-        -ms-animation: rotateOutUpLeft 0.7s;
-        animation: rotateOutUpLeft 0.7s;
-        z-index: 1032;
-        &.ng-leave-active {
-            opacity: 0;
-            z-index: 1032;
-        }
+  }
+  &.ng-leave {
+    -webkit-animation: rotateOutUpLeft 0.7s;
+    -moz-animation: rotateOutUpLeft 0.7s;
+    -ms-animation: rotateOutUpLeft 0.7s;
+    animation: rotateOutUpLeft 0.7s;
+    z-index: 1032;
+    &.ng-leave-active {
+      opacity: 0;
+      z-index: 1032;
     }
+  }
 }
 
 .background-grey {
-    background: none repeat scroll 0 0 #DBDBDB;
-    height: 100%;
+  background: none repeat scroll 0 0 #DBDBDB;
+  height: 100%;
 }
 
 html {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 .container.ui-container {
-    height: 100%;
-    overflow: auto;
+  height: auto;
 }
 
 #messageBar {
-    position: fixed;
-    top: 51px;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-    .alert {
-        border-radius: 0;
-        opacity: 0.8;
-        p {
-          text-align: center;
-        }
+  position: fixed;
+  top: 51px;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  .alert {
+    border-radius: 0;
+    opacity: 0.8;
+    p {
+      text-align: center;
     }
-    .progress {
-        margin-bottom: 0;
-    }
-    .font-percentage {
-        font-weight: bold;
-        color: black;
-        font-size: 16px;
-    }
+  }
+  .progress {
+    margin-bottom: 0;
+  }
+  .font-percentage {
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+  }
 }
 
 .times-font {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 /**
 * ngAnimate animations
 */
 .alert.alert-danger.message-element {
-    &.ng-enter {
-        -webkit-animation: bounceIn 1s;
-        -moz-animation: bounceIn 1s;
-        -ms-animation: bounceIn 1s;
-        animation: bounceIn 1s;
-        &.ng-enter-active {
-            opacity: 1;
-        }
+  &.ng-enter {
+    -webkit-animation: bounceIn 1s;
+    -moz-animation: bounceIn 1s;
+    -ms-animation: bounceIn 1s;
+    animation: bounceIn 1s;
+    &.ng-enter-active {
+      opacity: 1;
     }
-  
-    &.ng-leave {
-        -webkit-animation: bounceOut 1s;
-        -moz-animation: bounceOut 1s;
-        -ms-animation: bounceOut 1s;
-        animation: bounceOut 1s;
-        &.ng-leave-active {
-            opacity: 0;
-        }
+  }
+
+  &.ng-leave {
+    -webkit-animation: bounceOut 1s;
+    -moz-animation: bounceOut 1s;
+    -ms-animation: bounceOut 1s;
+    animation: bounceOut 1s;
+    &.ng-leave-active {
+      opacity: 0;
     }
+  }
 }
 
 .alert.alert-success.message-element, .alert.alert-info.message-element, .alert.alert-warning.message-element {
-    &.ng-enter {
-        -webkit-animation: fadeIn 1s;
-        -moz-animation: fadeIn 1s;
-        -ms-animation: fadeIn 1s;
-        animation: fadeIn 1s;
-        &.ng-enter-active {
-            opacity: 1;
-        }
+  &.ng-enter {
+    -webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    &.ng-enter-active {
+      opacity: 1;
     }
-  
-    &.ng-leave {
-        -webkit-animation: fadeOut 1s;
-        -moz-animation: fadeOut 1s;
-        -ms-animation: fadeOut 1s;
-        animation: fadeOut 1s;
-        &.ng-leave-active {
-            opacity: 0;
-        }
+  }
+
+  &.ng-leave {
+    -webkit-animation: fadeOut 1s;
+    -moz-animation: fadeOut 1s;
+    -ms-animation: fadeOut 1s;
+    animation: fadeOut 1s;
+    &.ng-leave-active {
+      opacity: 0;
     }
+  }
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
-  visibility: hidden!important;
-  height: 0!important;
-  width: 0!important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
   display: none !important;
 }
 
@@ -255,9 +250,9 @@ html {
  */
 .hide-summernote-backdrop-workaround {
   .modal-backdrop {
-    visibility: hidden!important;
-    height: 0!important;
-    width: 0!important;
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
     display: none;
   }
 }
