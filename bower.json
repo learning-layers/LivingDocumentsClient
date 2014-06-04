@@ -24,6 +24,7 @@
     "angular-summernote": "0.2.1",
     "respond": "1.4.2",
     "tinymce": "4.0.0",
+    "blueimp-load-image": "1.11.1",
     "jquery-file-upload": "git://github.com/DominicBoettger/jQuery-File-Upload.git#1.0.4"
   },
   "dependencies": {},
