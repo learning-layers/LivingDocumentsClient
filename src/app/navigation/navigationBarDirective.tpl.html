@@ -17,7 +17,7 @@
                     <!-- <div class="alert alert-danger" ng-show="loginForm.$dirty && loginForm.$invalid">
                         Wrong username
                     </div> -->
-                    <div class="form-group" ng-class="{'login-mode':ApplicationState.application.loginMode}">
+                    <div class="form-group visible-xs" ng-class="{'login-mode':ApplicationState.application.loginMode}">
                         <label for="username" class="hide">Username:</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -34,6 +34,22 @@
                                        ng-disabled="loginInProgress"></input>
                             </div>
                         </div>
+                        <button class="btn btn-default collapsed-btn login-btn"
+                                ng-class="{'login-mode':ApplicationState.application.loginMode}"
+                                ng-click="login()"
+                                ng-disabled="loginInProgress || !loginForm.$valid">
+                            <i class="fa fa-sign-in"></i> Login
+                        </button>
+                    </div>
+                    <div class="form-group hidden-xs" ng-class="{'login-mode':ApplicationState.application.loginMode}">
+                        <label for="username" class="hide">Username:</label>
+                        <input class="form-control" type="text"
+                               placeholder="Username" ng-model="username"
+                               ng-pattern="/^[A-z0-9]+$/" ng-disabled="loginInProgress"></input>
+                        <label for="password" class="hide">Password:</label>
+                        <input class="form-control" type="password"
+                               placeholder="Password" ng-model="password"
+                               ng-disabled="loginInProgress"></input>
                         <button class="btn btn-default collapsed-btn login-btn"
                                 ng-class="{'login-mode':ApplicationState.application.loginMode}"
                                 ng-click="login()"
