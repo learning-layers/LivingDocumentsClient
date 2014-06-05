@@ -42,7 +42,6 @@ class CreateCommentModalCtrl extends BaseController
       @$log.debug(@comment)
     return
   defineScope: ->
-    that = @
     @$scope.cmd = @cmd
     if (@cmd == 'Edit')
       @$scope.title = @comment.title
@@ -50,13 +49,12 @@ class CreateCommentModalCtrl extends BaseController
     @$scope.document = @document
     if angular.isDefined @comment
       @$scope.comment = @comment
-    @$scope.cancel = ->
-      that.$modalInstance.dismiss('cancel')
+    @$scope.cancel = =>
+      @$modalInstance.dismiss('cancel')
       return
     @$scope.createComment = @createComment.bind(@)
     return
-  createComment: ->
-    that = @
+  createComment: =>
     newTitle = @$scope.title
     newText = @$scope.text
     if (@cmd != 'Edit')
@@ -68,9 +66,9 @@ class CreateCommentModalCtrl extends BaseController
           newText,
           @comment
         )
-      createCommentTask.success((success) ->
+      createCommentTask.success((success) =>
         if (angular.isDefined(success.documentId))
-          that.commentList.comments.add(
+          @commentList.comments.add(
             {
               id: success.commentId
               title: newTitle
@@ -78,14 +76,14 @@ class CreateCommentModalCtrl extends BaseController
             }
           )
         else if (angular.isDefined(success.parentId))
-          that.comment.commentList.add(
+          @comment.commentList.add(
             {
               id: success.commentId
               title: newTitle
               text: newText
             }
           )
-        that.$modalInstance.dismiss('close')
+        @$modalInstance.dismiss('close')
         return
       )
     else if (@cmd == 'Edit')
@@ -97,10 +95,10 @@ class CreateCommentModalCtrl extends BaseController
           newTitle,
           newText
         )
-      editCommentTask.success((success) ->
+      editCommentTask.success((success) =>
         commentToEdit.title = newTitle
         commentToEdit.text = newText
-        that.$modalInstance.dismiss('close')
+        @$modalInstance.dismiss('close')
       )
     return
 
