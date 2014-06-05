@@ -1,0 +1,89 @@
+<div id="loadingDocument" ng-show="loadingDocument">
+    <div class="well">
+        <h2 class="letterpress-effect">Loading...</h2>
+        <div class="center-logo">
+            <img src="assets/img/layers-large-transparent-500.png" alt="Layers Logo">
+        </div>
+    </div>
+</div>
+<div id="document" ng-hide="loadingDocument">
+    <div class="well well-sm doc-heading">
+        <div class="title-section">
+            <div class="title-wrapper pull-left">
+                <h1 class="panel-title">{{ document.title }}</h1>
+            </div>
+            <div class="btn-group pull-right">
+                <a class="btn btn-info" href="#/document/{{ document.parent_document_id }}" ng-show="document.parent_document_id != null && document.parent_document_id != ''"><span class="glyphicon glyphicon-arrow-up"></span>Parent document</a>
+                <button class="btn btn-default demo-hidden" ng-show="!document.isAlreadyAddedToUserFolders" disabled><span class="glyphicon glyphicon-folder-close"></span>Add to your folders</button>
+                <button class="btn btn-default" ng-show="document.isAlreadyAddedToUserFolders"><span class="glyphicon glyphicon-folder-close"></span>Move</button>
+                <button class="btn btn-default" ng-show="document.userHasSharingRights"><span class="glyphicon glyphicon-share-alt"></span>Share</button>
+                <div class="btn-group">
+                    <button id="subscribe-dropdown" type="button" class="btn dropdown-toggle"
+                            ng-class="{'btn-default':!document.checkHasSubscriptions(), 'btn-success':document.checkHasSubscriptions()}" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-retweet"></span>
+                        Subscribe to changes
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="subscribe-dropdown">
+                        <li><span class="dropdown-label">Notify me about:</span></li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="document.subscriptions.all"> All of the below
+                                </label>
+                            </div>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="document.subscriptions.content"> Content changes
+                                </label>
+                            </div>
+                        </li>
+                        <li role="presentation">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="document.subscriptions.attachment"> Attachment changes
+                                </label>
+                            </div>    
+                        </li>
+                        <li role="presentation">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="document.subscriptions.discussions"> New Discussions
+                                </label>
+                            </div>   
+                        </li>
+                        <li role="presentation">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" ng-model="document.subscriptions.comments"> Comment changes
+                                </label>
+                            </div>    
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="tag-section pull-left">
+            <a href="" class="tag btn btn-warning" disabled ng-repeat="tag in document.tags"><span class="glyphicon glyphicon-tag"></span>{{ tag.name }}</a>
+        </div>
+        <div class="edit-tags pull-right"><button class="btn btn-default" ng-click="openEditTags()"><span class="glyphicon glyphicon-tags"></span>Edit tags</button></div>
+        <div style="clear: both"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div document-content="" document="document"></div>
+                <div document-comments="" document="document"></div>
+            </div>
+            <div class="col-lg-4 demo-hidden">
+                <div class="demo-hidden" document-discussions="" document="document"></div>
+                <div class="demo-hidden" document-recommendations=""></div>
+            </div>
+        </div>
+    </div>
+</div>

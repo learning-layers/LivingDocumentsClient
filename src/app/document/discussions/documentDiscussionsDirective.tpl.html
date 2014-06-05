@@ -1,6 +1,6 @@
 <div id="document-discussions" class="panel panel-default doc-discussion-panel">
     <div class="panel-heading panel-heading-sm discussion-panel-heading">
-        <img class="discussion-icon pull-left" src="assets/img/iconmonstr-speech-bubble-15-icon-256.png" width="25px" height="25px">
+        <img class="discussion-icon pull-left" src="assets/img/iconmonstr-speech-bubble-15-icon-256.png" width="25px" height="25px" alt="discussions-icon">
         <h4 class="pull-left">Discussions</h4>
         <div class="btn-group pull-right">
             <button class="btn btn-default" ng-click="openCreateDiscussionModal()"><span class="glyphicon glyphicon-plus-sign"></span> Create Discussion</button>
@@ -27,12 +27,12 @@
                 </div>
                 <div class="col-lg-6">
                     <a href="#/document/{{discussion.id}}" class="btn btn-info">
-                        <img class="discussion-icon" src="assets/img/iconmonstr-speech-bubble-15-icon.svg">
+                        <img class="discussion-icon" src="assets/img/iconmonstr-speech-bubble-15-icon.svg" alt="discussions-icon" >
                         Open Discussion
                     </a>
                     <div ng-if="discussion.isOpen">
                         <a href="" class="thumbnail thumbnail-picture" ng-click="openUserInfoModal(author.id)" ng-repeat="author in discussion.content.authors">
-                            <img ng-init="loadUserImgSrc(author.id, author)" ng-src="{{ author.img }}" class="img-responsive">
+                            <img ng-init="loadUserImgSrc(author.id, author)" ng-src="{{ author.img }}" class="img-responsive" alt="user image" >
                         </a>
                     </div>
                 </div>

@@ -5,10 +5,12 @@
                 <span>Menu</span>
             </button>
             <ul class="nav navbar-nav">
-                <a class="navbar-brand" href="#/home">
-                    <img src="assets/img/layers-large-transparent-500.png" width="24" height="16" alt="Learning Layers" ng-class="{'busy': busyTasks.length > 0}">
-                     Living Documents
-                </a>
+                <li>
+                    <a class="navbar-brand" href="#/home">
+                        <img src="assets/img/layers-large-transparent-500.png" width="24" height="16" alt="Learning Layers" ng-class="{'busy': busyTasks.length > 0}" alt="Layers logo">
+                         Living Documents
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="navbar-collapse collapse in" style="height: auto;" ng-class="{'login-mode':ApplicationState.application.loginMode}">
@@ -94,7 +96,7 @@
                         <div class="settings-img-thumbnail">
                             <span class="img-thumbnail">
                                 <span ng-show="profileImgSrc === ''" class="glyphicon glyphicon-user"></span>
-                                <img ng-show="profileImgSrc !== ''" ng-src="{{ profileImgSrc }}" style="width: 35px; height: 35px; margin-top: -5px;display: inline-block!important;">
+                                <img ng-show="profileImgSrc !== ''" ng-src="{{ profileImgSrc }}" style="width: 35px; height: 35px; margin-top: -5px;display: inline-block!important;"  alt="Profile image">
                                  /
                                 <span class="glyphicon glyphicon-wrench"></span>
                             </span>
