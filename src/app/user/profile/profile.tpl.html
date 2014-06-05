@@ -43,16 +43,16 @@
                         <div class="pull-left first-col">
                             <div class="userprofile-avatar thumbnail">
                                 <img class="profileimg img-responsive" ng-src="{{ profileImgSrc }}">
-                                <div ng-show="editMode" ng-controller="ProfileImageUploadCtrl">
+                                <!-- <div ng-show="editMode" ng-controller="ProfileImageUploadCtrl">
                                   <input type="text" ng-model="myModelObj">
                                   <input type="file" ng-file-select="onFileSelect($files)">
                                   <!-- <input type="file" ng-file-select="onFileSelect($files)" multiple>
                                   <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class" 
                                         ng-show="dropSupported">drop files here</div> -->
-                                  <div ng-file-drop-available="dropSupported=true" 
+                                  <!-- <div ng-file-drop-available="dropSupported=true"
                                         ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
                                   <button ng-click="upload.abort()">Cancel Upload</button>
-                                </div>
+                                </div> -->
                             </div>
                             <button class="btn btn-default btn-add-tag" ng-click="openAddTag()"><span class="glyphicon glyphicon-plus-sign"></span> Add tag</button>
                             <div class="well well-sm">
