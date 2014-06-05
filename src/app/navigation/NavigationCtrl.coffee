@@ -44,6 +44,7 @@ class NavigationCtrl extends BaseController
     @$scope.login = @login
     @$scope.logout = @logout
     @$scope.checkRoles = @checkRoles
+    @$scope.SecurityService = @SecurityService
     return
   issueSearch: (searchValue) =>
     @$log.debug("Issued Search with searchValue=" + searchValue)
@@ -136,6 +137,8 @@ class NavigationCtrl extends BaseController
       })
       .success((success, status) =>
         @$scope.profileImgSrc = 'data:' + success.type + ';base64,' + success.content
+        @$scope.profileImgSrc = @SecurityService.getInitialConfiguration().restServerAddress +
+          '/userimg/' + @SecurityService.currentUser.id + '/profile/image'
         return
       )
       .error((error, status) =>
