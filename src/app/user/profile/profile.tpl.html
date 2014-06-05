@@ -53,6 +53,7 @@
                                         ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
                                   <button ng-click="upload.abort()">Cancel Upload</button>
                                 </div> -->
+                                <div ng-show="editMode" ng-upload-form="" url="{{ uploadProfileImagePath }}" auto-upload="true" size-limit="50000000"></div>
                             </div>
                             <button class="btn btn-default btn-add-tag" ng-click="openAddTag()"><span class="glyphicon glyphicon-plus-sign"></span> Add tag</button>
                             <div class="well well-sm">

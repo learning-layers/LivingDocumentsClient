@@ -37,6 +37,11 @@ angular.module( 'LivingDocuments.user.profile', [
 })
 
 .controller( 'UserProfileCtrl', function UserProfileCtrl( $scope, $stateParams, $rootScope, $http, User, SecurityService, $modal, $log) {
+    var basePath = SecurityService.getInitialConfiguration().restServerAddress;
+    var uploadProfileImagePath = basePath + '/userimg/' + SecurityService.currentUser.id + '/profile?method=uploadimage';
+    uploadProfileImagePath = uploadProfileImagePath.replace("http:", "");
+    $scope.uploadProfileImagePath = uploadProfileImagePath;
+
     $scope.item = $stateParams.item;
     $scope.isOwner = (SecurityService.currentUser.id == $stateParams.item);
 
