@@ -62,6 +62,8 @@ documentCommentsModule.factory "DocumentCommentsController", ->
               return that.$scope.comments
             rootScope: ->
               return that.$rootScope
+            SecurityService: ->
+              return that.SecurityService
           }
         }
       )

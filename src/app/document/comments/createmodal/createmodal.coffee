@@ -35,9 +35,11 @@ createCommentsCreateModal = angular.module(
 class CreateCommentModalCtrl extends BaseController
   constructor: ($scope, @$modalInstance, $log, @document,
                 @DocumentCommentModel, @comment, @cmd,
-                @commentList, @rootScope) ->
+                @commentList, @rootScope, @SecurityService, @User) ->
     super($scope)
     @$log = $log.getInstance("CreateCommentModalCtrl")
+    @$log.debug("SecurityService")
+    @$log.debug(SecurityService.currentUser.displayname)
     if angular.isDefined @comment
       @$log.debug(@comment)
     return
@@ -68,21 +70,44 @@ class CreateCommentModalCtrl extends BaseController
         )
       createCommentTask.success((success) =>
         if (angular.isDefined(success.documentId))
+          newComment = {
+            id: success.commentId
+            title: newTitle
+            text: newText
+            creator: {
+              id: @SecurityService.currentUser.id,
+              displayname: @SecurityService.currentUser.displayname
+            }
+          }
           @commentList.comments.add(
-            {
-              id: success.commentId
-              title: newTitle
-              text: newText
-            }
+            newComment
           )
+          @$log.debug("Created new comment")
+          @$log.debug(newComment)
         else if (angular.isDefined(success.parentId))
-          @comment.commentList.add(
-            {
-              id: success.commentId
-              title: newTitle
-              text: newText
+          newComment = {
+            id: success.commentId
+            title: newTitle
+            text: newText
+            creator: {
+              id: @SecurityService.currentUser.id,
+              displayname: @SecurityService.currentUser.displayname
             }
+          }
+          @comment.commentList.add(
+            newComment
           )
+        @User.getUserById(
+          @SecurityService.currentUser.id,
+          (success) =>
+            newComment.creator.displayname = success.user.displayname
+          ,
+          (error) =>
+            @$scope.loadingProfileinfo = false
+            return
+        )
+        @$log.debug("Created new comment")
+        @$log.debug(newComment)
         @$modalInstance.dismiss('close')
         return
       )
@@ -105,6 +130,6 @@ class CreateCommentModalCtrl extends BaseController
 CreateCommentModalCtrl.$inject =
   ['$scope', '$modalInstance', '$log',
    'document', 'DocumentCommentModel', 'comment',
-   'cmd', 'commentList', 'rootScope']
+   'cmd', 'commentList', 'rootScope', 'SecurityService', 'User']
 createCommentsCreateModal.controller( 'CreateCommentModalCtrl',
   CreateCommentModalCtrl)
