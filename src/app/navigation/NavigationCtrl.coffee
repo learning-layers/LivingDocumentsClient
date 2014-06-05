@@ -44,7 +44,32 @@ class NavigationCtrl extends BaseController
     @$scope.login = @login
     @$scope.logout = @logout
     @$scope.checkRoles = @checkRoles
+    @$scope.openCreateNewDocumentModal = @openCreateNewDocumentModal
     @$scope.SecurityService = @SecurityService
+    @CreateNewDocumentModalInstanceCtrl = ['$scope', '$modalInstance', ($scope, $modalInstance) =>
+      $scope.title = ''
+      $scope.togglePublicOn = true
+      $scope.togglePublicCount = 0
+      $scope.togglePublic = =>
+        #This function contains a workaround because it is triggered twice
+        #upon clicking the checkbox.
+        @$log.debug("Triggered toggleRememberMe function")
+        if ($scope.togglePublicCount == 1)
+          $scope.togglePublicOn = !$scope.togglePublicOn
+          @$log.debug("togglePublicOn=" + $scope.togglePublicOn)
+          $scope.togglePublicCount = 0
+        else
+          $scope.togglePublicCount++
+        return
+
+      $scope.ok = (title) =>
+        $modalInstance.close(title)
+        return
+
+      $scope.cancel = =>
+        $modalInstance.dismiss('cancel')
+        return
+    ]
     return
   issueSearch: (searchValue) =>
     @$log.debug("Issued Search with searchValue=" + searchValue)
@@ -154,6 +179,42 @@ class NavigationCtrl extends BaseController
       @$scope.searchMode = searchMode
       return
     )
+    return
+  openCreateNewDocumentModal: =>
+    modalInstance = @$modal.open({
+      templateUrl: 'document/createmodal/createmodal.tpl.html',
+      controller: @CreateNewDocumentModalInstanceCtrl,
+      resolve: {
+      }
+    })
+    modalInstance.result.then(
+      (title) =>
+        #create new document
+        basePath = @SecurityService.getInitialConfiguration().restServerAddress
+        userPath = '/document'
+        @$http({
+          method: 'POST',
+          url: basePath + userPath,
+          data: {
+            title: title
+          },
+          headers: {'Authorization': @SecurityService.currentUser.authorizationString}
+        })
+        .success((success, status) =>
+          @$rootScope.$broadcast('success', "Document created successfully.")
+          @$location.path('/document/' + success.document.id)
+        )
+        .error((error, status) =>
+          @$rootScope.$broadcast('error', "Document couldn't be created!")
+          return
+        )
+        return
+      ,
+      =>
+        @$log.info('Modal dismissed at: ' + new Date())
+        return
+    )
+    return
 
 
 NavigationCtrl.$inject =
