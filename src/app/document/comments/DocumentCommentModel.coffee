@@ -56,6 +56,10 @@ class DocumentCommentModel extends BaseEventDispatcher
     return @DocumentCommentService.editComment(
       documentId, commentId, commentTitle, commentText
     )
+  increaseThumbsUp: (comment) =>
+    return @DocumentCommentService.increaseThumbsUp(
+      comment.id
+    )
 
 
 documentCommentModel.factory "DocumentCommentModel",

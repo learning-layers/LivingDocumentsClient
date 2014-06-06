@@ -1,4 +1,7 @@
 <div class="panel panel-info comment-panel">
+    <div ng-if="comments.likes === undefined || comments.likes === null">
+        <div ng-init="comments.likes = 0"></div>
+    </div>
     <div class="panel-heading panel-heading-sm">
         <img class="img-circle" src="http://placehold.it/40x40" alt="Profile picture placeholder" >
         <div class="accordion-toggle-wrap" ng-click="isCollapsed = !isCollapsed">
@@ -11,8 +14,8 @@
                 <div style="clear:both;"></div>
             </a>
         </div>
-        <div class="btn-group pull-right">
-            <button class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><span ng-show="comments.likes === null || comments.likes === undefined">0</span><span ng-hide="comments.likes === null || comments.likes === undefined">{{ comment.likes }}</span></span></button>
+        <div class="btn-group pull-right" >
+            <button class="btn btn-success" ng-click="increaseThumbsUp(comment)"><span class="glyphicon glyphicon-thumbs-up"></span><span class="badge"><span ng-show="comments.likes === undefined || comments.likes === null">0</span><span ng-hide="comments.likes === undefined || comments.likes === null">{{ comment.likes }}</span></span></button>
             <!-- <button class="btn btn-danger"><span class="glyphicon glyphicon-thumbs-down"></span><span class="badge">3</span></button> -->
             <button class="btn btn-info" ng-show="security.currentUser.id == comment.creator.id" ng-click="openCreateCommentModal('Edit', comment)"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
             <button class="btn btn-info" ng-hide="security.currentUser.id == comment.creator.id" ng-click="openCreateCommentModal('Reply', comment)"><span class="glyphicon glyphicon-plus-sign"></span> Reply</button>

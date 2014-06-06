@@ -38,6 +38,7 @@ documentCommentsModule.factory "DocumentCommentsController", ->
       @$scope.openCreateCommentModal = @openCreateCommentModal.bind(@)
       @$scope.comments = @DocumentCommentModel.getActiveDocumentComments()
       @$scope.security = @SecurityService
+      @$scope.increaseThumbsUp = @increaseThumbsUp
       return
     openCreateCommentModal: (cmd, comment) ->
       that = @
@@ -66,6 +67,16 @@ documentCommentsModule.factory "DocumentCommentsController", ->
               return that.SecurityService
           }
         }
+      )
+      return
+    increaseThumbsUp: (comment) =>
+      @$log.debug("Increase thumbs up pressed.")
+      increaseThumbsUpTask = @DocumentCommentModel.increaseThumbsUp(comment)
+      increaseThumbsUpTask.success((success) =>
+        @$log.debug("Liking success")
+        @$log.debug("Current likes=" + success)
+        comment.likes = success
+        return
       )
       return
   DocumentCommentsController

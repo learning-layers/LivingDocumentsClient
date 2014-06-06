@@ -63,6 +63,19 @@ class DocumentCommentService extends BaseService
       @$log.debug "Edited comment with id=" + commentId
       return
     return
+  increaseThumbsUp: (commentId) =>
+    return @$http.put(
+      @basePath + '/documentcomment/' + commentId + '/like',
+      {
+        commentId: commentId
+      },
+      headers: {
+        "Authorization": @SecurityService.currentUser.authorizationString
+      }
+    ).success (success) =>
+      @$log.debug "Liked comment with id=" + commentId
+      return
+    return
 
 DocumentCommentService.$inject = ['SecurityService','$http', '$log']
 documentCommentService.service(
