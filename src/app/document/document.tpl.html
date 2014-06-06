@@ -31,7 +31,25 @@
     <div class="well well-sm doc-heading">
         <div class="title-section">
             <div class="title-wrapper pull-left">
-                <h1 class="panel-title">{{ document.title }}</h1>
+                <div ng-if="document !== null" data-ng-init="document.titleEditMode = false; document.oldValues = {}">
+                    <div class="document-title-wrapper" ng-click="triggerTitleEditMode(document)">
+                        <h1 ng-hide="document.titleEditMode" class="panel-title">{{ document.title }}</h1>
+                        <input class="form-control" data-ng-show="document.titleEditMode" type="text" data-ng-model="document.title">
+                        <button data-ng-show="document.titleEditMode"
+                                class="btn btn-danger cancel-btn"
+                                data-ng-click="toggleTitleEditMode(document); $event.stopPropagation()">
+                            <div>
+                                &times;
+                            </div>
+                        </button>
+                        <button data-ng-show="document.titleEditMode"
+                                class="btn btn-success submit-btn"
+                                data-ng-click="saveDocumentTitle(document); $event.stopPropagation()">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
             </div>
             <div class="btn-group pull-right">
                 <a class="btn btn-info" href="#/document/{{ document.parent_document_id }}" ng-show="document.parent_document_id != null && document.parent_document_id != ''"><span class="glyphicon glyphicon-arrow-up"></span>Parent document</a>

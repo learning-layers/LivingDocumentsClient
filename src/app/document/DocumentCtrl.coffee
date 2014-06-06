@@ -49,6 +49,9 @@ class DocumentCtrl extends BaseController
     @$scope.loadingDocument = true
     @$scope.document = @DocumentModel.getActiveDocument()
     @$scope.openEditTags = @openEditTags
+    @$scope.triggerTitleEditMode = @triggerTitleEditMode
+    @$scope.toggleTitleEditMode = @toggleTitleEditMode
+    @$scope.saveDocumentTitle = @saveDocumentTitle
     return
   defineWatches: =>
     #Subscriptions
@@ -119,6 +122,29 @@ class DocumentCtrl extends BaseController
         }
       }
     )
+    return
+  toggleTitleEditMode: (document) =>
+    @$log.debug("Toggling document title edit mode")
+    if !document.titleEditMode
+      document.oldValues.title = document.title
+    else
+      document.title = document.oldValues.title
+    document.titleEditMode = !document.titleEditMode
+    return
+  triggerTitleEditMode: (document) =>
+    @$log.debug("Triggering document title edit mode")
+    if !document.titleEditMode
+      document.oldValues.title = document.title
+      document.titleEditMode = !document.titleEditMode
+    return
+  saveDocumentTitle: (document) =>
+    @$log.debug("Saving document title")
+    if (document.titleEditMode)
+      document.titleEditMode = !document.titleEditMode
+      if (document.title != "")
+      else
+        document.title = '<Empty title>'
+      #@AktuellesModel.saveDocument(document)
     return
 
 DocumentCtrl.$inject =
