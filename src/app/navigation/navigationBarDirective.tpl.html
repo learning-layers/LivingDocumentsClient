@@ -80,11 +80,11 @@
                         <li>
                             <a href="" ng-click="openCreateNewDocumentModal()"><span class="glyphicon glyphicon-file"></span>New Document</a>
                         </li>
-                        <li class="divider demo-hidden"></li>
-                        <li class="demo-hidden">
+                        <li class="divider demo-hidden-nav"></li>
+                        <li class="demo-hidden-nav">
                             <a href=""><span class="glyphicon glyphicon-list"></span><strike><del>Document Explorer</del></strike></a>
                         </li>
-                        <li class="demo-hidden">
+                        <li class="demo-hidden-nav">
                             <a href=""><span class="glyphicon glyphicon-folder-open"></span><strike><del>Manage Documents</del></strike></a>
                         </li>
                     </ul>
@@ -105,17 +105,17 @@
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li class="demo-hidden">
+                        <li class="demo-hidden-nav">
                             <a href=""><span class="glyphicon glyphicon-folder-open"></span><strike><del>Manage Documents</del></strike></a>
                         </li>
-                        <li class="demo-hidden">
+                        <li class="demo-hidden-nav">
                             <a href=""><span class="glyphicon glyphicon glyphicon-user"></span><strike><del>Manage Contacts</del></strike></a>
                         </li>
-                        <li class="divider demo-hidden"></li>
+                        <li class="divider demo-hidden-nav"></li>
                         <li>
                             <a href="#/userprofile/{{currentUser.id}}"><span class="glyphicon glyphicon-refresh"></span>Update Profile</a>
                         </li>
-                        <li class="demo-hidden">
+                        <li class="demo-hidden-nav">
                             <a href=""><span class="glyphicon glyphicon-wrench"></span><strike><del>Settings</del></strike></a>
                         </li>
                         <li ng-show="checkRoles()" class="divider"></li>
