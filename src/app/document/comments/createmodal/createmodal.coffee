@@ -60,6 +60,7 @@ class CreateCommentModalCtrl extends BaseController
     newTitle = @$scope.title
     newText = @$scope.text
     if (@cmd != 'Edit')
+      @$scope.createCommentInProgress = true
       parentComment = @comment
       createCommentTask =
         @DocumentCommentModel.createComment(
@@ -68,6 +69,10 @@ class CreateCommentModalCtrl extends BaseController
           newText,
           @comment
         )
+      createCommentTask.error((error) =>
+        @$scope.createCommentInProgress = false
+        return
+      )
       createCommentTask.success((success) =>
         if (angular.isDefined(success.documentId))
           newComment = {
@@ -109,6 +114,7 @@ class CreateCommentModalCtrl extends BaseController
         @$log.debug("Created new comment")
         @$log.debug(newComment)
         @$modalInstance.dismiss('close')
+        @$scope.createCommentInProgress = false
         return
       )
     else if (@cmd == 'Edit')
