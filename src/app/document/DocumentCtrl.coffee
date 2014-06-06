@@ -144,7 +144,7 @@ class DocumentCtrl extends BaseController
       if (document.title != "")
       else
         document.title = '<Empty title>'
-      #@AktuellesModel.saveDocument(document)
+      @DocumentModel.updateTitle(document.title)
     return
 
 DocumentCtrl.$inject =

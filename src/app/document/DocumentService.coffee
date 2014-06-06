@@ -66,6 +66,17 @@ class DocumentService extends BaseService
       @$log.debug "Adding tag with name=" + tagname +
       "to document with id=" + id
       return
+  updateTitle: (documentId, title) =>
+    return @$http({
+      method: 'PUT',
+      url: @basePath + '/document/' + documentId +
+        '?method=updateTitle',
+      data: title,
+      headers: {
+        'Authorization': @SecurityService.currentUser.authorizationString
+      }
+    }).success (status) =>
+      return
   updateSubscriptions: (documentId, subscriptionChangeObj) =>
     @$log.debug "Updating subscriptions of  document with id=" +
       documentId + " to="

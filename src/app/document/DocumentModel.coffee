@@ -67,7 +67,8 @@ class DocumentModel extends BaseEventDispatcher
       document.id + ", update="
     @$log.debug subscriptionChangeObj
     subscriptionChange = @DocumentService.updateSubscriptions(
-      @activeDocument.id, subscriptionChangeObj)
+      @activeDocument.id, subscriptionChangeObj
+    )
     subscriptionChange.success =>
       @$log.debug "Subscription change success"
       @$rootScope.$emit "success", "Successfully updated subscriptions"
@@ -76,6 +77,13 @@ class DocumentModel extends BaseEventDispatcher
       @$log.debug "Subscription change error"
       @$rootScope.$emit "error", "Error updating subscriptions"
       return
+    return
+  updateTitle: (title) =>
+    id = @activeDocument.id
+    addTagTask = @DocumentService.updateTitle(id, title)
+    addTagTask.success (data) =>
+      return
+    return
     return
   refreshDocumentModel: (id, document) =>
     @$log.debug ">> Updating document model"
