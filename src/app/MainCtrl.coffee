@@ -192,13 +192,13 @@ angular.module( "LivingDocuments.maincontroller", [
         templateUrl: 'user/infolistmodal/infolistmodal.tpl.html',
         controller: UserInfoListModalCtrl,
         resolve: {
-          modalTitle: ->
+          modalTitle: =>
             return modalTitle
+          userIds: =>
+            return userIds
+          UserInfoListModel: =>
+            return UserInfoListModel
         }
-        userIds: ->
-          return userIds
-        UserInfoListModel: ->
-          return UserInfoListModel
       }
     )
     return
