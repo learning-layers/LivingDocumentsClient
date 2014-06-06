@@ -65,7 +65,8 @@ angular.module( 'LivingDocuments.user.profile', [
         }
     };
 
-    $scope.profileImgSrc = '';
+    var profileImagePath = basePath + '/userimg/' + SecurityService.currentUser.id + '/profile/image';
+    $scope.profileImgSrc = profileImagePath;
 
     $scope.loadingProfileinfo = true;
     User.getUserById($scope.item, 
