@@ -42,6 +42,7 @@ class DocumentContentCtrl extends BaseController
     @$scope.attachmentsActive = false
     @$scope.editorActive = false
     @$scope.SecurityService = @SecurityService
+    @$scope.documentContentId = @DocumentContentModel.getActiveDocumentId()
     @$scope.tabs = {
       historyActive: true,
       filesActive: false,
@@ -129,6 +130,8 @@ class DocumentContentCtrl extends BaseController
         resolve: {
           attachmentsActiveScope: =>
             return @$scope
+          SecurityService: =>
+            return @SecurityService
         }
       }
     )
@@ -274,7 +277,7 @@ class DocumentContentCtrl extends BaseController
     return
 
 DocumentContentCtrl.$inject =
-  ['$scope', '$log', 'DocumentContentModel', '$rootScope']
+  ['$scope', '$log', 'DocumentContentModel', '$rootScope', '$modal', 'SecurityService', '$timeout']
 
 documentContentController.controller(
   'DocumentContentCtrl',

@@ -54,6 +54,10 @@ class DocumentContentModel extends BaseEventDispatcher
     return
   getActiveDocumentContent: =>
     return @activeDocumentContent
+  getActiveDocumentId: =>
+    return @activeDocumentId
+  getSecurityService: =>
+    return @SecurityService
   initActiveDocumentContent: =>
     return {
       content: {

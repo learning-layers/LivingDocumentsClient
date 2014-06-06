@@ -33,8 +33,8 @@ contentAttachmentUploadModal = angular.module(
 >> AttachmentUploadModal Controller
 ###
 class AttachmentUploadModalCtrl extends BaseController
-  constructor: ($scope, @$modalInstance,
-                @attachmentsActiveScope, @documentId) ->
+  constructor: (@$scope, @$modalInstance,
+                @attachmentsActiveScope) ->
     super($scope)
     return
   defineScope: =>
@@ -42,10 +42,12 @@ class AttachmentUploadModalCtrl extends BaseController
       @attachmentsActiveScope.attachmentsActive = true
       @$modalInstance.dismiss('cancel')
       return
+    basePath = @attachmentsActiveScope.SecurityService.getInitialConfiguration().restServerAddress
+    @$scope.uploadFileURL = basePath + '/documentattachment/' + @attachmentsActiveScope.document.id
     return
 
 AttachmentUploadModalCtrl.$inject =
-  ['$scope', '$modalInstance', 'attachmentsActiveScope']
+  ['$scope', '$modalInstance', 'attachmentsActiveScope', 'SecurityService']
 contentAttachmentUploadModal.controller( 'AttachmentUploadModalCtrl',
   AttachmentUploadModalCtrl)
 
