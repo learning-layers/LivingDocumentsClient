@@ -2,7 +2,6 @@
 *~
 build/
 bin/
-karma/karma-unit.tpl.js
 node_modules/
 .idea/*
 .c9revisions/*
