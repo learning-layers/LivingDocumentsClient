@@ -29,6 +29,8 @@
   },
   "dependencies": {},
   "resolutions": {
-    "angular": "1.2.10"
+    "angular": "1.2.10",
+    "jquery": "1.11.0",
+    "bootstrap": "v3.1.0"
   }
 }
