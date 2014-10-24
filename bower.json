@@ -25,12 +25,14 @@
     "respond": "1.4.2",
     "tinymce": "4.0.0",
     "blueimp-load-image": "1.11.1",
-    "jquery-file-upload": "git://github.com/DominicBoettger/jQuery-File-Upload.git#1.0.4"
+    "jquery-file-upload": "git://github.com/DominicBoettger/jQuery-File-Upload.git#1.0.4",
+    "angular-file-upload": "git://github.com/danialfarid/angular-file-upload.git#1.6.5"
   },
   "dependencies": {},
   "resolutions": {
     "angular": "1.2.10",
     "jquery": "1.11.0",
-    "bootstrap": "v3.1.0"
+    "bootstrap": "v3.1.0",
+    "angular-file-upload": "1.6.5"
   }
 }

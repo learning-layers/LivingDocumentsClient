@@ -67,6 +67,7 @@ module.exports = {
       'vendor/respond/dest/respond.min.js',
       'vendor/modernizr/modernizr.js',
       'vendor/angular-ui-utils/modules/ie-shiv/ie-shiv.js',
+      'vendor/angular-file-upload/dist/angular-file-upload-shim.js',
       'vendor/jquery/dist/jquery.min.js',
       'vendor/jqueryuicustom/jquery-ui-1.10.4.custom.js',
       'vendor/sugar/release/sugar.min.js',
@@ -86,7 +87,8 @@ module.exports = {
       'vendor/angular-treeview-custom/angular.treeview.js',
       'vendor/angular-summernote/dist/angular-summernote.min.js',
       'vendor/blueimp-load-image/js/load-image.min.js',
-      'vendor/custom-jquery-file-upload/dist/uploader.js'
+      'vendor/custom-jquery-file-upload/dist/uploader.js',
+      'vendor/angular-file-upload/dist/angular-file-upload.min.js'
     ],
     css: [
     ],
