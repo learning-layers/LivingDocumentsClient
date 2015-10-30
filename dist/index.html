@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html manifest="manifest.appcache?v=11">
+    <head>
+        <meta charset="UTF-8" />
+
+        <!-- Mobile viewport optimized -->
+        <meta http-equiv="Cache-control" content="no-cache">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+        <!-- , user-scalable=no -->
+
+        <title>Living Documents</title>
+        <link rel="stylesheet" href="lib/normalize/normalize.css">
+
+        <link rel="stylesheet" href="https://tinymce.cachefly.net/4.1/skins/lightgray/skin.min.css">
+        <script src="https://tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+        <script src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.min.js"></script>
+        <script src="https://rawgit.com/evidenceprime/html-docx-js/master/dist/html-docx.js"></script>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+
+        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/roboto.min.css" rel="stylesheet"> -->
+        <!-- <link href="css/material/material-fullpalette.min.css" rel="stylesheet"> -->
+        <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css" rel="stylesheet"> -->
+        <!-- <link href="css/fixes.css" rel="stylesheet"> -->
+        <!-- <link href="app.css" rel="stylesheet"> -->
+        <script type="text/javascript">
+            var alertFallback = false;
+            if (typeof console === "undefined" || typeof console.log === "undefined") {
+                /*jshint -W020 */
+                console = {};
+                if (alertFallback) {
+                    console.log = function(msg) {
+                        alert(msg);
+                    };
+                } else {
+                    console.log = function() {};
+                }
+            }
+        </script>
+        <!--[if IE 8]>
+        <script src="lib/ie8support/respond/respond.min.js"></script>
+        <script src="lib/ie8support/consolePolyfill.js"></script>
+        <script src="lib/ie8support/es5-shim.min.js"></script>
+        <script src="lib/ie8support/es5-sham.min.js"></script>
+        <script src="lib/ie8support/html5shiv/html5shiv.min.js"></script>
+        <script src="lib/jquery/jquery.min.js"></script>
+        <![endif]-->
+        <script type="text/javascript">
+            try {
+                if (global === undefined) {
+                    window.global = window;
+                }
+            } catch (e) {
+                window.global = window;
+            }
+            global.document.domain = "localhost";
+
+            global.config = {
+                protocol: "https",
+                hostname: "localhost",
+                port: "9000"
+            };
+
+            if (global.config.port !== null) {
+                global.config.endpoint = global.config.protocol + "://" + global.config.hostname + ":" + global.config.port;
+            } else {
+                global.config.endpoint = global.config.protocol + "://" + global.config.hostname;
+            }
+        </script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <div id="loading-modal"></div>
+        <div id="create-document-modal"></div>
+        <div id="create-discussion-modal"></div>
+        <div id="create-comment-modal"></div>
+        <div id="fullscreen-editor-modal"></div>
+        <div id="edit-tag-modal"></div>
+        <div id="create-tag-modal"></div>
+        <div id="add-tag-modal"></div>
+        <div id="folder-item-context-menu"></div>
+        <div id="create-folder-modal"></div>
+        <div id="sss-create-discs-modal"></div>
+        <div id="share-document-modal"></div>
+        <div id="document-selection-context-menu"></div>
+        <!-- <script src="http://localhost:8080/webpack-dev-server.js"></script>
+        <script src="https://localhost:8080/webpack-dev-server.js"></script> -->
+        <!-- <script src="vendors.js"></script> -->
+
+        <textarea id="content-tmceo" cols="60" rows="10" style="visibility: hidden;">
+        </textarea>
+
+        <script>
+            tinymce.init({
+                selector: '#content-tmceo',
+                plugins: [
+                    "print"
+                ]
+            });
+            function convertImagesToBase64 () {
+                contentDocument = tinymce.get('content-tmceo').getDoc();
+                var regularImages = contentDocument.querySelectorAll("img");
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                [].forEach.call(regularImages, function (imgElement) {
+                    // preparing canvas for drawing
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.width = imgElement.width;
+                    canvas.height = imgElement.height;
+                    ctx.drawImage(imgElement, 0, 0);
+                    // by default toDataURL() produces png image, but you can also export to jpeg
+                    // checkout function's documentation for more details
+                    var dataURL = canvas.toDataURL();
+                    imgElement.setAttribute('src', dataURL);
+                });
+                canvas.remove();
+            }
+            function convertImagesToBase64_c (callback) {
+                contentDocument = tinymce.get('content-tmceo').getDoc();
+                var regularImages = contentDocument.querySelectorAll("img");
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                [].forEach.call(regularImages, function (imgElement) {
+                    // preparing canvas for drawing
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    canvas.width = imgElement.width;
+                    canvas.height = imgElement.height;
+                    ctx.drawImage(imgElement, 0, 0);
+                    // by default toDataURL() produces png image, but you can also export to jpeg
+                    // checkout function's documentation for more details
+                    var dataURL = canvas.toDataURL();
+                    imgElement.setAttribute('src', dataURL);
+                });
+                canvas.remove();
+                callback();
+            }
+        </script>
+        <script src="app-108566966960127.98.js"></script>
+    </body>
+</html>

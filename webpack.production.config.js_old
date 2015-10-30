@@ -1,0 +1,102 @@
+var path = require("path");
+var webpack = require("webpack");
+var node_modules = path.resolve(__dirname, "node_modules");
+var pathToReact = path.resolve(node_modules, "react/dist/react.js");
+var pathToJQuery = path.resolve(node_modules, "jquery/dist/jquery.js");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var pathToReactIntl = path.resolve(node_modules, "react-intl/dist/react-intl.js");
+var pathToSweetAlert = path.resolve(node_modules, "sweetalert");
+var pathToReactDnd = path.resolve(node_modules, "react-dnd/dist/ReactDnD.min.js");
+var pathToDndCore = path.resolve(node_modules, "dnd-core");
+var pathToReactTagInput = path.resolve(__dirname, "app/custom-libs/reactTags.min.js");
+
+var config = {
+    entry: {
+        vendors: [
+            "react",
+            "jquery",
+            "underscore",
+            "griddle-react",
+            "sweetalert",
+            "react-hot-loader/Injection"
+        ],
+        app: path.resolve(__dirname, "app/main.js")
+    },
+    resolve: {
+        alias: {
+            "react/lib": path.resolve(node_modules, "react/lib"),
+            "React": "react",
+            "jquery": pathToJQuery,
+            "react-intl": pathToReactIntl,
+            "underscore": path.resolve(node_modules, "lodash"),
+            "_": path.resolve(node_modules, "lodash"),
+            "griddle-react": path.resolve(__dirname, "app/custom-libs/griddle/griddle.js"),
+            "sweetalert": pathToSweetAlert,
+            "react-hot-loader/Injection": path.resolve(node_modules, "empty-module"),
+            "dnd-core": pathToDndCore,
+            "react-dnd": pathToReactDnd,
+            "react-tag-input": pathToReactTagInput
+        },
+        modulesDirectories: ["node_modules", "bower_components"]
+    },
+    output: {
+        path: path.resolve(__dirname, "dist"),
+        filename: "app.js"
+    },
+    module: {
+        loaders: [{
+            test: /\.jpe?g$|\.json$|\.ico$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
+            loader: "file-loader"
+        }, {
+            test: /\.jsx?$/,
+            exclude: /.spec.jsx/,
+            loader: "babel"
+        }, {
+            test: /\.js$/,
+            include: path.resolve(__dirname, "app"),
+            loaders: ["babel"]
+        }, {
+            test: /\.css$/, // Only .css files
+            //loader: "style!css" // Run both loaders
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+        },
+        // LESS
+        {
+            test: /\.less$/,
+            //loader: "style!css!less"
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+        },
+
+        // SASS
+        {
+            test: /\.scss$/,
+            //loader: "style!css!sass"
+            loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+        },  { test: /\.woff([\?]?.*)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.ttf([\?]?.*)$/,  loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+            { test: /\.eot([\?]?.*)$/,  loader: "file-loader" },
+            { test: /\.svg([\?]?.*)$/,  loader: "url-loader?limit=10000&mimetype=image/svg+xml" }],
+        noParse: [pathToDndCore, pathToReactDnd, pathToReactTagInput]
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            // This has effect on the react lib size.
+            "process.env": {
+                NODE_ENV: JSON.stringify("production")
+            }
+        }),
+        new webpack.PrefetchPlugin("react"),
+        new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment"),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            _: "underscore",
+            React: "react"
+        }),
+        new webpack.optimize.CommonsChunkPlugin("vendors", "vendors.js"),
+        new webpack.optimize.DedupePlugin(),
+        new ExtractTextPlugin("[name].css"),
+        new webpack.optimize.UglifyJsPlugin()
+    ]
+};
+
+module.exports = config;

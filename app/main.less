@@ -1,0 +1,116 @@
+@import "../node_modules/bootstrap/less/bootstrap.less";
+@import "./boostrap-em";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,100);
+@import url(https://fonts.googleapis.com/css?family=Monoton);
+
+@import "../node_modules/toastr/toastr";
+@import (css) "./assets/griddle.css";
+@import url(https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.3.0/css/ripples.min.css);
+@import "../bower_components/bootstrap-material-design/less/material.less";
+
+div[class*='col-']:not(:first-child,:last-child) {
+  padding-right: 0.500rem;
+  padding-left: 0.500rem;
+}
+
+div[class*='col-']:last-child {
+  padding-left: 0.500rem;
+  padding-right: 0.500rem;
+}
+
+div[class*='col-']:first-child {
+  padding-right: 0.500rem;
+  padding-left: 0.500rem;
+}
+
+body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4 {
+  font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+* {
+  font-family: Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+
+.navbar-brand {
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
+
+label {
+  font-weight: bold;
+  font-size: 1.0rem;
+  span {
+    font-weight: bold;
+    font-size: 1.0rem;
+  }
+}
+
+@primary: #357A9C;
+@orange: #F6A74B;
+@secondaryOrange: #E0992F;
+@lightGray: #f8f8f8;
+@primaryFont: "Helvetica Neue", Helvetica, Arial, sans-serif;
+@primaryFontColor: #666666;
+@shadowColor: #666666;
+@buttonGradientTop: #ebebeb;
+@buttonGradientBottom: #f3f3f3;
+
+.btn(@buttonGradientTop: #ebebeb, @buttonGradientBottom: #f3f3f3) {
+  background: #adadad;
+  background-image: -webkit-linear-gradient(top, @buttonGradientTop, @buttonGradientBottom);
+  background-image: -moz-linear-gradient(top, @buttonGradientTop, @buttonGradientBottom);
+  background-image: -ms-linear-gradient(top, @buttonGradientTop, @buttonGradientBottom);
+  background-image: -o-linear-gradient(top, @buttonGradientTop, @buttonGradientBottom);
+  background-image: linear-gradient(to bottom, @buttonGradientTop, @buttonGradientBottom);
+  -webkit-border-radius: 0.714rem;
+  -moz-border-radius: 0.714rem;
+  border-radius: 0.714rem;
+  -webkit-box-shadow: 0.143rem 0.143rem 0.071rem @shadowColor;
+  -moz-box-shadow: 0.143rem 0.143rem 0.071rem @shadowColor;
+  box-shadow: 0.143rem 0.143rem 0.071rem @shadowColor;
+  font-family: @primaryFont;
+  color: #000000;
+  font-size: 0.857rem;
+  padding: 0.714rem 0.714rem 0.714rem 0.714rem;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #adadad;
+  text-decoration: none;
+}
+
+@import (css) "../node_modules/nprogress/nprogress.css";
+@import (css) "../node_modules/sweetalert/dist/sweetalert.css";
+@import (css) "../node_modules/sweetalert/themes/google/google.css";
+
+@import "./components/header/header";
+@import "./components/home/home";
+@import "./components/document/document";
+@import "./components/user/user";
+@import "./components/login/login";
+@import "./components/app/loadingModal";
+@import "./components/app/tags/editTagModal";
+@import "./components/app/tags/createTagModal";
+@import "./components/app/tags/addTagModal";
+@import "./components/explorer/explorer";
+
+.ld-panel {
+  -webkit-box-shadow: inset 0 0.071rem 0 rgba(255, 255, 255, 0.15), 0 0.071rem 0.357rem rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 0.071rem 0 rgba(255, 255, 255, 0.15), 0 0.071rem 0.357rem rgba(0, 0, 0, 0.075);
+  border: 0.071rem solid #cccccc;
+  margin-bottom: 0.714rem;
+}
+
+#nprogress .spinner {
+  top: 1.429rem!important;
+  left: 14.286rem!important;
+  right: auto!important;
+  width: 1.286rem;
+}
+
+div[role="tooltip"] .arrow {
+  display: block;
+}

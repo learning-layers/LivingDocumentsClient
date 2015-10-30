@@ -1,0 +1,85 @@
+.main-content-context-menu {
+  /** {
+    font-family: "Questrial", Arial, serif;
+    font-weight: 400;
+  }*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  /*.folder-item-options {
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+    .folder-item-option {
+      border: 1px solid #cccccc;
+      border-bottom: none;
+      padding: 5px;
+      height: 36px;
+      cursor: pointer;
+      &:hover {
+        background-color: #cccccc;
+      }
+      &:last-of-type {
+        border-bottom: 1px solid #cccccc;
+      }
+    }
+  }*/
+}
+
+.cctx {
+  position: absolute;
+  z-index: 2147383647;
+
+  min-width: 300px;
+
+  background-color: #FFF;
+  color: #000;
+  border: solid 1px #BABABA;
+  box-shadow: 2px 2px 4px #ABABAB;
+
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 12px;
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 2px;
+    margin-top: 2px;
+  }
+}
+
+.cctx-item {
+  position: relative;
+  cursor: default;
+  padding: 7px 10px;
+}
+
+.cctx-item-icon {
+  display: inline-block;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.discuss-section {
+  .glyph-minus {
+    display: inline;
+    top: 15px;
+    position: absolute;
+  }
+  .glyph-pencil {
+    display: inline-block;
+    padding-left: 12px;
+  }
+}
+
+.cctx-item:hover {
+  background-color: #357A9C;
+  color: white;
+  cursor: pointer;
+}
+
+.cctx-separator {
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: solid 1px #E9E9E9;
+}

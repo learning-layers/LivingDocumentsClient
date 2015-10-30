@@ -1,38 +1,27 @@
 {
-  "name": "ng-livingdocuments",
-  "version": "0.0.1-alpha",
-  "devDependencies": {
-    "angular-local-storage": "git://github.com/grevory/angular-local-storage.git#0.0.1",
-    "prototype-class-jquery": "git://github.com/protonet/jquery-class-create#master",
-    "jquery.hotkeys": "git://github.com/tzuryby/jquery.hotkeys.git#master",
-    "jquery": "1.11.0",
-    "sugar": "1.4.1",
-    "ng-file-upload": "1.2.9",
-    "angular": "1.2.10",
-    "angular-mocks": "1.2.10",
-    "angular-sanitize": "1.2.10",
-    "angular-resource": "1.2.10",
-    "angular-route": "1.2.10",
-    "angular-bootstrap": "0.10.0",
-    "angular-ui-router": "0.2.10",
-    "angular-ui-utils": "0.0.4",
-    "angular-animate": "1.2.10",
-    "modernizr": "2.7.1",
-    "angular-uuid": "0.1.0",
-    "bootstrap": "v3.1.0",
-    "summernote": "v0.5.1",
-    "angular-summernote": "0.2.1",
-    "respond": "1.4.2",
-    "tinymce": "4.0.0",
-    "blueimp-load-image": "1.11.1",
-    "jquery-file-upload": "git://github.com/DominicBoettger/jQuery-File-Upload.git#1.0.4",
-    "angular-file-upload": "git://github.com/danialfarid/angular-file-upload.git#1.6.5"
-  },
-  "dependencies": {},
-  "resolutions": {
-    "angular": "1.2.10",
-    "jquery": "1.11.0",
-    "bootstrap": "v3.1.0",
-    "angular-file-upload": "1.6.5"
+  "name": "LDCReactJS",
+  "version": "0.0.1",
+  "authors": [
+    "Martin Bachl <martin@bachl.pro>"
+  ],
+  "description": "Living Documents Client ReactJS version",
+  "main": "./app/main.js",
+  "keywords": [
+    "Living",
+    "Documents"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "console-polyfill": "~0.2.1",
+    "html5shiv": "~3.7.3",
+    "respond": "~1.4.2",
+    "bootstrap-material-design": "~0.3.0"
   }
 }

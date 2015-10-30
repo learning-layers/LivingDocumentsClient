@@ -1,0 +1,198 @@
+.Resizer {
+  background: #cccccc;
+  z-index: 1;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background-clip: padding-box;
+}
+
+.Resizer:hover {
+  -webkit-transition: all 2s ease;
+  transition: all 2s ease;
+}
+
+.Resizer.horizontal {
+  height: 11px;
+  margin: -5px 0;
+  border-top: 5px solid rgba(255, 255, 255, 0);
+  border-bottom: 5px solid rgba(255, 255, 255, 0);
+  cursor: row-resize;
+  width: 100%;
+}
+
+.Resizer.horizontal:hover {
+  border-top: 5px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.vertical {
+  width: 21px;
+  margin: 0 -10px;
+  border-left: 5px solid rgba(255, 255, 255, 0);
+  border-right: 5px solid rgba(255, 255, 255, 0);
+  cursor: col-resize;
+  height: 100%;
+  &::after {
+    content: "||";
+    position: absolute;
+    top: 50%;
+    color: black;
+    width: 10px;
+    height: 10px;
+    margin-left: 1.5px;
+    font-weight: bold;
+  }
+}
+
+.Resizer.vertical:hover {
+  border-left: 5px solid rgba(0, 0, 0, 0.5);
+  border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.explorer .SplitPane.vertical {
+  background-image: -webkit-linear-gradient(top, #ffffff 0, #f8f8f8 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0, #f8f8f8 100%);
+  background-repeat: repeat-x;
+  border: 0.071rem solid #cccccc;
+  left: 7px!important;
+  right: 7px!important;
+  margin-bottom: 0.714rem;
+  .Pane.vertical {
+    overflow-x: hidden!important;
+  }
+}
+
+.folder-item {
+  min-height: 44px;
+  white-space: nowrap;
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+  &.active {
+    background-color: #cccccc;
+  }
+  .form-group {
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 0;
+    width: 100%;
+  }
+  .folder-item {
+    margin-left: 13px;
+  }
+  button {
+    margin-left: 15px!important;
+  }
+  &::before {
+    border-left: 3px solid @primary;
+    content: "__";
+    color: @primary;
+    font-weight: bold;
+    display: inline-block;
+    top: 0;
+    padding-top: 7px;
+    bottom: 0;
+    position: absolute;
+  }
+  &:last-of-type {
+    &::before {
+      height: 23px;
+    }
+  }
+  ul {
+    list-style: none;
+    margin-left: 18px;
+    padding-left: 0;
+  }
+  .btn-fab {
+    -moz-box-shadow: inset 0 0 10px #000000!important;
+    -webkit-box-shadow: inset 0 0 10px #000000!important;
+    box-shadow: inset 0 0 7px #555555!important;
+    padding-top: 7px!important;
+    padding-left: 10px!important;
+    span.glyphicon {
+      font-size: 22px;
+    }
+    &.btn-primary {
+      &:hover {
+        background-color: @primary !important;
+      }
+    }
+    &:hover {
+      background-color: white!important;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+  }
+}
+
+.folders {
+  list-style: none;
+  padding-left: 0;
+  &.isloading {
+    .folder-item {
+      &:last-of-type {
+        &::after {
+          content: ".";
+          height: 30px;
+          background-image: url("../../assets/img/ajax-loader.gif");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 55px 40px;
+          display: block;
+        }
+      }
+    }
+  }
+  /*> span {
+    height: 30px;
+    background-image: url("../../assets/img/facebook.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 55px 40px;
+    display: block;
+  }*/
+}
+
+.context-menu {
+  position: fixed;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  -webkit-transition: opacity .218s;
+  transition: opacity .218s;
+  background: #fff;
+  cursor: default;
+  font-size: 13px;
+  margin: 0;
+  outline: none;
+  padding: 6px 0;
+  -webkit-user-select: none;
+  max-height: 427px;
+  border: none;
+  -webkit-box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.2);
+  z-index: 2300;
+  overflow-y: auto;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 320px;
+}
+
+.tooltip-arrow {
+  display: block!important;
+}
+
+@import "./searchbar";
+@import "./treefolderexplorer/context-menu/folderItemContextMenu";

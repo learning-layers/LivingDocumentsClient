@@ -1,0 +1,201 @@
+h4.disc-section-name {
+  margin-top: 10px;
+}
+
+.inner-discussion-header {
+  width: 220px;
+}
+
+.inner-comment-header {
+  margin-top: 5px;
+  width: 220px;
+  position: relative;
+  h4 {
+    margin-top: 10px;
+  }
+  .add-comment-btn {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.sss-discussions {
+  padding: 5px;
+  padding-top: 2px;
+  list-style: none;
+  overflow: hidden;
+  height: 60px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 230px;
+
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  .nav.nav-tabs {
+    li {
+      float: none;
+    }
+  }
+  li {
+    float: none;
+    cursor: pointer;
+    font-weight: 300;
+    border-radius: 0.286rem;
+    color: black;
+    margin-right: 1px;
+    font-size: 18px;
+    padding: 5px;
+    background-image: -webkit-linear-gradient(top, #ffffff 0, #f8f8f8 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0, #f8f8f8 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 0.071rem solid #cccccc;
+    background-color: #f5f5f5;
+
+    height: 36px;
+    max-width: 160px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    &.active {
+      background-color: @primary;
+      background-image: -webkit-linear-gradient(top, #357A9C 0, #357A9C 100%);
+      background-image: linear-gradient(to bottom, #357A9C 0, #357A9C 100%);
+      color: white;
+    }
+  }
+}
+
+.comment-area .ld-panel-header {
+  min-height: 5.5rem;
+}
+
+.sss-discussion {
+  .comment-text {
+    padding-left: 0;
+    .sss-discussion-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  }
+  .subcomments-panel {
+    border-left: 3px solid @primary;
+    border-top: 1px solid @primary;
+    padding: 0;
+  }
+  .inner-item {
+    cursor: pointer;
+  }
+}
+
+.sss-comment-area-loading-indicator {
+  height: 30px;
+  display: block;
+}
+
+@import (css) "../../../../node_modules/react-quill/node_modules/quill/dist/quill.base.css";
+@import (css) "../../../../node_modules/react-quill/node_modules/quill/dist/quill.snow.css";
+
+.ql-toolbar {
+  box-shadow: 0 1px 10px rgba(0, 0, 0, .1);
+}
+
+.ql-editor {
+  padding: 1rem;
+}
+
+ul.attachment-area {
+  margin-bottom: 10px;
+  list-style: none;
+  padding-left: 0;
+  li {
+    border: 1px solid #cccccc;
+    border-bottom: none;
+    padding: 5px;
+    &:last-of-type  {
+      border-bottom: 1px solid #cccccc;
+    }
+  }
+  img.attachment-img {
+    height: 32px;
+    margin-right: 10px;
+  }
+}
+
+ul.tags-area {
+  list-style: none;
+  padding-left: 0;
+  li {
+    display: inline;
+    .badge {
+      background-color: #d79634;
+      font-weight: 300;
+      font-size: 1rem;
+    }
+  }
+}
+
+#create-sss-discussion-modal {
+  .modal-body {
+    padding-top: 15px;
+  }
+  .modal-footer {
+    .form-group {
+      float: right;
+    }
+  }
+  form {
+    margin-top: 10px;
+  }
+  ul.nav.nav-tabs {
+    background-image: -webkit-linear-gradient(top, #ffffff 0, #f8f8f8 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0, #f8f8f8 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 0.071rem solid #cccccc;
+    background-color: #f5f5f5;
+    li {
+      a {
+        color: #cccccc!important;
+      }
+      &.active {
+        a {
+          color: black!important;
+        }
+      }
+    }
+  }
+  .quill-contents.ql-container.ql-snow {
+    border: 0.071rem solid #cccccc;
+    height: 150px;
+  }
+}
+
+@import (css) "../../../../node_modules/react-tag-input/example/reactTags.css";
+
+#create-sss-discussion-modal {
+  div.ReactTags__tags {
+    margin-top: 15px;
+  }
+  div.ReactTags__selected span.ReactTags__tag {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    color: #fff;
+    line-height: 1;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #d79634;
+    font-weight: 300;
+    font-size: 1rem;
+    margin-top: 3px;
+  }
+}

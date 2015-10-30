@@ -1,0 +1,64 @@
+@import (css) "../../../../node_modules/react-select/dist/default.css";
+
+.sharing-lbl {
+  margin-top: 17px;
+}
+
+#share-document-modal-instance {
+  hr {
+    background-color: #cccccc;
+  }
+  .btn-primary {
+    color: white;
+  }
+  .user-access-item {
+    .Select.is-searchable.has-value {
+      display: inline;
+      input {
+        display: inline;
+      }
+      .Select-control {
+        display: inline;
+        float: right;
+        min-width: 150px;
+      }
+    }
+  }
+  .user-access-table {
+    max-height: 250px;
+    overflow-y: auto;
+    .user-access-table-inner {
+      min-height: 300px;
+      padding-bottom: 100px;
+    }
+  }
+  ul.nav.nav-tabs {
+    background-image: -webkit-linear-gradient(top, #ffffff 0, #f8f8f8 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0, #f8f8f8 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff8f8f8', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 0.071rem solid #cccccc;
+    background-color: #f5f5f5;
+    li {
+      a {
+        color: #cccccc!important;
+      }
+      &.active {
+        a {
+          color: black!important;
+        }
+      }
+    }
+  }
+  nav[role="tablist"] {
+    margin-top: 10px;
+  }
+  .tab-content {
+    border: 1px solid #cccccc;
+    div[role="tabpanel"] {
+      margin-top: 10px;
+      padding: 5px;
+    }
+  }
+}

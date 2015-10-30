@@ -1,0 +1,126 @@
+.ld-panel-content {
+  position: relative;
+  height: 28.571rem;
+  .content {
+    position: absolute;
+    width: 100%;
+    height: 28.571rem;
+    top: 0;
+    padding-left: 3.000rem;
+    iframe[name="etherpadEditor"] {
+      background-color: white;
+      width: 100%;
+      height: 28.571rem;
+      overflow: hidden;
+    }
+    .hidden {
+      height: 0;
+    }
+  }
+  .attachments-bar {
+    position: relative;
+    height: 100%;
+    width: 3.000rem;
+    background-color: #f6a74b;
+    z-index: 1;
+    ul.attachment-bar-icons {
+      list-style: none;
+      padding-left:0;
+      margin-bottom: 0;
+      li {
+        padding: 0.417rem 0 0.417rem 0;
+        min-height: 3.429rem;
+        .icon-wrapper {
+          margin: auto;
+          display: flex;
+          margin-bottom: 0.5rem;
+        }
+        .badge-wrapper {
+          margin: auto;
+          display: flex;
+        }
+        span.badge {
+          font-weight: normal;
+          font-size: 1rem;
+        }
+        span {
+          font-size: 1.333rem;
+          margin: auto;
+          display: flex;
+        }
+        &:hover {
+          box-shadow: 0 0.071rem 0.429rem 0 rgba(0, 0, 0, 0.12), 0 0.071rem 0.429rem 0 rgba(0, 0, 0, 0.12);
+          cursor: pointer;
+          background-color: white;
+        }
+        &.active {
+          box-shadow: 0 0.071rem 0.429rem 0 rgba(0, 0, 0, 0.12), 0 0.071rem 0.429rem 0 rgba(0, 0, 0, 0.12);
+          cursor: pointer;
+          background-color: white;
+        }
+      }
+    }
+  }
+}
+
+.edit-main-content {
+  padding-top: 0.5rem;
+}
+
+h4.document-title {
+  display: inline-block;
+  font-weight: 300;
+  background-color: @primary;
+  border-radius: 0.286rem;
+  color: white;
+  padding: 0.357rem;
+  margin: 0.357rem;
+  margin-left: 3.000rem;
+}
+
+@import "./fileAttachments/fileAttachments";
+@import "./fullscreenEditorModal";
+
+.fullscreen-btn {
+  position: absolute;
+  right: 5.303rem;
+  top: -2.409rem;
+  font-size: 1.571rem;
+  border: 0.071rem solid black;
+  border-color: black!important;
+  border-radius: 0.286rem;
+  padding: 0.143rem;
+  margin: 0;
+  height: 2.286rem;
+  width: 2.286rem;
+  &.hover {
+    background: black;
+  }
+}
+
+.close-discussion-btn {
+  border: 0.071rem solid black;
+  border-color: black!important;
+  border-radius: 0.286rem;
+  padding: 0.143rem;
+  margin: 0;
+  width: 2.286rem;
+  top: 0.500rem;
+  height: 2.286rem;
+  right: -0.664rem;
+  &.hover {
+    background: black;
+  }
+}
+
+@import "./mainContentContextMenu";
+
+.iframe-loading-inidicator {
+  height: 6px!important;
+  width: 6px!important;
+  overflow: hidden;
+  position: absolute;
+  z-index: 100;
+  top: -6px;
+  left: 34px;
+}
