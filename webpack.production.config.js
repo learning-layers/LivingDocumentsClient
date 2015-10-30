@@ -44,7 +44,6 @@ module.exports = {
             "underscore": path.resolve(node_modules, "lodash"),
             "_": "underscore",
             "griddle-react": path.resolve(__dirname, "app/custom-libs/griddle/griddle.js"),
-            "sweetalert": pathToSweetAlert,
             "react-hot-loader/Injection": path.resolve(node_modules, "empty-module")
         },
         modulesDirectories: ["node_modules", "bower_components"]
@@ -103,7 +102,7 @@ module.exports = {
                 loader: 'file-loader'
             }
             /*{ test: /\.svg([\?]?.*)$/,  loader: "url-loader?limit=10000&mimetype=image/svg+xml" }*/],
-        noParse: [pathToJQuery, pathToReactIntl, pathToSweetAlert]
+        noParse: [pathToJQuery, pathToReactIntl]
     },
     plugins: [
         /*new webpack.DefinePlugin({
