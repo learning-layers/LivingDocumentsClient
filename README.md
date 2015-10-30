@@ -1,3 +1,5 @@
+!This client is deprecated!
+
 Learning Layers - Living Documents [![Build Status](https://travis-ci.org/learning-layers/LivingDocumentsClient.svg?branch=master)](https://travis-ci.org/learning-layers/LivingDocumentsClient)
 
 For living documents license information see the LICENSE.txt file.
